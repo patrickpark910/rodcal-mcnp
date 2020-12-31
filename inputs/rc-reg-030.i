@@ -4781,7 +4781,7 @@ c ---- COPY HERE ----
 c
 c ROD HEIGHTS
 c the "bottom of control rod" has z-position 5.120640 at 0 % and 53.2694 at 100 %
-c add 4.814876 to each z coordinate to raise by 10%
+c
 c Safe Rod (0 % Withdrawn)
 c
 c
@@ -4850,7 +4850,7 @@ c
 c
 c
 c
-c Reg Rod (300% withdrawn)
+c Reg Rod (30% withdrawn)
 c
 c
 c c/z surfaces
@@ -4863,20 +4863,20 @@ c
 c
 c pz surfaces
 c
-832301   pz   198.63984   $ top of control rod
-832302   pz   197.87784   $ top of main section
-832303   pz   197.24284   $ top of poison portion
-832304   pz   151.16724   $ bottom of poison portion
-832305   pz   150.53224   $ bottom of main section
-832306   pz   150.12584   $ bottom of outer lower cone
-832307   pz   149.56704   $ bottom of control rod
+832301   pz   68.63808   $ top of control rod
+832302   pz   67.87608   $ top of main section
+832303   pz   67.24108   $ top of poison portion
+832304   pz   21.16548   $ bottom of poison portion
+832305   pz   20.53048   $ bottom of main section
+832306   pz   20.12408   $ bottom of outer lower cone
+832307   pz   19.56528   $ bottom of control rod
 c
 c
 c k/z surfaces
 c
-833301   k/z   0   15.9156   201.5413   0.1877777777   $ upper beveling
-833302   k/z   0   15.9156   148.57839   0.66015625   $ lower outer beveling
-833303   k/z   0   15.9156   149.56704   5.0625   $ lower inner beveling
+833301   k/z   0   15.9156   71.53954   0.1877777777   $ upper beveling
+833302   k/z   0   15.9156   18.57663   0.66015625   $ lower outer beveling
+833303   k/z   0   15.9156   19.56528   5.0625   $ lower inner beveling
 c
 c
 c
@@ -5009,16 +5009,16 @@ c ------- Active section surfaces -------
 c
 c 302301  pz  17.89684  $ Fuel meat 1"
 c 302302  pz  20.43684  $ Fuel meat 2"
-302303   pz   167.42324   $ Fuel meat 3"
+302303  pz  22.97684  $ Fuel meat 3"
 c 302304  pz  25.51684  $ Fuel meat 4"
 c 302305  pz  28.05684  $ Fuel meat 5"
-302306   pz   175.04324   $ Fuel meat 6"
+302306  pz  30.59684  $ Fuel meat 6"
 c 302307  pz  33.13684  $ Fuel meat 7"
 c 302308  pz  35.67684  $ Fuel meat 8"
-302309   pz   182.66324   $ Fuel meat 9"
+302309  pz  38.21684  $ Fuel meat 9"
 c 302310  pz  40.75684  $ Fuel meat 10"
 c 302311  pz  43.29684  $ Fuel meat 11"
-302312   pz   190.28324   $ Fuel meat 12"
+302312  pz  45.83684  $ Fuel meat 12"
 c 302313  pz  48.37684  $ Fuel meat 13"
 c 302314  pz  50.91684  $ Fuel meat 14"
 c
@@ -5032,16 +5032,16 @@ c
 311305  cz  1.873250  $ Cladding outer radius (1.475" DIA)
 311306  cz  1.92  $
 c
-312300   pz   144.4464   $ Bottom of lower grid plate (with rounding correction)
-312301   pz   149.56704   $ Top of lower grid plate pin
-312302   pz   150.83704   $ Top of bottom fitting casing
-312303   pz   159.80324   $ Bottom of active section
-312304   pz   197.90324   $ Top of active section 
-312305   pz   206.86944   $ Top of upper graphite spacer
-312306   pz   208.13944   $ Top of Al top cap 
-312307   pz   210.99694   $ Top of tri-flute 
-312308   pz   214.80694   $ Top of fuel 
-312309   pz   220.8464   $ top plane of fuel assembly supercells
+312300  pz  0         $ Bottom of lower grid plate (with rounding correction)
+312301  pz  5.120640  $ Top of lower grid plate pin
+312302  pz  6.390640  $ Top of bottom fitting casing
+312303  pz  15.35684  $ Bottom of active section
+312304  pz  53.45684  $ Top of active section 
+312305  pz  62.42304  $ Top of upper graphite spacer
+312306  pz  63.69304  $ Top of Al top cap 
+312307  pz  66.55054  $ Top of tri-flute  
+312308  pz  70.36054  $ Top of fuel 
+312309  pz  76.40000  $ top plane of fuel assembly supercells
 c
 c
 c

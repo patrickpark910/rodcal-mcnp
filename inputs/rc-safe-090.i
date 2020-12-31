@@ -4781,7 +4781,7 @@ c ---- COPY HERE ----
 c
 c ROD HEIGHTS
 c the "bottom of control rod" has z-position 5.120640 at 0 % and 53.2694 at 100 %
-c add 4.814876 to each z coordinate to raise by 10%
+c
 c Safe Rod (0 % Withdrawn)
 c
 c

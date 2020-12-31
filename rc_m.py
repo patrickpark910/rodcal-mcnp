@@ -5,6 +5,17 @@ Written by Patrick Park (RO, Physics '22)
 ppark@reed.edu
 Last updated Dec. 30, 2020
 
+__________________
+Default MCNP units
+
+Length: cm
+Mass: g
+Energy & Temp.: MeV
+Positive density (+x): atoms/barn-cm
+Negative density (-x): g/cm3
+Time: shakes
+(1 barn = 10e-24 cm2, 1 sh = 10e-8 sec)
+
 '''
 
 import os, sys, multiprocessing
@@ -14,12 +25,12 @@ import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 
-from 'mcnp-funcs' import *
+from mcnp_funcs import *
 
 # Variables
 filepath = "C:/MCNP6/facilities/reed/rodcal-mcnp" # do NOT include / at the end
 rods = ["Safe", "Shim", "Reg"]
-heights = [10,20,30,40,50,60,70,80,90,100]
+heights = [00,10,20,30,40,50,60,70,80,90,100]
 
 # Main function to be executed
 def main(argv):
@@ -47,10 +58,15 @@ def main(argv):
     # Run MCNP for all .i files in f".\{inputs_folder_name}".
     tasks = get_tasks()
     for file in os.listdir(f"{filepath}/{inputs_folder_name}"):
-        run_mcnp(f"{filepath}/{inputs_folder_name}",f"{filepath}/{outputs_folder_name}",file,tasks)
+        run_mcnp(filepath,inputs_folder_name,outputs_folder_name,file,tasks)
 
-    # Deletes MCNP runtape and scriptape files.
-    delete_files(f"{filepath}/{outputs_folder_name}")
+    # Deletes MCNP runtape and source dist files.
+    delete_files(f"{filepath}/{outputs_folder_name}",r=True,s=True)
+
+    keff_df = pd.DataFrame(columns=["Height", "Safe", "Safe unc", "Shim", "Shim unc", "Reg", "Reg unc"])
+    for file in os.listdir(f"{filepath}/{outputs_folder_name}"):
+        keff, keff_unc = extract_keff(file)
+        print(f'{file}: keff = {keff} +/- {keff_unc}')
 
 #
 # HELPER FUNCTIONS
@@ -60,10 +76,12 @@ def main(argv):
 def find_height(rod, height, base_input_name, inputs_folder_name):
     base_input_deck = open(base_input_name, 'r')
     
-    if height != 100:
-        new_input_name = './'+ inputs_folder_name + '/' + 'rc-'+rod.lower()+ '-0' + str(height) +'.i'
-    else:
+    if height == 0:
+        new_input_name = f'./{inputs_folder_name}/rc-{rod.lower()}-00{str(height)}.i'
+    elif height == 100:
         new_input_name = './'+ inputs_folder_name + '/' + 'rc-'+rod.lower()+ '-' + str(height) +'.i'
+    else:
+        new_input_name = './'+ inputs_folder_name + '/' + 'rc-'+rod.lower()+ '-0' + str(height) +'.i'
     
     # If the folder doesn't exist, create it
     if not os.path.isdir(inputs_folder_name):
@@ -92,7 +110,7 @@ def find_height(rod, height, base_input_name, inputs_folder_name):
             # This would signify, that we are inside the block
             if start_marker in line and "90%" not in line:
                 inside_block = True
-                new_input_deck.write("c "+ rod + " Rod ("+ str(height) + "0% withdrawn)\n")
+                new_input_deck.write("c "+ rod + " Rod ("+ str(height) + "% withdrawn)\n")
                 continue
             new_input_deck.write(line)
             continue
@@ -111,10 +129,10 @@ def find_height(rod, height, base_input_name, inputs_folder_name):
                     new_input_deck.write(line)
                     continue
              
-            if 'pz' in line:
+            if 'pz' in line and line[0].startswith('8'):
                 new_input_deck.write(change_height('pz', line, height) + '\n')
                 continue
-            if 'k/z' in line:
+            if 'k/z' in line and line[0].startswith('8'):
                 new_input_deck.write(change_height('k/z', line, height) + '\n')
                 continue
             # If not, just write the line to the new file
@@ -141,11 +159,13 @@ def sep_entries(s):
     return output[1:]
 
 # Performs the mathematical operations on the exact value
-def math(n, x):
-    CONST = 4.81488
-    n += x*CONST
-    # This returns 'n' rounded to 5 places of decimals
-    return str(round(n, 5))
+def math(z_coordinate, height):
+    # z_coordinate: a decimal value 
+    # height: a value ranging from 0 to 100 for % rod withdrawn
+    # +/- 4.81488 to z_coordinate for a 10 % rod change
+    # bottom of rod is 5.120640 at 0 % and 53.2694 at 100 %
+    z_coordinate += height*0.481488
+    return str(round(z_coordinate, 5)) # Round to at least 5 or 6 digits
 
 # Performs the necessary changes on the values
 def change_height(value, line, x):

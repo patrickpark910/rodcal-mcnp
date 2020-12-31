@@ -7,7 +7,7 @@ Last updated Dec. 30, 2020
 
 '''
 
-import os, sys, multiprocessing
+import os, sys, multiprocessing, glob
 import numpy as np
 import pandas as pd
 
@@ -67,22 +67,47 @@ def get_tasks():
             tasks = cores 
     return tasks # Integer between 1 and total number of cores available.
     
-def run_mcnp(input_filepath,output_filepath,input_file, tasks_to_use):
-
-    if 'o_'+input_file.split('/')[-1].split(".")[0]+'.o' not in os.listdir(f'{output_filepath}'):
+def run_mcnp(filepath,inputs_folder_name,outputs_folder_name,input_file, tasks_to_use):
+    if not os.path.isdir(outputs_folder_name): os.mkdir(outputs_folder_name)
+    if 'o_'+input_file.split('/')[-1].split(".")[0]+'.o' not in os.listdir(f'{outputs_folder_name}'):
         print('Running MCNP...')
-        output_file = filepath+'/o_'+input_file.split('/')[-1].split(".")[0]
-        os.system(f'mcnp6 i="{input_filepath}/{input_file}" n="{output_filepath}/{output_file}." tasks {tasks_to_use} ')
-        #self.delete_files()
-        #self.move_files([self.input_file])
-    else:
-        print(f'---This MCNP run will be skipped because the output for {input_file.split("/")[-1]} already exists.')
+        input_filepath = f'{filepath}/{inputs_folder_name}/{input_file}'
+        output_filepath = f"{filepath}/{outputs_folder_name}/o_{input_file.split('/')[-1].split('.')[0]}"
+        os.system(f"mcnp6 i={input_filepath} n={output_filepath}. tasks {tasks_to_use}")
+    else: 
+        print(f"---This MCNP run will be skipped because the output for {input_file.split('/')[-1]} already exists.")
  
-def delete_files(target_folder_filepath,o=False, r=True, s=True):
-    if o: os.remove(f'f"{target_folder_filepath}/*.o')
-    if r: os.remove(f'f"{target_folder_filepath}/*.r')
-    if s: os.remove(f'f"{target_folder_filepath}/*.s')
-       
+def delete_files(target_folder_filepath,o=False, r=False, s=False):
+    # Default args are False unless specified in command
+    # NB: os.remove(f'*.r') does not work bc os.remove does not take wildcards (*)
+    # if o: 
+    #    for file in glob.glob(f'{target_folder_filepath}/*.o'): os.remove(file) 
+    if r: 
+        for file in glob.glob(f'{target_folder_filepath}/*.r'): os.remove(file) 
+    if s: 
+        for file in glob.glob(f'{target_folder_filepath}/*.s'): os.remove(file)
+
+def extract_keff(target_outputs):
+    # target_outputs: list of output file names from which to read keff values
+    # keff_file_name: string with desired file name of collected keffs + .csv
+    
+    for fe_removed in target_outputs:
+        file_to_extract_from = open(f'{filepath}/{fe_removed}')
+        get_keff = False
+        found_keff = False
+        for line in file_to_extract_from:
+            if not found_keff:
+                if line.startswith(" the estimated average keffs"):
+                    get_keff = True
+                elif get_keff and line.startswith("       col/abs/trk len"):
+                    keff, keff_unc = float(line.split()[2]), float(line.split()[3])
+                    found_keff = True
+        print(f'keff = {keff} +/- {keff_unc} with core positions {fe_removed} vacated.')
+    return keff, keff_unc
+
+'''   
+# Old extract_keff() for cle.py. Need backwards compatibility with new extract_keff()
+
 def extract_keff(target_outputs, keff_file_name):
     # target_outputs: list of output file names from which to read keff values
     # keff_file_name: string with desired file name of collected keffs + .csv
@@ -103,3 +128,4 @@ def extract_keff(target_outputs, keff_file_name):
     keff_df.to_csv(keff_file_name, index=False, encoding='utf8')
     print(f"All {len(target_outputs)} keff values and their uncertainties have been extracted to '{keff_file_name}'.")
     return keff_file_name
+'''
