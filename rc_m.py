@@ -30,7 +30,7 @@ from mcnp_funcs import *
 # Variables
 filepath = "C:/MCNP6/facilities/reed/rodcal-mcnp" # do NOT include / at the end
 rods = ["safe", "shim", "reg"]
-heights = [0,10,20,30,40,50,60,70,80,90,100] # for use in name strings, use str(height).zfill(3) to pad 0s until it is 3 characters long
+heights = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100] # for use in name strings, use str(height).zfill(3) to pad 0s until it is 3 characters long
 
 # Main function to be executed
 def main(argv):
@@ -169,8 +169,10 @@ def plot_rodcal_data(rho_csv_name):
     #plt.title(f'Fuel Assembly B-1, {cycle_state}',fontsize=fs1)
     ax_dif.legend(title=f'Key', title_fontsize='x-large', ncol=4, fontsize='x-large', loc='lower center')
     
-    #plt.savefig(f'{os.getcwd()}/shim_worth_{cycle_state}_{shim[-1]}.png', bbox_inches = 'tight', pad_inches = 0.1, dpi=320)
-    #print(f'figure saved')
+    plt.savefig(f'results.png', bbox_inches = 'tight', pad_inches = 0.1, dpi=320)
+    print(f'Figure saved!')
+
+    print(f"************ PROGRAM COMPLETE ************")
     
     
     

@@ -4795,20 +4795,20 @@ c
 c
 c pz surfaces
 c
-812301   pz   102.34224   $ top of control rod
-812302   pz   101.58024   $ top of main section
-812303   pz   100.94524   $ top of poison portion
-812304   pz   54.86964   $ bottom of poison portion
-812305   pz   54.23464   $ bottom of main section
-812306   pz   53.82824   $ bottom of outer lower cone
-812307   pz   53.26944   $ bottom of control rod
+812301   pz   107.15712   $ top of control rod
+812302   pz   106.39512   $ top of main section
+812303   pz   105.76012   $ top of poison portion
+812304   pz   59.68452   $ bottom of poison portion
+812305   pz   59.04952   $ bottom of main section
+812306   pz   58.64312   $ bottom of outer lower cone
+812307   pz   58.08432   $ bottom of control rod
 c
 c
 c k/z surfaces
 c
-813301   k/z   6.91134   -3.99034   105.2437   0.1877777777   $ upper beveling
-813302   k/z   6.91134   -3.99034   52.28079   0.66015625   $ lower outer beveling
-813303   k/z   6.91134   -3.99034   53.26944   5.0625   $ lower inner beveling
+813301   k/z   6.91134   -3.99034   110.05858   0.1877777777   $ upper beveling
+813302   k/z   6.91134   -3.99034   57.09567   0.66015625   $ lower outer beveling
+813303   k/z   6.91134   -3.99034   58.08432   5.0625   $ lower inner beveling
 c
 c
 c
@@ -4828,20 +4828,20 @@ c
 c
 c pz surfaces
 c
-822301   pz    54.19344   $ top of control rod
-822302   pz    53.43144   $ top of main section
-822303   pz    52.79644   $ top of poison portion
-822304   pz     6.72084   $ bottom of poison portion
-822305   pz     6.08584   $ bottom of main section
-822306   pz     5.67944   $ bottom of outer lower cone
-822307   pz     5.120640   $ bottom of control rod
+822301   pz   59.00832   $ top of control rod
+822302   pz   58.24632   $ top of main section
+822303   pz   57.61132   $ top of poison portion
+822304   pz   11.53572   $ bottom of poison portion
+822305   pz   10.90072   $ bottom of main section
+822306   pz   10.49432   $ bottom of outer lower cone
+822307   pz   9.93552   $ bottom of control rod
 c
 c
 c k/z surfaces
 c
-823301   k/z  -6.91134   -3.99034   57.09490154    0.1877777777   $ upper beveling
-823302   k/z  -6.91134   -3.99034    4.13199   0.66015625   $ lower outer beveling
-823303   k/z  -6.91134   -3.99034    5.120640   5.0625   $ lower inner beveling
+823301   k/z   -6.91134   -3.99034   61.90978   0.1877777777   $ upper beveling
+823302   k/z   -6.91134   -3.99034   8.94687   0.66015625   $ lower outer beveling
+823303   k/z   -6.91134   -3.99034   9.93552   5.0625   $ lower inner beveling
 c
 c End of Shim Rod
 c
@@ -4862,20 +4862,20 @@ c
 c
 c pz surfaces
 c
-832301   pz    54.19344   $ top of control rod
-832302   pz    53.43144   $ top of main section
-832303   pz    52.79644   $ top of poison portion
-832304   pz     6.72084   $ bottom of poison portion
-832305   pz     6.08584   $ bottom of main section
-832306   pz     5.67944   $ bottom of outer lower cone
-832307   pz     5.120640   $ bottom of control rod
+832301   pz   59.00832   $ top of control rod
+832302   pz   58.24632   $ top of main section
+832303   pz   57.61132   $ top of poison portion
+832304   pz   11.53572   $ bottom of poison portion
+832305   pz   10.90072   $ bottom of main section
+832306   pz   10.49432   $ bottom of outer lower cone
+832307   pz   9.93552   $ bottom of control rod
 c
 c
 c k/z surfaces
 c
-833301   k/z  0   15.9156   57.09490154    0.1877777777   $ upper beveling
-833302   k/z  0   15.9156    4.13199   0.66015625   $ lower outer beveling
-833303   k/z  0   15.9156    5.120640   5.0625   $ lower inner beveling
+833301   k/z   0   15.9156   61.90978   0.1877777777   $ upper beveling
+833302   k/z   0   15.9156   8.94687   0.66015625   $ lower outer beveling
+833303   k/z   0   15.9156   9.93552   5.0625   $ lower inner beveling
 c
 c End of Reg Rod
 c
