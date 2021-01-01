@@ -25,7 +25,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 
-# from mcnp_funcs import *
+from mcnp_funcs import *
 
 # Variables
 filepath = "C:/MCNP6/facilities/reed/rodcal-mcnp" # do NOT include / at the end
@@ -35,7 +35,7 @@ heights = [0,10,20,30,40,50,60,70,80,90,100] # for use in name strings, use str(
 # Main function to be executed
 def main(argv):
     os.chdir(f'{filepath}')
-    '''
+    # '''
     base_input_name = find_base_file(filepath)
     check_kcode(filepath,base_input_name)
 
@@ -81,7 +81,7 @@ def main(argv):
     keff_df.to_csv("keff.csv")
 
     convert_keff_to_rho("keff.csv","rho.csv")
-    '''
+    # '''
     plot_rodcal_data("rho.csv")
     
 def plot_rodcal_data(rho_csv_name):
@@ -93,6 +93,7 @@ def plot_rodcal_data(rho_csv_name):
     
     fig,axs = plt.subplots(2,1, figsize=(1636/my_dpi, 2*673/my_dpi), dpi=my_dpi,facecolor='w',edgecolor='k')
     ax_int, ax_dif = axs[0], axs[1] # integral, differential worth on top, bottom, resp.
+    color = {rods[0]:"tab:red",rods[1]:"tab:green",rods[2]:"tab:blue"}
     
     for rod in rods: # We want to sort our curves by rods
         int_y = rho_df[f"{rod}"].tolist()
@@ -100,13 +101,14 @@ def plot_rodcal_data(rho_csv_name):
 
         int_eq = np.polyfit(heights,int_y,3) # integral worth curve equation
         fit_x = np.linspace(heights[0],heights[-1],heights[-1]-heights[0]+1)
-        # int_fit_y = np.polyval(int_eq,fit_x)
+        int_fit_y = np.polyval(int_eq,fit_x)
         
         ax_int.errorbar(heights, int_y, yerr=int_y_unc,
+                            marker="o",ls="none",
                             label=f'{rod.capitalize()}',
-                            linewidth=2,capsize=3,capthick=2)
+                            color=color[rod],elinewidth=2,capsize=3,capthick=2)
         
-        # ax_int.plot(heights,int_y,"o",fit_x,int_fit_y)
+        ax_int.plot(fit_x,int_fit_y,color=color[rod])
         
 
         dif_eq = -1*np.polyder(int_eq) # differential worth curve equation
@@ -116,8 +118,7 @@ def plot_rodcal_data(rho_csv_name):
         
         ax_dif.errorbar(fit_x, dif_fit_y,
                             label=f'{rod.capitalize()}',
-                            linewidth=2,capsize=3,capthick=2)
-        
+                            color=color[rod],linewidth=2,capsize=3,capthick=2)
     
     x_label = "Axial height withdrawn (%)"
     y_label_int = r"Integral worth $(\%\Delta\rho)$"
