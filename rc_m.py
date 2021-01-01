@@ -25,16 +25,17 @@ import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 
-from mcnp_funcs import *
+# from mcnp_funcs import *
 
 # Variables
 filepath = "C:/MCNP6/facilities/reed/rodcal-mcnp" # do NOT include / at the end
-rods = ["Safe", "Shim", "Reg"]
-heights = [00,10,20,30,40,50,60,70,80,90,100]
+rods = ["safe", "shim", "reg"]
+heights = [0,10,20,30,40,50,60,70,80,90,100] # for use in name strings, use str(height).zfill(3) to pad 0s until it is 3 characters long
 
 # Main function to be executed
 def main(argv):
     os.chdir(f'{filepath}')
+    '''
     base_input_name = find_base_file(filepath)
     check_kcode(filepath,base_input_name)
 
@@ -63,10 +64,121 @@ def main(argv):
     # Deletes MCNP runtape and source dist files.
     delete_files(f"{filepath}/{outputs_folder_name}",r=True,s=True)
 
-    keff_df = pd.DataFrame(columns=["Height", "Safe", "Safe unc", "Shim", "Shim unc", "Reg", "Reg unc"])
-    for file in os.listdir(f"{filepath}/{outputs_folder_name}"):
-        keff, keff_unc = extract_keff(file)
-        print(f'{file}: keff = {keff} +/- {keff_unc}')
+    # Setup a dataframe to collect keff values
+    keff_df = pd.DataFrame(columns=["height","safe", "safe unc", "shim", "shim unc", "reg", "reg unc"]) # use lower cases to match 'rods' def above
+    keff_df["height"] = heights
+    keff_df.set_index("height",inplace=True)
+
+    # Add keff values to dataframe
+    # NB: Use keff_df.iloc[row, column] to select by range integers, .loc[row, column] to select by row/column labels
+    for rod in rods:
+        for height in heights:
+            keff, keff_unc = extract_keff(f"{filepath}/{outputs_folder_name}/o_rc-{rod}-{str(height).zfill(3)}.o")
+            keff_df.loc[height,rod] = keff 
+            keff_df.loc[height,f'{rod} unc'] = keff_unc    
+    
+    print(keff_df)
+    keff_df.to_csv("keff.csv")
+
+    convert_keff_to_rho("keff.csv","rho.csv")
+    '''
+    plot_rodcal_data("rho.csv")
+    
+def plot_rodcal_data(rho_csv_name):
+    rho_df = pd.read_csv(rho_csv_name,index_col=0)
+    rods = [c for c in rho_df.columns.values.tolist() if "unc" not in c]
+    heights = rho_df.index.values.tolist()
+    
+    my_dpi = 96
+    
+    fig,axs = plt.subplots(2,1, figsize=(1636/my_dpi, 2*673/my_dpi), dpi=my_dpi,facecolor='w',edgecolor='k')
+    ax_int, ax_dif = axs[0], axs[1] # integral, differential worth on top, bottom, resp.
+    
+    for rod in rods: # We want to sort our curves by rods
+        int_y = rho_df[f"{rod}"].tolist()
+        int_y_unc = rho_df[f"{rod} unc"].tolist()
+
+        int_eq = np.polyfit(heights,int_y,3) # integral worth curve equation
+        fit_x = np.linspace(heights[0],heights[-1],heights[-1]-heights[0]+1)
+        # int_fit_y = np.polyval(int_eq,fit_x)
+        
+        ax_int.errorbar(heights, int_y, yerr=int_y_unc,
+                            label=f'{rod.capitalize()}',
+                            linewidth=2,capsize=3,capthick=2)
+        
+        # ax_int.plot(heights,int_y,"o",fit_x,int_fit_y)
+        
+
+        dif_eq = -1*np.polyder(int_eq) # differential worth curve equation
+        
+        
+        dif_fit_y = np.polyval(dif_eq,fit_x)
+        
+        ax_dif.errorbar(fit_x, dif_fit_y,
+                            label=f'{rod.capitalize()}',
+                            linewidth=2,capsize=3,capthick=2)
+        
+    
+    x_label = "Axial height withdrawn (%)"
+    y_label_int = r"Integral worth $(\%\Delta\rho)$"
+    y_label_dif = r"Differential worth ($\%\Delta\rho$/cm)"
+    label_fontsize = 16
+    
+    # INTEGRAL WORTH PLOT SETTINGS
+    
+    #df_int.plot(ax=ax_int, linewidth='0.75') 
+    
+    #plt.title('Relative integral worths for varied control blade thickness')
+    ax_int.set_xlim([0,100])
+    ax_int.set_ylim([-.5,3.5])
+
+    ax_int.xaxis.set_major_locator(MultipleLocator(10))
+    ax_int.yaxis.set_major_locator(MultipleLocator(0.5))
+    
+    ax_int.minorticks_on()
+    ax_int.xaxis.set_minor_locator(MultipleLocator(2.5))
+    ax_int.yaxis.set_minor_locator(MultipleLocator(0.125))
+    
+    ax_int.tick_params(axis='both', which='major', labelsize=16)
+    
+    ax_int.grid(b=True, which='major', color='#999999', linestyle='-', linewidth='1')
+    ax_int.grid(which='minor', linestyle=':', linewidth='1', color='gray')
+    
+    ax_int.set_xlabel(x_label,fontsize=label_fontsize)
+    ax_int.set_ylabel(y_label_int,fontsize=label_fontsize)
+    ax_int.legend(title=f'Key', title_fontsize='x-large', ncol=4, fontsize='x-large',loc='upper right')
+    # fontsize: int or {'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'}
+    
+    #
+    # DIFFERENTIAL WORTH PLOT SETTINGS
+    ax_dif.set_xlim([0,100])
+    ax_dif.set_ylim([0,0.06])
+    
+    ax_dif.minorticks_on()
+    ax_dif.xaxis.set_minor_locator(MultipleLocator(2.5))
+    ax_dif.yaxis.set_minor_locator(MultipleLocator(0.0025))
+    
+    ax_dif.grid(b=True, which='major', color='#999999', linestyle='-', linewidth='1')
+    ax_dif.grid(which='minor', linestyle=':', linewidth='1', color='gray')
+
+    ax_dif.tick_params(axis='both', which='major', labelsize=16)
+    
+    ax_dif.set_xlabel(x_label,fontsize=label_fontsize)
+    ax_dif.set_ylabel(y_label_dif,fontsize=label_fontsize)
+    #plt.title(f'Fuel Assembly B-1, {cycle_state}',fontsize=fs1)
+    ax_dif.legend(title=f'Key', title_fontsize='x-large', ncol=4, fontsize='x-large', loc='lower center')
+    
+    #plt.savefig(f'{os.getcwd()}/shim_worth_{cycle_state}_{shim[-1]}.png', bbox_inches = 'tight', pad_inches = 0.1, dpi=320)
+    #print(f'figure saved')
+    
+    
+    
+    
+
+
+
+
+
 
 #
 # HELPER FUNCTIONS
@@ -76,13 +188,8 @@ def main(argv):
 def find_height(rod, height, base_input_name, inputs_folder_name):
     base_input_deck = open(base_input_name, 'r')
     
-    if height == 0:
-        new_input_name = f'./{inputs_folder_name}/rc-{rod.lower()}-00{str(height)}.i'
-    elif height == 100:
-        new_input_name = './'+ inputs_folder_name + '/' + 'rc-'+rod.lower()+ '-' + str(height) +'.i'
-    else:
-        new_input_name = './'+ inputs_folder_name + '/' + 'rc-'+rod.lower()+ '-0' + str(height) +'.i'
-    
+    new_input_name = './'+ inputs_folder_name + '/' + 'rc-'+rod.lower()+ '-' + str(height).zfill(3) +'.i'
+
     # If the folder doesn't exist, create it
     if not os.path.isdir(inputs_folder_name):
         os.mkdir(inputs_folder_name)
@@ -96,8 +203,8 @@ def find_height(rod, height, base_input_name, inputs_folder_name):
 
     # 'start_marker' is what you're searching for in each line of the whole document. Thus it needs to be unique,
     # like "Safe Rod (0% Withdrawn)"
-    start_marker = rod + " Rod (0% Withdrawn)"
-    end_marker = "End of " + rod
+    start_marker = rod.capitalize() + " Rod (0% Withdrawn)"
+    end_marker = f"End of {rod.capitalize()} Rod"
     
     # Using 'inside_block' to indicate whether the current line is inbetween "Safe Rod (0% Withdrawn)" and
     # "End of Safe Rod", i.e lines (4778,4807), (4812, 4841), (4846, 4875)
@@ -110,7 +217,8 @@ def find_height(rod, height, base_input_name, inputs_folder_name):
             # This would signify, that we are inside the block
             if start_marker in line and "90%" not in line:
                 inside_block = True
-                new_input_deck.write("c "+ rod + " Rod ("+ str(height) + "% withdrawn)\n")
+                new_input_deck.write(f"c {rod.capitalize()} Rod ({height}% withdrawn)\n")
+                print(f'{new_input_name} block check')
                 continue
             new_input_deck.write(line)
             continue
@@ -131,9 +239,11 @@ def find_height(rod, height, base_input_name, inputs_folder_name):
              
             if 'pz' in line and line[0].startswith('8'):
                 new_input_deck.write(change_height('pz', line, height) + '\n')
+                # print(f'{new_input_name} pz change')
                 continue
             if 'k/z' in line and line[0].startswith('8'):
                 new_input_deck.write(change_height('k/z', line, height) + '\n')
+                # print(f'{new_input_name} k/z change')
                 continue
             # If not, just write the line to the new file
             else:
@@ -184,6 +294,46 @@ def change_height(value, line, x):
 
     return s
 
+def convert_keff_to_rho(keff_csv_name,rho_csv_name):
+    # Assumes the keff.csv has columns labeled "rod" and "rod unc" for keff and keff uncertainty values for a given rod
+    keff_df = pd.read_csv(keff_csv_name,index_col=0)
+    rods = [c for c in keff_df.columns.values.tolist() if "unc" not in c]
+    heights = keff_df.index.values.tolist()
+
+    # Setup a dataframe to collect rho values
+    rho_df = pd.DataFrame(columns=keff_df.columns.values.tolist()) # use lower cases to match 'rods' def above
+    rho_df["height"] = heights
+    rho_df.set_index("height",inplace=True)
+
+    '''
+    ERROR PROPAGATION FORMULAE
+    % Delta rho = 100* frac{k2-k1}{k2*k1}
+    numerator = k2-k1
+    delta num = sqrt{(delta k2)^2 + (delta k1)^2}
+    denominator = k2*k1
+    delta denom = k2*k1*sqrt{(frac{delta k2}{k2})^2 + (frac{delta k1}{k1})^2}
+    delta % Delta rho = 100*sqrt{(frac{delta num}{num})^2 + (frac{delta denom}{denom})^2}
+    '''   
+    for rod in rods: 
+        for height in heights: 
+            k1 = keff_df.loc[height,rod]
+            k2 = keff_df.loc[heights[-1],rod]
+            dk1 = keff_df.loc[height,f"{rod} unc"] 
+            dk2 = keff_df.loc[heights[-1],f"{rod} unc"] 
+            k2_minus_k1 = k2-k1
+            k2_times_k1 = k2*k1
+            d_k2_minus_k1 = np.sqrt(dk2**2+dk1**2)
+            d_k2_times_k1 = k2*k1*np.sqrt((dk2/k2)**2+(dk1/k1)**2)
+            rho = (k2-k1)/(k2*k1)*100
+
+            rho_df.loc[height,rod] = rho
+            if k2_minus_k1 != 0: 
+                d_rho = rho*np.sqrt((d_k2_minus_k1/k2_minus_k1)**2+(d_k2_times_k1/k2_times_k1)**2)
+                rho_df.loc[height,f"{rod} unc"] = d_rho
+            else: rho_df.loc[height,f"{rod} unc"] = 0
+
+    print(rho_df)
+    rho_df.to_csv(f"{rho_csv_name}")
     
 if __name__ == "__main__":
     main(sys.argv[1:])

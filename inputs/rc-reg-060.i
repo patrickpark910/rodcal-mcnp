@@ -1,4 +1,4 @@
-1 RRR TRIGA Core - Malcolm McCarthy (2017-06-29)
+1 RRR TRIGA Core - Patrick Park (2020-12-31)
 c    __   ___  ___  __      __   ___  __   ___       __   __           __   ___       __  ___  __   __  
 c   |__) |__  |__  |  \    |__) |__  /__` |__   /\  |__) /  ` |__|    |__) |__   /\  /  `  |  /  \ |__) 
 c   |  \ |___ |___ |__/    |  \ |___ .__/ |___ /--\ |  \ \__, |  |    |  \ |___ /--\ \__,  |  \__/ |  \
@@ -4782,7 +4782,7 @@ c
 c ROD HEIGHTS
 c the "bottom of control rod" has z-position 5.120640 at 0 % and 53.2694 at 100 %
 c
-c Safe Rod (0 % Withdrawn)
+c Safe Rod (0% Withdrawn)
 c
 c
 c c/z surfaces
@@ -4810,7 +4810,7 @@ c
 813302   k/z  6.91134   -3.99034    4.13199   0.66015625   $ lower outer beveling
 813303   k/z  6.91134   -3.99034    5.120640   5.0625   $ lower inner beveling
 c
-c
+c End of Safe Rod
 c
 c
 c
@@ -4844,13 +4844,13 @@ c
 823302   k/z  -6.91134   -3.99034    4.13199   0.66015625   $ lower outer beveling
 823303   k/z  -6.91134   -3.99034    5.120640   5.0625   $ lower inner beveling
 c
+c End of Shim Rod
 c
 c
 c
 c
 c
-c
-c Reg Rod (60% withdrawn)
+c Reg Rod (060% withdrawn)
 c
 c
 c c/z surfaces
@@ -4877,7 +4877,6 @@ c
 833301   k/z   0   15.9156   85.98418   0.1877777777   $ upper beveling
 833302   k/z   0   15.9156   33.02127   0.66015625   $ lower outer beveling
 833303   k/z   0   15.9156   34.00992   5.0625   $ lower inner beveling
-c
 c
 c
 c

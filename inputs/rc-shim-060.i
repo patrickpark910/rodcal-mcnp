@@ -1,4 +1,4 @@
-1 RRR TRIGA Core - Malcolm McCarthy (2017-06-29)
+1 RRR TRIGA Core - Patrick Park (2020-12-31)
 c    __   ___  ___  __      __   ___  __   ___       __   __           __   ___       __  ___  __   __  
 c   |__) |__  |__  |  \    |__) |__  /__` |__   /\  |__) /  ` |__|    |__) |__   /\  /  `  |  /  \ |__) 
 c   |  \ |___ |___ |__/    |  \ |___ .__/ |___ /--\ |  \ \__, |  |    |  \ |___ /--\ \__,  |  \__/ |  \
@@ -4782,7 +4782,7 @@ c
 c ROD HEIGHTS
 c the "bottom of control rod" has z-position 5.120640 at 0 % and 53.2694 at 100 %
 c
-c Safe Rod (0 % Withdrawn)
+c Safe Rod (0% Withdrawn)
 c
 c
 c c/z surfaces
@@ -4810,13 +4810,13 @@ c
 813302   k/z  6.91134   -3.99034    4.13199   0.66015625   $ lower outer beveling
 813303   k/z  6.91134   -3.99034    5.120640   5.0625   $ lower inner beveling
 c
+c End of Safe Rod
 c
 c
 c
 c
 c
-c
-c Shim Rod (600% withdrawn)
+c Shim Rod (060% withdrawn)
 c
 c
 c c/z surfaces
@@ -4829,21 +4829,20 @@ c
 c
 c pz surfaces
 c
-822301   pz   343.08624   $ top of control rod
-822302   pz   342.32424   $ top of main section
-822303   pz   341.68924   $ top of poison portion
-822304   pz   295.61364   $ bottom of poison portion
-822305   pz   294.97864   $ bottom of main section
-822306   pz   294.57224   $ bottom of outer lower cone
-822307   pz   294.01344   $ bottom of control rod
+822301   pz   83.08272   $ top of control rod
+822302   pz   82.32072   $ top of main section
+822303   pz   81.68572   $ top of poison portion
+822304   pz   35.61012   $ bottom of poison portion
+822305   pz   34.97512   $ bottom of main section
+822306   pz   34.56872   $ bottom of outer lower cone
+822307   pz   34.00992   $ bottom of control rod
 c
 c
 c k/z surfaces
 c
-823301   k/z   -6.91134   -3.99034   345.9877   0.1877777777   $ upper beveling
-823302   k/z   -6.91134   -3.99034   293.02479   0.66015625   $ lower outer beveling
-823303   k/z   -6.91134   -3.99034   294.01344   5.0625   $ lower inner beveling
-c
+823301   k/z   -6.91134   -3.99034   85.98418   0.1877777777   $ upper beveling
+823302   k/z   -6.91134   -3.99034   33.02127   0.66015625   $ lower outer beveling
+823303   k/z   -6.91134   -3.99034   34.00992   5.0625   $ lower inner beveling
 c
 c
 c
@@ -4863,22 +4862,22 @@ c
 c
 c pz surfaces
 c
-832301   pz   343.08624   $ top of control rod
-832302   pz   342.32424   $ top of main section
-832303   pz   341.68924   $ top of poison portion
-832304   pz   295.61364   $ bottom of poison portion
-832305   pz   294.97864   $ bottom of main section
-832306   pz   294.57224   $ bottom of outer lower cone
-832307   pz   294.01344   $ bottom of control rod
+832301   pz    54.19344   $ top of control rod
+832302   pz    53.43144   $ top of main section
+832303   pz    52.79644   $ top of poison portion
+832304   pz     6.72084   $ bottom of poison portion
+832305   pz     6.08584   $ bottom of main section
+832306   pz     5.67944   $ bottom of outer lower cone
+832307   pz     5.120640   $ bottom of control rod
 c
 c
 c k/z surfaces
 c
-833301   k/z   0   15.9156   345.9877   0.1877777777   $ upper beveling
-833302   k/z   0   15.9156   293.02479   0.66015625   $ lower outer beveling
-833303   k/z   0   15.9156   294.01344   5.0625   $ lower inner beveling
+833301   k/z  0   15.9156   57.09490154    0.1877777777   $ upper beveling
+833302   k/z  0   15.9156    4.13199   0.66015625   $ lower outer beveling
+833303   k/z  0   15.9156    5.120640   5.0625   $ lower inner beveling
 c
-c
+c End of Reg Rod
 c
 c
 c

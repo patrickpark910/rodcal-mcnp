@@ -87,22 +87,21 @@ def delete_files(target_folder_filepath,o=False, r=False, s=False):
     if s: 
         for file in glob.glob(f'{target_folder_filepath}/*.s'): os.remove(file)
 
-def extract_keff(target_outputs):
+def extract_keff(target_filepath):
     # target_outputs: list of output file names from which to read keff values
     # keff_file_name: string with desired file name of collected keffs + .csv
-    
-    for fe_removed in target_outputs:
-        file_to_extract_from = open(f'{filepath}/{fe_removed}')
-        get_keff = False
-        found_keff = False
-        for line in file_to_extract_from:
-            if not found_keff:
-                if line.startswith(" the estimated average keffs"):
-                    get_keff = True
-                elif get_keff and line.startswith("       col/abs/trk len"):
-                    keff, keff_unc = float(line.split()[2]), float(line.split()[3])
-                    found_keff = True
-        print(f'keff = {keff} +/- {keff_unc} with core positions {fe_removed} vacated.')
+    get_keff = False
+    found_keff = False
+
+    for line in open(target_filepath):
+        if not found_keff:
+            if line.startswith(" the estimated average keffs"):
+                get_keff = True
+            elif get_keff and line.startswith("       col/abs/trk len"):
+                keff, keff_unc = float(line.split()[2]), float(line.split()[3])
+                # print(f"{target_filepath.split('/')[-1]}: keff = {keff} +/- {keff_unc}")
+                found_keff = True
+    if not found_keff: print("--Error: keff cannot be found")
     return keff, keff_unc
 
 '''   
