@@ -75,7 +75,7 @@ def run_mcnp(filepath,inputs_folder_name,outputs_folder_name,input_file, tasks_t
         output_filepath = f"{filepath}/{outputs_folder_name}/o_{input_file.split('/')[-1].split('.')[0]}"
         os.system(f"mcnp6 i={input_filepath} n={output_filepath}. tasks {tasks_to_use}")
     else: 
-        print(f"---This MCNP run will be skipped because the output for {input_file.split('/')[-1]} already exists.")
+        print(f"--This MCNP run will be skipped because the output for {input_file.split('/')[-1]} already exists.")
  
 def delete_files(target_folder_filepath,o=False, r=False, s=False):
     # Default args are False unless specified in command

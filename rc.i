@@ -4780,7 +4780,9 @@ c -------------------
 c ---- COPY HERE ----
 c
 c ROD HEIGHTS
-c the "bottom of control rod" has z-position 5.120640 at 0 % and 53.2694 at 100 %
+c Control rods have a travel of 38 cm
+c The "bottom of control rod" has z-position 13.7425 at 0% and 51.7425 at 100%
+c Rod moves 0.38 for every 1%
 c
 c Safe Rod (0% Withdrawn)
 c
@@ -4795,20 +4797,20 @@ c
 c
 c pz surfaces
 c
-812301   pz   59.00832   $ top of control rod
-812302   pz   58.24632   $ top of main section
-812303   pz   57.61132   $ top of poison portion
-812304   pz   11.53572   $ bottom of poison portion
-812305   pz   10.90072   $ bottom of main section
-812306   pz   10.49432   $ bottom of outer lower cone
-812307   pz   9.93552   $ bottom of control rod
+812301   pz   62.8153   $ top of control rod
+812302   pz   62.0533   $ top of main section
+812303   pz   61.4183   $ top of poison portion
+812304   pz   15.4327   $ bottom of poison portion
+812305   pz   14.7077   $ bottom of main section
+812306   pz   14.3013   $ bottom of outer lower cone
+812307   pz   13.7425   $ bottom of control rod
 c
 c
 c k/z surfaces
 c
-813301   k/z   6.91134   -3.99034   61.90978   0.1877777777   $ upper beveling
-813302   k/z   6.91134   -3.99034   8.94687   0.66015625   $ lower outer beveling
-813303   k/z   6.91134   -3.99034   9.93552   5.0625   $ lower inner beveling
+813301   k/z   6.91134   -3.99034   65.71676   0.1877777777   $ upper beveling
+813302   k/z   6.91134   -3.99034   12.75385   0.66015625   $ lower outer beveling
+813303   k/z   6.91134   -3.99034   13.74250   5.0625   $ lower inner beveling
 c
 c End of Safe Rod
 c
@@ -4829,20 +4831,20 @@ c
 c
 c pz surfaces
 c
-822301   pz   59.00832   $ top of control rod
-822302   pz   58.24632   $ top of main section
-822303   pz   57.61132   $ top of poison portion
-822304   pz   11.53572   $ bottom of poison portion
-822305   pz   10.90072   $ bottom of main section
-822306   pz   10.49432   $ bottom of outer lower cone
-822307   pz   9.93552   $ bottom of control rod
+822301   pz   62.8153   $ top of control rod
+822302   pz   62.0533   $ top of main section
+822303   pz   61.4183   $ top of poison portion
+822304   pz   15.4327   $ bottom of poison portion
+822305   pz   14.7077   $ bottom of main section
+822306   pz   14.3013   $ bottom of outer lower cone
+822307   pz   13.7425   $ bottom of control rod
 c
 c
 c k/z surfaces
 c
-823301   k/z   -6.91134   -3.99034   61.90978   0.1877777777   $ upper beveling
-823302   k/z   -6.91134   -3.99034   8.94687   0.66015625   $ lower outer beveling
-823303   k/z   -6.91134   -3.99034   9.93552   5.0625   $ lower inner beveling
+823301   k/z   -6.91134   -3.99034   65.71676   0.1877777777   $ upper beveling
+823302   k/z   -6.91134   -3.99034   12.75385   0.66015625   $ lower outer beveling
+823303   k/z   -6.91134   -3.99034   13.74250   5.0625   $ lower inner beveling
 c
 c End of Shim Rod
 c
@@ -4863,20 +4865,20 @@ c
 c
 c pz surfaces
 c
-832301   pz   59.00832   $ top of control rod
-832302   pz   58.24632   $ top of main section
-832303   pz   57.61132   $ top of poison portion
-832304   pz   11.53572   $ bottom of poison portion
-832305   pz   10.90072   $ bottom of main section
-832306   pz   10.49432   $ bottom of outer lower cone
-832307   pz   9.93552   $ bottom of control rod
+832301   pz   62.8153   $ top of control rod
+832302   pz   62.0533   $ top of main section
+832303   pz   61.4183   $ top of poison portion
+832304   pz   15.4327   $ bottom of poison portion
+832305   pz   14.7077   $ bottom of main section
+832306   pz   14.3013   $ bottom of outer lower cone
+832307   pz   13.7425   $ bottom of control rod
 c
 c
 c k/z surfaces
 c
-833301   k/z   0   15.9156   61.90978   0.1877777777   $ upper beveling
-833302   k/z   0   15.9156   8.94687   0.66015625   $ lower outer beveling
-833303   k/z   0   15.9156   9.93552   5.0625   $ lower inner beveling
+833301   k/z   0   15.9156   65.71676   0.1877777777   $ upper beveling
+833302   k/z   0   15.9156   12.75385   0.66015625   $ lower outer beveling
+833303   k/z   0   15.9156   13.74250   5.0625   $ lower inner beveling
 c
 c End of Reg Rod
 c
