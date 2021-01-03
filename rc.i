@@ -8658,7 +8658,7 @@ c
 c
 mode n                                                  $ neutrons! 
 c
-kcode    10000 1.0 10 110 $ kcode card
+kcode    20000 1 5 105 $ kcode card, NIST default is 20000 neutrons, discard 5, run 105 total active cycles
 c
 esplt:n  2 0.1 2 0.001 2 0.0001 2 0.000001 0.75 5e-7    $ split energy
 c
