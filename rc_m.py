@@ -47,7 +47,8 @@ import numpy as np
 import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
-from matplotlib.ticker import MultipleLocator
+from matplotlib.ticker import MultipleLocator, FormatStrFormatter
+
 
 from mcnp_funcs import *
 
@@ -67,6 +68,7 @@ keff_csv_name = "keff.csv" # File for keff and uncertainty values.
 # or YOUR FILE WILL BE OVERWRITTEN.
 rho_csv_name = "rho.csv" # File for rho and uncertainty values.
 params_csv_name = "rod_parameters.csv"
+figure_name = "results.png"
 
 # Normal rod motion speed is about 11 inches (27.9 cm) per minute for the Shim rod, 19 inches (48.3 cm) per minute for the Safe rod, and 24 inches (61 cm) per minute for the Reg rod.
 
@@ -121,18 +123,18 @@ def main(argv):
             keff_df.loc[height,rod] = keff 
             keff_df.loc[height,f'{rod} unc'] = keff_unc    
     
-    print(f"\nDataframe of keff values and their uncertainties:\n{keff_df}")
+    print(f"\nDataframe of keff values and their uncertainties:\n{keff_df}\n")
     keff_df.to_csv(keff_csv_name)
 
     # ''' # [END] TO PLOT YOUR OWN KEFF: Remove first # to just plot rodcal data using a CSV of keff values.
     
     convert_keff_to_rho(keff_csv_name,rho_csv_name)
     
-    plot_rodcal_data(rho_csv_name)
-
     calc_params(rho_csv_name,params_csv_name)
 
-    print(f"************ PROGRAM COMPLETE ************")
+    plot_rodcal_data(rho_csv_name,figure_name)
+
+    print(f"\n************************ PROGRAM COMPLETE ************************\n")
     
 
 
@@ -344,109 +346,10 @@ def convert_keff_to_rho(keff_csv_name,rho_csv_name):
                 rho_df.loc[height,f"{rod} unc"] = d_rho
             else: rho_df.loc[height,f"{rod} unc"] = 0
 
-    print(f"\nDataframe of rho values and their uncertainties:\n{rho_df}")
+    print(f"\nDataframe of rho values and their uncertainties:\n{rho_df}\n")
     rho_df.to_csv(f"{rho_csv_name}")
 
 
-
-'''
-Plots integral and differential worths given a CSV of rho and uncertainties.
-
-rho_csv_name: str, name of CSV of rho and uncertainties, e.g. "rho.csv"
-
-Does not return anything. Only produces a figure.
-
-NB: Major plot settings have been organized into variables for your personal convenience.
-'''
-def plot_rodcal_data(rho_csv_name):
-    rho_df = pd.read_csv(rho_csv_name,index_col=0)
-    rods = [c for c in rho_df.columns.values.tolist() if "unc" not in c]
-    heights = rho_df.index.values.tolist()
-    
-    # Personal parameters, to be used in plot settings below.
-    my_dpi = 96
-    x_label = "Axial height withdrawn (%)"
-    y_label_int = r"Integral worth $(\%\Delta\rho)$"
-    y_label_dif = r"Differential worth ($\%\Delta\rho$/%)"
-    label_fontsize = 16
-    legend_fontsize = "x-large"
-    # fontsize: int or {'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'}
-    figure_name = "results.png"
-
-    fig,axs = plt.subplots(2,1, figsize=(1636/my_dpi, 2*673/my_dpi), dpi=my_dpi,facecolor='w',edgecolor='k')
-    ax_int, ax_dif = axs[0], axs[1] # integral, differential worth on top, bottom, resp.
-    color = {rods[0]:"tab:red",rods[1]:"tab:green",rods[2]:"tab:blue"}
-    
-    for rod in rods: # We want to sort our curves by rods
-        int_y = rho_df[f"{rod}"].tolist()
-        int_y_unc = rho_df[f"{rod} unc"].tolist()
-
-        int_eq = np.polyfit(heights,int_y,3) # coefs of integral worth curve equation
-        fit_x = np.linspace(heights[0],heights[-1],heights[-1]-heights[0]+1)
-        int_fit_y = np.polyval(int_eq,fit_x)
-        
-        # Data points with error bars
-        ax_int.errorbar(heights, int_y, yerr=int_y_unc,
-                            marker="o",ls="none",
-                            color=color[rod],elinewidth=2,capsize=3,capthick=2)
-        
-        # The standard least squaures fit curve
-        ax_int.plot(fit_x,int_fit_y,color=color[rod],label=f'{rod.capitalize()}')
-        
-
-        dif_eq = -1*np.polyder(int_eq) # coefs of differential worth curve equation
-        dif_fit_y = np.polyval(dif_eq,fit_x)
-        
-        # The differentiated curve.
-        # The errorbar method allows you to add errors to the differential plot too.
-        ax_dif.errorbar(fit_x, dif_fit_y,
-                            label=f'{rod.capitalize()}',
-                            color=color[rod],linewidth=2,capsize=3,capthick=2)
-    
-    # Integral worth plot settings
-    ax_int.set_xlim([0,100])
-    ax_int.set_ylim([-.5,3.5])
-
-    ax_int.xaxis.set_major_locator(MultipleLocator(10))
-    ax_int.yaxis.set_major_locator(MultipleLocator(0.5))
-    
-    ax_int.minorticks_on()
-    ax_int.xaxis.set_minor_locator(MultipleLocator(2.5))
-    ax_int.yaxis.set_minor_locator(MultipleLocator(0.125))
-    
-    ax_int.tick_params(axis='both', which='major', labelsize=label_fontsize)
-    
-    ax_int.grid(b=True, which='major', color='#999999', linestyle='-', linewidth='1')
-    ax_int.grid(which='minor', linestyle=':', linewidth='1', color='gray')
-    
-    ax_int.set_xlabel(x_label,fontsize=label_fontsize)
-    ax_int.set_ylabel(y_label_int,fontsize=label_fontsize)
-    ax_int.legend(title=f'Key', title_fontsize=legend_fontsize, ncol=4, fontsize=legend_fontsize,loc='upper right')
-    
-    # Differential worth plot settings
-    ax_dif.set_xlim([0,100])
-    ax_dif.set_ylim([0,0.06])
-
-    ax_dif.xaxis.set_major_locator(MultipleLocator(10))
-    ax_dif.yaxis.set_major_locator(MultipleLocator(0.01))
-    
-    ax_dif.minorticks_on()
-    ax_dif.xaxis.set_minor_locator(MultipleLocator(2.5))
-    ax_dif.yaxis.set_minor_locator(MultipleLocator(0.0025))
-    
-    ax_dif.grid(b=True, which='major', color='#999999', linestyle='-', linewidth='1')
-    ax_dif.grid(which='minor', linestyle=':', linewidth='1', color='gray')
-
-    ax_dif.tick_params(axis='both', which='major', labelsize=label_fontsize)
-    
-    ax_dif.set_xlabel(x_label,fontsize=label_fontsize)
-    ax_dif.set_ylabel(y_label_dif,fontsize=label_fontsize)
-    #plt.title(f'Fuel Assembly B-1, {cycle_state}',fontsize=fs1)
-    ax_dif.legend(title=f'Key', title_fontsize=legend_fontsize, ncol=4, fontsize=legend_fontsize, loc='lower center')
-    
-    plt.savefig(f'{figure_name}', bbox_inches = 'tight', pad_inches = 0.1, dpi=320)
-    print(f'\nFigure saved!\n') # no space near \ 
-    
 
 '''
 Calculates a few other rod parameters.
@@ -499,6 +402,135 @@ def calc_params(rho_csv_name,params_csv_name):
 
     print(f"\nVarious rod parameters:\n{params_df}")
     params_df.to_csv(params_csv_name)
+
+
+
+'''
+Plots integral and differential worths given a CSV of rho and uncertainties.
+
+rho_csv_name: str, name of CSV of rho and uncertainties, e.g. "rho.csv"
+figure_name: str, desired name of resulting figure, e.g. "figure.png"
+
+Does not return anything. Only produces a figure.
+
+NB: Major plot settings have been organized into variables for your personal convenience.
+'''
+def plot_rodcal_data(rho_csv_name,figure_name):
+    rho_df = pd.read_csv(rho_csv_name,index_col=0)
+    rods = [c for c in rho_df.columns.values.tolist() if "unc" not in c]
+    heights = rho_df.index.values.tolist()
+
+    rho_or_dollars = None
+    while rho_or_dollars is None:
+        rho_or_dollars_input = input("Would you like your plot in rho or dollars? Type 'rho' or 'dollars', or 'q' to quit: ")
+        if rho_or_dollars_input.lower() in ['r','rho','p']: rho_or_dollars = 'rho'
+        elif rho_or_dollars_input.lower() in ['d','dol','dollar','dollars','$']: rho_or_dollars = 'dollars'
+        elif rho_or_dollars_input.lower() in ['q','quit','kill']: sys.exit()
+        else: print("Units unknown. Try again.")
+    
+    # Personal parameters, to be used in plot settings below.
+    my_dpi = 320
+    x_label = "Axial height withdrawn (%)"
+    
+    if rho_or_dollars == 'dollars':
+        y_label_int = r"Integral worth ($)"
+        y_label_dif = r"Differential worth ($/%)"
+
+    else: # Use axes labels below for units of rho
+        y_label_int = r"Integral worth ($\%\Delta\rho$)"
+        y_label_dif = r"Differential worth ($\%\Delta\rho$/%)"
+
+    label_fontsize = 16
+    legend_fontsize = "x-large"
+    # fontsize: int or {'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'}
+    
+
+    fig,axs = plt.subplots(2,1, figsize=(1636/96, 2*673/96), dpi=my_dpi,facecolor='w',edgecolor='k')
+    ax_int, ax_dif = axs[0], axs[1] # integral, differential worth on top, bottom, resp.
+    color = {rods[0]:"tab:red",rods[1]:"tab:green",rods[2]:"tab:blue"}
+    
+    for rod in rods: # We want to sort our curves by rods
+        int_y = rho_df[f"{rod}"].tolist()
+        int_y_unc = rho_df[f"{rod} unc"].tolist()
+        
+        if rho_or_dollars == 'dollars':
+            int_y = [x * 0.01 / 0.0075 for x in int_y] 
+            int_y_unc = [x * 0.01 / 0.0075 for x in int_y_unc] 
+
+        int_eq = np.polyfit(heights,int_y,3) # coefs of integral worth curve equation
+        fit_x = np.linspace(heights[0],heights[-1],heights[-1]-heights[0]+1)
+        int_fit_y = np.polyval(int_eq,fit_x)
+        
+        # Data points with error bars
+        ax_int.errorbar(heights, int_y, yerr=int_y_unc,
+                            marker="o",ls="none",
+                            color=color[rod],elinewidth=2,capsize=3,capthick=2)
+        
+        # The standard least squaures fit curve
+        ax_int.plot(fit_x,int_fit_y,color=color[rod],label=f'{rod.capitalize()}')
+        
+
+        dif_eq = -1*np.polyder(int_eq) # coefs of differential worth curve equation
+        dif_fit_y = np.polyval(dif_eq,fit_x)
+        
+        # The differentiated curve.
+        # The errorbar method allows you to add errors to the differential plot too.
+        ax_dif.errorbar(fit_x, dif_fit_y,
+                            label=f'{rod.capitalize()}',
+                            color=color[rod],linewidth=2,capsize=3,capthick=2)
+    
+    # Integral worth plot settings
+    ax_int.set_xlim([0,100])
+    ax_int.set_ylim([-0.5,3.5])
+
+    if rho_or_dollars == "dollars":
+        ax_int.set_ylim([0,4.5]) # Use for dollars units
+        ax_int.yaxis.set_major_formatter(FormatStrFormatter('%.2f')) # Use for 2 decimal places after 0. for dollars units
+
+    ax_int.xaxis.set_major_locator(MultipleLocator(10))
+    ax_int.yaxis.set_major_locator(MultipleLocator(0.5))
+    
+    ax_int.minorticks_on()
+    ax_int.xaxis.set_minor_locator(MultipleLocator(2.5))
+    ax_int.yaxis.set_minor_locator(MultipleLocator(0.125))
+    
+    ax_int.tick_params(axis='both', which='major', labelsize=label_fontsize)
+    
+    ax_int.grid(b=True, which='major', color='#999999', linestyle='-', linewidth='1')
+    ax_int.grid(which='minor', linestyle=':', linewidth='1', color='gray')
+    
+    ax_int.set_xlabel(x_label,fontsize=label_fontsize)
+    ax_int.set_ylabel(y_label_int,fontsize=label_fontsize)
+    ax_int.legend(title=f'Key', title_fontsize=legend_fontsize, ncol=4, fontsize=legend_fontsize,loc='upper right')
+    
+    # Differential worth plot settings
+    ax_dif.set_xlim([0,100])
+    ax_dif.set_ylim([0,0.06])
+
+    if rho_or_dollars == "dollars": 
+        ax_dif.set_ylim([0,0.07]) # use for dollars/% units
+
+    ax_dif.xaxis.set_major_locator(MultipleLocator(10))
+    ax_dif.yaxis.set_major_locator(MultipleLocator(0.01))
+    
+    ax_dif.minorticks_on()
+    ax_dif.xaxis.set_minor_locator(MultipleLocator(2.5))
+    ax_dif.yaxis.set_minor_locator(MultipleLocator(0.0025))
+    
+    ax_dif.grid(b=True, which='major', color='#999999', linestyle='-', linewidth='1')
+    ax_dif.grid(which='minor', linestyle=':', linewidth='1', color='gray')
+
+    ax_dif.tick_params(axis='both', which='major', labelsize=label_fontsize)
+    
+    ax_dif.set_xlabel(x_label,fontsize=label_fontsize)
+    ax_dif.set_ylabel(y_label_dif,fontsize=label_fontsize)
+    #plt.title(f'Fuel Assembly B-1, {cycle_state}',fontsize=fs1)
+    ax_dif.legend(title=f'Key', title_fontsize=legend_fontsize, ncol=4, fontsize=legend_fontsize, loc='lower center')
+    
+    plt.savefig(f"{figure_name.split('.')[0]}_{rho_or_dollars}.{figure_name.split('.')[-1]}", bbox_inches = 'tight', pad_inches = 0.1, dpi=320)
+    print(f"\nFigure '{figure_name.split('.')[0]}_{rho_or_dollars}.{figure_name.split('.')[-1]}' saved!\n") # no space near \ 
+    
+
 
 
 
