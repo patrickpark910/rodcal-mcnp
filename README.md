@@ -14,15 +14,24 @@ This project involves a python wrapper (`rc_m.py`) that:
 5. plots integral and differential worth curves (`results.png`)
 
 A `mcnp_funcs.py` has been created to contain some general python functions related to writing, running, or reading MCNP decks. 
-The `mcnp_funcs.py` is not yet reverse-compatible with my earlier project, [`critloadexp`](https:/github.com/patrickpark910/critloadexp),
+The `mcnp_funcs.py` is not yet reverse-compatible with my earlier project, [**critloadexp**](https:/github.com/patrickpark910/critloadexp),
 but I hope to use it as a base library in future projects.
 
+### Results 
+
 In `results.png`, the MCNP-predicted control rod worth curves are plotted. 
-My next project will be to improve our currently existing experimental rodcal python code during our annual maintenance and calibrations in mid-January.
-Further analysis or comparisons will have to wait until then.
 
 ![Result figure produced](https://github.com/patrickpark910/rodcal-mcnp/blob/main/results.png?raw=true)
 
+From the plotted data, the following tabulated parameters can be calculated. From the maximum integral worth, the dollar worth of the rods were found. The maximum differential worth is the peak worth added per unit percent or inch of height. Using the current motor speeds and the maximum differential worth, the reactivity addition rates were found. Our federally-specified reactivity addition rate limit is $0.16/sec, so the maximum motor speed we can use without violating this limit was also computed.
+
+| Rod  | Worth ($)         | Peak worth added per % height ($/%) | Peak worth added per height ($/in) | Current motor speed (in./min)  | Reactivity add. rate ($/sec) | Reactivity add. limit ($/sec) | Max motor speed (in./min) |
+| ---- | :-----------------: | :----------------------------------: | :---------------------------------: | :--------------------------------: | :--------------------------------: | :------------------------:| :------------------------: |
+| Safe | 3.41 | 0.05188                | 0.3468                | 19    | 0.1098  | 0.16        | 27.68        |
+| Shim | 4.10 | 0.05765                | 0.3853                | 11    | 0.0706  | 0.16         | 24.91        |
+| Reg  | 2.57 | 0.03587                | 0.2398                | 24    | 0.0959  | 0.16         | 40.04       |
+
+My next project will be to improve our currently existing experimental rodcal python code during our annual maintenance and calibrations in mid-January.
 
 ### Procedure
 
