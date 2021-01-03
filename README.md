@@ -21,7 +21,7 @@ but I hope to use it as a base library in future projects.
 
 In `results.png`, the MCNP-predicted control rod worth curves are plotted. 
 
-![Result figure produced](https://github.com/patrickpark910/rodcal-mcnp/blob/main/results.png?raw=true)
+![Result figure produced](https://github.com/patrickpark910/rodcal-mcnp/blob/main/results_rho.png?raw=true)
 
 From the plotted data, the following tabulated parameters can be calculated. From the maximum integral worth, the dollar worth of the rods were found. The maximum differential worth is the peak worth added per unit percent or inch of height. Using the current motor speeds and the maximum differential worth, the reactivity addition rates were found. Our federally-specified reactivity addition rate limit is $0.16/sec, so the maximum motor speed we can use without violating this limit was also computed.
 
