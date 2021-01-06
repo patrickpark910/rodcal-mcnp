@@ -99,6 +99,6 @@ In `math()`, you may need to adjust how much 1% change in height adjusts the z-c
 
 ### Acknowledgements
 
-I learned this method of Python-MCNP automation thanks to my time at the NIST Center for Neutron Research. 
+I learned this method of Python-MCNP automation thanks to my time working remotely with the NIST Center for Neutron Research. 
 My `run_mcnp()` function is almost identical to Dr. Danyal Turkoglu's NCNR code library, and 
-I have adapted the `get_keff()` and iterative `matplotlib` plotting functions from what I wrote during my time working with him.
+I have adapted the `get_keff()` and iterative `matplotlib` worth curve plotting functions from what I wrote during my time working with him.
