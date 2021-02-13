@@ -1,2 +1,5 @@
 
 *.pyc
+outputs/
+cladding_al/
+cladding_ss/

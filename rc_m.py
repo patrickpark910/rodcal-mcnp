@@ -50,7 +50,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 
 
-from mcnp_funcs import *
+#from mcnp_funcs import *
 
 # Variables
 cm_per_percent_height = 0.38 # Control rods have 38 cm of travel, so 0.38 cm/%
@@ -82,21 +82,23 @@ import this into another py file, e.g. 'from mcnp_funcs import *'.
 def main(argv):
     os.chdir(f'{filepath}')
     
-    # ''' # [START] TO PLOT YOUR OWN KEFF: Remove first # to just plot rodcal data using a CSV of keff values.
+    ''' # [START] TO PLOT YOUR OWN KEFF: Remove first # to just plot rodcal data using a CSV of keff values.
     
     base_input_name = find_base_file(filepath)
     check_kcode(filepath,base_input_name)
 
     num_inputs_created = 0
+    num_inputs_skipped = 0
 
     for rod in rods:
         for height in heights:
-            input_created = find_height(rod, height, base_input_name, inputs_folder_name)
+            input_created = change_rod_height(filepath, rod, height, base_input_name, inputs_folder_name)
             # find_height returns False if the input already exists.
             # Otherwise, it finds and changes the heights and returns True.
             if input_created: num_inputs_created +=1
+            if not input_created: num_inputs_skipped +=1
     
-    print(f"Created {num_inputs_created} new input decks.")
+    print(f"Created {num_inputs_created} new input decks.\n--Skipped {num_inputs_skipped} input decks because they already exist..")
 
     # Check if you want to run MCNP right now. 
     # check_run_mcnp() returns True or False. If False, quit program.
@@ -105,7 +107,7 @@ def main(argv):
     # Run MCNP for all .i files in f".\{inputs_folder_name}".
     tasks = get_tasks()
     for file in os.listdir(f"{filepath}/{inputs_folder_name}"):
-        run_mcnp(filepath,inputs_folder_name,outputs_folder_name,file,tasks)
+        run_mcnp(filepath,f"{filepath}/{inputs_folder_name}/{file}",outputs_folder_name,tasks)
 
     # Deletes MCNP runtape and source dist files.
     delete_files(f"{filepath}/{outputs_folder_name}",r=True,s=True)
@@ -132,7 +134,7 @@ def main(argv):
     
     calc_params(rho_csv_name,params_csv_name)
 
-    plot_rodcal_data(rho_csv_name,figure_name)
+    plot_rodcal_data(keff_csv_name,rho_csv_name,figure_name)
 
     print(f"\n************************ PROGRAM COMPLETE ************************\n")
     
@@ -143,162 +145,6 @@ def main(argv):
 '''
 HELPER FUNCTIONS
 '''
-
-
-
-'''
-Finds the desired set of parameters to change for a given rod.
-
-rod: str, name of rod, e.g. "shim"
-height: float, percent rod height, e.g. 10
-base_input_name: str, name of base deck with extension, e.g. "rc.i"
-inputs_folder_name: str, name of input folder, e.g. "inputs"
-
-Returns 'True' when new input deck is completed, or 'False' if the input deck already exists.
-
-NB: This is the function you will change the most for use with a different facility's MCNP deck.
-'''
-def find_height(rod, height, base_input_name, inputs_folder_name):
-    base_input_deck = open(base_input_name, 'r')
-    new_input_name = './'+ inputs_folder_name + '/' + 'rc-'+rod.lower()+ '-' + str(height).zfill(3) +'.i'
-
-    # If the inputs folder doesn't exist, create it
-    if not os.path.isdir(inputs_folder_name):
-        os.mkdir(inputs_folder_name)
-
-    # If the input deck exists, skip
-    if os.path.isfile(new_input_name):
-        print(f"--The input deck '{new_input_name}' will be skipped because it already exists.")
-        return False
-
-    new_input_deck = open(new_input_name, 'w+')
-
-    '''
-    'start_marker' and 'end_marker' are what you're searching for in each 
-    line of the whole input deck to indicate start and end of rod parameters. 
-    Thus it needs to be unique, like "Safe Rod (0% Withdrawn)" and "End of Safe Rod".
-    Make sure the input deck contains these markers EXACTLY as they are defined here,
-    e.g. watch for capitalizations or extra spaces between words.
-    '''
-    start_marker = rod.capitalize() + " Rod (0% Withdrawn)"
-    end_marker = f"End of {rod.capitalize()} Rod"
-    
-    # Indicates if we are between 'start_marker' and 'end_marker'
-    inside_block = False
-    
-    # Now, we're reading the base input deck ('rc.i') line-by-line.
-    for line in base_input_deck:
-        # If we're not inside the block, just copy the line to a new file
-        if inside_block == False:
-            # If this is the line with the 'start_marker', rewrite it to the new file with required changes
-            if start_marker in line and "90%" not in line:
-                inside_block = True
-                new_input_deck.write(f"c {rod.capitalize()} Rod ({height}% withdrawn)\n")
-                print(f'{new_input_name} block check')
-                continue
-            new_input_deck.write(line)
-            continue
-
-        # Logic for what to do when we're inside the block
-        if inside_block == True:
-            
-            # If the line starts with a 'c'
-            if line[0] == 'c':
-                # If this is the line with the 'start_marker', it means we're outside the block now
-                if end_marker in line:
-                    inside_block = False
-                    continue
-                # If not, just write the line to new file
-                else:
-                    new_input_deck.write(line)
-                    continue
-            
-            # We're now making the actual changes to the rod geometry 
-            if 'pz' in line and line[0].startswith('8'):
-                new_input_deck.write(change_height('pz', line, height) + '\n')
-                # print(f'{new_input_name} pz change')
-                continue
-            if 'k/z' in line and line[0].startswith('8'):
-                new_input_deck.write(change_height('k/z', line, height) + '\n')
-                # print(f'{new_input_name} k/z change')
-                continue
-            # If not, just write the line to the new file
-            else:
-                new_input_deck.write(line)
-                continue
-
-    base_input_deck.close()
-    new_input_deck.close()
-    return True
-
-
-
-
-'''
-Performs the necessary changes on the values
-
-value: str, MCNP geometry mnemonic, e.g. "pz"
-line: str, line read from input deck
-height: float, desired rod height, e.g. 10
-'''
-def change_height(value, line, height):
-    line_formatted = sep_entries(line)
-    
-    # For loop not recommended here. Leads to errors and bugs.
-    if value == 'pz':
-        line_formatted[2] = math(float(line_formatted[2]), height)
-        s = '   '.join(line_formatted[0:4]) + ' '
-        s += ' '.join(line_formatted[4:])
-
-    if value == 'k/z':
-        line_formatted[4] = math(float(line_formatted[4]), height)
-        s = '   '.join(line_formatted[0:7]) + ' '
-        s += ' '.join(line_formatted[7:])
-
-    return s
-
-
-
-'''
-Returns the value of the line in the form of a list with the various elements as its items
-
-s: str, a line of a file read as a string, e.g. "812301 pz 54.19344 $ top of rod"
-
-Returns list, e.g. ['812301', 'pz', '54.19344', '$', 'top', 'of', 'rod']
-
-NB: This method is more robust than just using s.sep(' ') by avoiding instances of multiple spaces.
-'''
-def sep_entries(s):
-    output = []
-    s = ' ' + s
-    wrd = ''
-    for i in range(0, len(s)):
-        if s[i] != ' ': wrd += s[i]
-        else:
-            if s[i-1] != ' ':
-                output.append(wrd)
-                wrd = ''
-    output.append(wrd[:-1])
-    return output[1:]
-
-
-
-'''
-Performs the mathematical operations on the exact value
-
-z_coordinate: float, a MCNP geomtery parameter, e.g. 54.19344
-height: float, desired rod height, e.g. 10
-
-Returns a new str for the 'z_coordinate' adjusted to the desired 'height'
-
-NB: Bottom of rod is 5.120640 at 0% and 53.2694 at 100%. 
-Use +/- 4.81488 to 'z_coordinate' for a 1% height change. 
-'''
-def math(z_coordinate, height):
-    z_coordinate += height*cm_per_percent_height
-    return str(round(z_coordinate, 5)) # Round to at least 5 or 6 digits
-
-
 
 '''
 Converts a CSV of keff and uncertainty values to a CSV of rho and uncertainty values.
@@ -415,11 +261,13 @@ Does not return anything. Only produces a figure.
 
 NB: Major plot settings have been organized into variables for your personal convenience.
 '''
-def plot_rodcal_data(rho_csv_name,figure_name):
+def plot_rodcal_data(keff_csv_name,rho_csv_name,figure_name):
+    keff_df = pd.read_csv(keff_csv_name,index_col=0)
     rho_df = pd.read_csv(rho_csv_name,index_col=0)
     rods = [c for c in rho_df.columns.values.tolist() if "unc" not in c]
     heights = rho_df.index.values.tolist()
-
+    
+    # Determine plot units in rho or dollars.
     rho_or_dollars = None
     while rho_or_dollars is None:
         rho_or_dollars_input = input("Would you like your plot in rho or dollars? Type 'rho' or 'dollars', or 'q' to quit: ")
@@ -431,6 +279,7 @@ def plot_rodcal_data(rho_csv_name,figure_name):
     # Personal parameters, to be used in plot settings below.
     my_dpi = 320
     x_label = "Axial height withdrawn (%)"
+    y_label_keff = r"Effective multiplication factor ($k_{eff}$)"    
     
     if rho_or_dollars == 'dollars':
         y_label_int = r"Integral worth ($)"
@@ -445,46 +294,82 @@ def plot_rodcal_data(rho_csv_name,figure_name):
     # fontsize: int or {'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'}
     
 
-    fig,axs = plt.subplots(2,1, figsize=(1636/96, 2*673/96), dpi=my_dpi,facecolor='w',edgecolor='k')
-    ax_int, ax_dif = axs[0], axs[1] # integral, differential worth on top, bottom, resp.
+    fig,axs = plt.subplots(3,1, figsize=(1636/96, 3*673/96), dpi=my_dpi,facecolor='w',edgecolor='k')
+    ax_keff, ax_int, ax_dif = axs[0], axs[1], axs[2] # integral, differential worth on top, bottom, resp.
     color = {rods[0]:"tab:red",rods[1]:"tab:green",rods[2]:"tab:blue"}
     
     for rod in rods: # We want to sort our curves by rods
-        int_y = rho_df[f"{rod}"].tolist()
-        int_y_unc = rho_df[f"{rod} unc"].tolist()
+        # Plot data for keff.
+        y_keff = keff_df[f"{rod}"].tolist()
+        y_unc_keff = keff_df[f"{rod} unc"].tolist()
+        
+        ax_keff.errorbar(heights, y_keff, yerr=y_unc_keff,
+                        marker="o",ls="none",
+                        color=color[rod],elinewidth=2,capsize=3,capthick=2)
+        
+        eq_keff = np.polyfit(heights,y_keff,3) # coefs of integral worth curve equation
+        x_fit = np.linspace(heights[0],heights[-1],heights[-1]-heights[0]+1)
+        y_fit_keff = np.polyval(eq_keff,x_fit)
+        
+        ax_keff.plot(x_fit,y_fit_keff,color=color[rod],label=f'{rod.capitalize()}')
+        
+        # Plot data for integral worth.
+        y_int = rho_df[f"{rod}"].tolist()
+        y_unc_int = rho_df[f"{rod} unc"].tolist()
         
         if rho_or_dollars == 'dollars':
-            int_y = [x * 0.01 / 0.0075 for x in int_y] 
-            int_y_unc = [x * 0.01 / 0.0075 for x in int_y_unc] 
+            y_int = [x * 0.01 / 0.0075 for x in y_int] 
+            y_unc_int = [x * 0.01 / 0.0075 for x in y_unc_int] 
 
-        int_eq = np.polyfit(heights,int_y,3) # coefs of integral worth curve equation
-        fit_x = np.linspace(heights[0],heights[-1],heights[-1]-heights[0]+1)
-        int_fit_y = np.polyval(int_eq,fit_x)
+        int_eq = np.polyfit(heights,y_int,3) # coefs of integral worth curve equation
+        x_fit = np.linspace(heights[0],heights[-1],heights[-1]-heights[0]+1)
+        y_fit_int = np.polyval(int_eq,x_fit)
         
         # Data points with error bars
-        ax_int.errorbar(heights, int_y, yerr=int_y_unc,
+        ax_int.errorbar(heights, y_int, yerr=y_unc_int,
                             marker="o",ls="none",
                             color=color[rod],elinewidth=2,capsize=3,capthick=2)
         
         # The standard least squaures fit curve
-        ax_int.plot(fit_x,int_fit_y,color=color[rod],label=f'{rod.capitalize()}')
+        ax_int.plot(x_fit,y_fit_int,color=color[rod],label=f'{rod.capitalize()}')
         
 
         dif_eq = -1*np.polyder(int_eq) # coefs of differential worth curve equation
-        dif_fit_y = np.polyval(dif_eq,fit_x)
+        y_dif_fit = np.polyval(dif_eq,x_fit)
         
         # The differentiated curve.
         # The errorbar method allows you to add errors to the differential plot too.
-        ax_dif.errorbar(fit_x, dif_fit_y,
+        ax_dif.errorbar(x_fit, y_dif_fit,
                             label=f'{rod.capitalize()}',
                             color=color[rod],linewidth=2,capsize=3,capthick=2)
     
+    # Keff plot settings
+    ax_keff.set_xlim([0,100])
+    ax_keff.set_ylim([0.945,0.98])
+
+    ax_keff.xaxis.set_major_locator(MultipleLocator(10))
+    ax_keff.yaxis.set_major_locator(MultipleLocator(0.005))
+    
+    ax_keff.minorticks_on()
+    ax_keff.xaxis.set_minor_locator(MultipleLocator(2.5))
+    ax_keff.yaxis.set_minor_locator(MultipleLocator(0.001))
+    
+    ax_keff.tick_params(axis='both', which='major', labelsize=label_fontsize)
+    
+    ax_keff.grid(b=True, which='major', color='#999999', linestyle='-', linewidth='1')
+    ax_keff.grid(which='minor', linestyle=':', linewidth='1', color='gray')
+    
+    ax_keff.set_xlabel(x_label,fontsize=label_fontsize)
+    ax_keff.set_ylabel(y_label_keff,fontsize=label_fontsize)
+    ax_keff.legend(title=f'Key', title_fontsize=legend_fontsize, ncol=4, fontsize=legend_fontsize,loc='lower right')
+    
     # Integral worth plot settings
     ax_int.set_xlim([0,100])
-    ax_int.set_ylim([-0.5,3.5])
+    ax_int.set_ylim([-0.25,3.5])
 
+    # Overwrite set_ylim above for dollar units
     if rho_or_dollars == "dollars":
-        ax_int.set_ylim([0,4.5]) # Use for dollars units
+        ax_int.set_ylim([-0.25,4.5]) # Use for dollars units
         ax_int.yaxis.set_major_formatter(FormatStrFormatter('%.2f')) # Use for 2 decimal places after 0. for dollars units
 
     ax_int.xaxis.set_major_locator(MultipleLocator(10))
@@ -525,9 +410,9 @@ def plot_rodcal_data(rho_csv_name,figure_name):
     ax_dif.set_xlabel(x_label,fontsize=label_fontsize)
     ax_dif.set_ylabel(y_label_dif,fontsize=label_fontsize)
     #plt.title(f'Fuel Assembly B-1, {cycle_state}',fontsize=fs1)
-    ax_dif.legend(title=f'Key', title_fontsize=legend_fontsize, ncol=4, fontsize=legend_fontsize, loc='lower center')
+    ax_dif.legend(title=f'Key', title_fontsize=legend_fontsize, ncol=4, fontsize=legend_fontsize, loc='upper right')
     
-    plt.savefig(f"{figure_name.split('.')[0]}_{rho_or_dollars}.{figure_name.split('.')[-1]}", bbox_inches = 'tight', pad_inches = 0.1, dpi=320)
+    plt.savefig(f"{figure_name.split('.')[0]}_{rho_or_dollars}.{figure_name.split('.')[-1]}", bbox_inches = 'tight', pad_inches = 0.1, dpi=my_dpi)
     print(f"\nFigure '{figure_name.split('.')[0]}_{rho_or_dollars}.{figure_name.split('.')[-1]}' saved!\n") # no space near \ 
     
 

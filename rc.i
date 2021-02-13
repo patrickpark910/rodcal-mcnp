@@ -1,4 +1,4 @@
-1 RRR TRIGA Core - Patrick Park (2020-12-31)
+1 RRR TRIGA Core - Patrick Park (2021-02-13)
 c    __   ___  ___  __      __   ___  __   ___       __   __           __   ___       __  ___  __   __  
 c   |__) |__  |__  |  \    |__) |__  /__` |__   /\  |__) /  ` |__|    |__) |__   /\  /  `  |  /  \ |__) 
 c   |  \ |___ |___ |__/    |  \ |___ .__/ |___ /--\ |  \ \__, |  |    |  \ |___ /--\ \__,  |  \__/ |  \
@@ -8,7 +8,7 @@ c  Reed Research Reactor TRIGA input deck
 c  Created by Malcolm McCarthy, SRO, Physics '18 (malcolm@malcolmm.com)
 c  with help from Robert Shickler of Oregon State University
 c  Edited by Patrick Park, RO, Physics '22 (ppark@reed.edu)
-c  Base core geometry last updated: June 23, 2016
+c  Base core geometry last updated: Jan 16, 2021
 c
 c  _____________________________________
 c   Guide to reading the RRR input deck 
@@ -123,9 +123,9 @@ c
 c
 c
 c
-c
-c
-c
+c    2021-02-13
+c    Rewrote fuel mats with 2020 burnup data
+c    Consolidated invidual fuel meat section mat cards into one mat card for each FE
 c
 c
 c
@@ -301,9 +301,9 @@ c rabbit
 620 0 10 -11 -20 trcl=(-14.778990 -13.307314 0) imp:n=1 fill=4046 $  
 621 0 10 -11 -20 trcl=(-17.223232 -9.9441000 0) imp:n=1 fill=3865 $  
 622 0 10 -11 -20 trcl=(-18.915634 -6.1455300 0) imp:n=1 fill=3743 $  
-623 0 10 -11 -20 trcl=(-19.777202 -2.0706080 0) imp:n=1 fill=80 $  
+c 623 0 10 -11 -20 trcl=(-19.777202 -2.0706080 0) imp:n=1 fill=80 $  
 624 0 10 -11 -20 trcl=(-19.777202  2.0706080 0) imp:n=1 fill=3835 $  
-625 0 10 -11 -20 trcl=(-18.915634  6.1455300 0) imp:n=1 fill=80 $  
+c 625 0 10 -11 -20 trcl=(-18.915634  6.1455300 0) imp:n=1 fill=80 $  
 626 0 10 -11 -20 trcl=(-17.223232  9.9441000 0) imp:n=1 fill=3676 $  
 627 0 10 -11 -20 trcl=(-14.778990  13.307314 0) imp:n=1 fill=3840 $  
 628 0 10 -11 -20 trcl=(-11.690350  16.089630 0) imp:n=1 fill=3854 $  
@@ -330,7 +330,7 @@ c
 8004  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=80  $ Water around element
 8005  106  -1.56     312302 -312305 -311304          imp:n=1 u=80  $ Graphite slug
 8006  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=80  $ Element cladding
-8007  104  -2.70     312305 -312306 -311305          imp:n=1 u=80  $ Al top cap
+8007  104  -2.70     312305 -312306 -311305          imp:n=1 u=80  $ SS top cap
 8008  104  -2.70     312306 -312307 -311303          imp:n=1 u=80  $ Tri-flute
 8009  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=80  $ Water around tri-flute
 8010  104  -2.70     312307 -312308 -311302          imp:n=1 u=80  $ Element tip
@@ -361,25 +361,25 @@ c
 c
 c The following are universes based on 31X3XX surfaces defined in 'Fuel Surfaces' section
 c 
-c
-c
+c 
+c TOS210D210 refers to the GA drawing number
 c
 c --- 18 - water universe ---
 c
 1801  102  -1.00     312300 -312301 -311302          imp:n=1 u=18  $ Lower grid plate pin
 1802  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=18  $ Water around grid plate pin 
-1803  104  -1.00     312301 -312302 -311305          imp:n=1 u=18  $ Bottom casing 
+1803  102  -1.00     312301 -312302 -311305          imp:n=1 u=18  $ Bottom casing 
 1804  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=18  $ Water around fuel element
 1805  102  -1.56     312302 -312303 -311304          imp:n=1 u=18  $ Lower graphite slug 
-1806  104  -1.00     312302 -312305  311304 -311305  imp:n=1 u=18  $ Fuel cladding
-1807  108   0.042234 312303 -312304 -311301          imp:n=1 u=18  $ Zirc pin 
+1806  102  -1.00     312302 -312305  311304 -311305  imp:n=1 u=18  $ Fuel cladding
+1807  102   0.042234 312303 -312304 -311301          imp:n=1 u=18  $ Zirc pin 
 1808 102 -1.00 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=18 $ Fuel meat section 1
 1809 102 -1.00 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=18 $ Fuel meat section 2
 1810 102 -1.00 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=18 $ Fuel meat section 3
 1811 102 -1.00 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=18 $ Fuel meat section 4
 1812 102 -1.00 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=18 $ Fuel meat section 5
 1813  102  -1.00     312304 -312305 -311304          imp:n=1 u=18  $ Upper graphite spacer
-1814  102  -1.00     312305 -312306 -311305          imp:n=1 u=18  $ Al top cap 
+1814  102  -1.00     312305 -312306 -311305          imp:n=1 u=18  $ SS top cap 
 1815  102  -1.00     312306 -312307 -311303          imp:n=1 u=18  $ Tri-flute 
 1816  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=18  $ Water around tri-flute 
 1817  102  -1.00     312307 -312308 -311302          imp:n=1 u=18  $ Fuel tip
@@ -388,1490 +388,1490 @@ c
 c
 c
 c
-c --- 3674 - Al (TOS210D130) universe ---
+c --- 3674 - SS clad (TOS210D210) universe ---
 c
-367401  104  -2.70     312300 -312301 -311302          imp:n=1 u=3674  $ Lower grid plate pin
+367401  105  -7.857     312300 -312301 -311302          imp:n=1 u=3674  $ Lower grid plate pin
 367402  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3674  $ Water around grid plate pin 
-367403  104  -2.70     312301 -312302 -311305          imp:n=1 u=3674  $ Bottom casing 
+367403  105  -7.857     312301 -312302 -311305          imp:n=1 u=3674  $ Bottom casing 
 367404  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3674  $ Water around fuel element
 367405  106  -1.56     312302 -312303 -311304          imp:n=1 u=3674  $ Lower graphite slug 
-367406  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3674  $ Fuel cladding
+367406  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3674  $ Fuel cladding
 367407  108   0.042234 312303 -312304 -311301          imp:n=1 u=3674  $ Zirc pin 
-367408 36741 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3674 $ Fuel meat section 1
-367409 36742 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3674 $ Fuel meat section 2
-367410 36743 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3674 $ Fuel meat section 3
-367411 36744 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3674 $ Fuel meat section 4
-367412 36745 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3674 $ Fuel meat section 5
+367408 3674 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3674 $ Fuel meat section 1
+367409 3674 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3674 $ Fuel meat section 2
+367410 3674 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3674 $ Fuel meat section 3
+367411 3674 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3674 $ Fuel meat section 4
+367412 3674 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3674 $ Fuel meat section 5
 367413  106  -1.56     312304 -312305 -311304          imp:n=1 u=3674  $ Upper graphite spacer
-367414  104  -2.70     312305 -312306 -311305          imp:n=1 u=3674  $ Al top cap 
-367415  104  -2.70     312306 -312307 -311303          imp:n=1 u=3674  $ Tri-flute 
+367414  105  -7.857     312305 -312306 -311305          imp:n=1 u=3674  $ SS top cap 
+367415  105  -7.857     312306 -312307 -311303          imp:n=1 u=3674  $ Tri-flute 
 367416  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3674  $ Water around tri-flute 
-367417  104  -2.70     312307 -312308 -311302          imp:n=1 u=3674  $ Fuel tip
+367417  105  -7.857     312307 -312308 -311302          imp:n=1 u=3674  $ Fuel tip
 367418  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3674  $ Water around fuel tip
 367419  102  -1.00     312308 -312309 -311306          imp:n=1 u=3674  $ Water above fuel element
 c
 c
 c
-c --- 8104 - Al (TOS210D130) universe ---
+c --- 8104 - SS clad (TOS210D210) universe ---
 c
-810401  104  -2.70     312300 -312301 -311302          imp:n=1 u=8104  $ Lower grid plate pin
+810401  105  -7.857     312300 -312301 -311302          imp:n=1 u=8104  $ Lower grid plate pin
 810402  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=8104  $ Water around grid plate pin 
-810403  104  -2.70     312301 -312302 -311305          imp:n=1 u=8104  $ Bottom casing 
+810403  105  -7.857     312301 -312302 -311305          imp:n=1 u=8104  $ Bottom casing 
 810404  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=8104  $ Water around fuel element
 810405  106  -1.56     312302 -312303 -311304          imp:n=1 u=8104  $ Lower graphite slug 
-810406  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=8104  $ Fuel cladding
+810406  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=8104  $ Fuel cladding
 810407  108   0.042234 312303 -312304 -311301          imp:n=1 u=8104  $ Zirc pin 
-810408 81041 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8104 $ Fuel meat section 1
-810409 81042 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8104 $ Fuel meat section 2
-810410 81043 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8104 $ Fuel meat section 3
-810411 81044 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8104 $ Fuel meat section 4
-810412 81045 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8104 $ Fuel meat section 5
+810408 8104 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8104 $ Fuel meat section 1
+810409 8104 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8104 $ Fuel meat section 2
+810410 8104 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8104 $ Fuel meat section 3
+810411 8104 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8104 $ Fuel meat section 4
+810412 8104 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8104 $ Fuel meat section 5
 810413  106  -1.56     312304 -312305 -311304          imp:n=1 u=8104  $ Upper graphite spacer
-810414  104  -2.70     312305 -312306 -311305          imp:n=1 u=8104  $ Al top cap 
-810415  104  -2.70     312306 -312307 -311303          imp:n=1 u=8104  $ Tri-flute 
+810414  105  -7.857     312305 -312306 -311305          imp:n=1 u=8104  $ SS top cap 
+810415  105  -7.857     312306 -312307 -311303          imp:n=1 u=8104  $ Tri-flute 
 810416  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=8104  $ Water around tri-flute 
-810417  104  -2.70     312307 -312308 -311302          imp:n=1 u=8104  $ Fuel tip
+810417  105  -7.857     312307 -312308 -311302          imp:n=1 u=8104  $ Fuel tip
 810418  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=8104  $ Water around fuel tip
 810419  102  -1.00     312308 -312309 -311306          imp:n=1 u=8104  $ Water above fuel element
 c
 c
 c
-c --- 8733 - Al (TOS210D130) universe ---
+c --- 8733 - SS clad (TOS210D210) universe ---
 c
-873301  104  -2.70     312300 -312301 -311302          imp:n=1 u=8733  $ Lower grid plate pin
+873301  105  -7.857     312300 -312301 -311302          imp:n=1 u=8733  $ Lower grid plate pin
 873302  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=8733  $ Water around grid plate pin 
-873303  104  -2.70     312301 -312302 -311305          imp:n=1 u=8733  $ Bottom casing 
+873303  105  -7.857     312301 -312302 -311305          imp:n=1 u=8733  $ Bottom casing 
 873304  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=8733  $ Water around fuel element
 873305  106  -1.56     312302 -312303 -311304          imp:n=1 u=8733  $ Lower graphite slug 
-873306  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=8733  $ Fuel cladding
+873306  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=8733  $ Fuel cladding
 873307  108   0.042234 312303 -312304 -311301          imp:n=1 u=8733  $ Zirc pin 
-873308 87331 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8733 $ Fuel meat section 1
-873309 87332 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8733 $ Fuel meat section 2
-873310 87333 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8733 $ Fuel meat section 3
-873311 87334 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8733 $ Fuel meat section 4
-873312 87335 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8733 $ Fuel meat section 5
+873308 8733 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8733 $ Fuel meat section 1
+873309 8733 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8733 $ Fuel meat section 2
+873310 8733 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8733 $ Fuel meat section 3
+873311 8733 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8733 $ Fuel meat section 4
+873312 8733 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8733 $ Fuel meat section 5
 873313  106  -1.56     312304 -312305 -311304          imp:n=1 u=8733  $ Upper graphite spacer
-873314  104  -2.70     312305 -312306 -311305          imp:n=1 u=8733  $ Al top cap 
-873315  104  -2.70     312306 -312307 -311303          imp:n=1 u=8733  $ Tri-flute 
+873314  105  -7.857     312305 -312306 -311305          imp:n=1 u=8733  $ SS top cap 
+873315  105  -7.857     312306 -312307 -311303          imp:n=1 u=8733  $ Tri-flute 
 873316  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=8733  $ Water around tri-flute 
-873317  104  -2.70     312307 -312308 -311302          imp:n=1 u=8733  $ Fuel tip
+873317  105  -7.857     312307 -312308 -311302          imp:n=1 u=8733  $ Fuel tip
 873318  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=8733  $ Water around fuel tip
 873319  102  -1.00     312308 -312309 -311306          imp:n=1 u=8733  $ Water above fuel element
 c
 c
 c
-c --- 4106 - Al (TOS210D130) universe ---
+c --- 4106 - SS clad (TOS210D210) universe ---
 c
-410601  104  -2.70     312300 -312301 -311302          imp:n=1 u=4106  $ Lower grid plate pin
+410601  105  -7.857     312300 -312301 -311302          imp:n=1 u=4106  $ Lower grid plate pin
 410602  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4106  $ Water around grid plate pin 
-410603  104  -2.70     312301 -312302 -311305          imp:n=1 u=4106  $ Bottom casing 
+410603  105  -7.857     312301 -312302 -311305          imp:n=1 u=4106  $ Bottom casing 
 410604  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4106  $ Water around fuel element
 410605  106  -1.56     312302 -312303 -311304          imp:n=1 u=4106  $ Lower graphite slug 
-410606  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4106  $ Fuel cladding
+410606  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4106  $ Fuel cladding
 410607  108   0.042234 312303 -312304 -311301          imp:n=1 u=4106  $ Zirc pin 
-410608 41061 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4106 $ Fuel meat section 1
-410609 41062 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4106 $ Fuel meat section 2
-410610 41063 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4106 $ Fuel meat section 3
-410611 41064 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4106 $ Fuel meat section 4
-410612 41065 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4106 $ Fuel meat section 5
+410608 4106 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4106 $ Fuel meat section 1
+410609 4106 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4106 $ Fuel meat section 2
+410610 4106 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4106 $ Fuel meat section 3
+410611 4106 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4106 $ Fuel meat section 4
+410612 4106 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4106 $ Fuel meat section 5
 410613  106  -1.56     312304 -312305 -311304          imp:n=1 u=4106  $ Upper graphite spacer
-410614  104  -2.70     312305 -312306 -311305          imp:n=1 u=4106  $ Al top cap 
-410615  104  -2.70     312306 -312307 -311303          imp:n=1 u=4106  $ Tri-flute 
+410614  105  -7.857     312305 -312306 -311305          imp:n=1 u=4106  $ SS top cap 
+410615  105  -7.857     312306 -312307 -311303          imp:n=1 u=4106  $ Tri-flute 
 410616  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4106  $ Water around tri-flute 
-410617  104  -2.70     312307 -312308 -311302          imp:n=1 u=4106  $ Fuel tip
+410617  105  -7.857     312307 -312308 -311302          imp:n=1 u=4106  $ Fuel tip
 410618  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4106  $ Water around fuel tip
 410619  102  -1.00     312308 -312309 -311306          imp:n=1 u=4106  $ Water above fuel element
 c
 c
 c
-c --- 4117 - Al (TOS210D130) universe ---
+c --- 4117 - SS clad (TOS210D210) universe ---
 c
-411701  104  -2.70     312300 -312301 -311302          imp:n=1 u=4117  $ Lower grid plate pin
+411701  105  -7.857     312300 -312301 -311302          imp:n=1 u=4117  $ Lower grid plate pin
 411702  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4117  $ Water around grid plate pin 
-411703  104  -2.70     312301 -312302 -311305          imp:n=1 u=4117  $ Bottom casing 
+411703  105  -7.857     312301 -312302 -311305          imp:n=1 u=4117  $ Bottom casing 
 411704  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4117  $ Water around fuel element
 411705  106  -1.56     312302 -312303 -311304          imp:n=1 u=4117  $ Lower graphite slug 
-411706  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4117  $ Fuel cladding
+411706  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4117  $ Fuel cladding
 411707  108   0.042234 312303 -312304 -311301          imp:n=1 u=4117  $ Zirc pin 
-411708 41171 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4117 $ Fuel meat section 1
-411709 41172 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4117 $ Fuel meat section 2
-411710 41173 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4117 $ Fuel meat section 3
-411711 41174 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4117 $ Fuel meat section 4
-411712 41175 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4117 $ Fuel meat section 5
+411708 4117 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4117 $ Fuel meat section 1
+411709 4117 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4117 $ Fuel meat section 2
+411710 4117 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4117 $ Fuel meat section 3
+411711 4117 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4117 $ Fuel meat section 4
+411712 4117 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4117 $ Fuel meat section 5
 411713  106  -1.56     312304 -312305 -311304          imp:n=1 u=4117  $ Upper graphite spacer
-411714  104  -2.70     312305 -312306 -311305          imp:n=1 u=4117  $ Al top cap 
-411715  104  -2.70     312306 -312307 -311303          imp:n=1 u=4117  $ Tri-flute 
+411714  105  -7.857     312305 -312306 -311305          imp:n=1 u=4117  $ SS top cap 
+411715  105  -7.857     312306 -312307 -311303          imp:n=1 u=4117  $ Tri-flute 
 411716  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4117  $ Water around tri-flute 
-411717  104  -2.70     312307 -312308 -311302          imp:n=1 u=4117  $ Fuel tip
+411717  105  -7.857     312307 -312308 -311302          imp:n=1 u=4117  $ Fuel tip
 411718  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4117  $ Water around fuel tip
 411719  102  -1.00     312308 -312309 -311306          imp:n=1 u=4117  $ Water above fuel element
 c
 c
 c
-c --- 3671 - Al (TOS210D130) universe ---
+c --- 3671 - SS clad (TOS210D210) universe ---
 c
-367101  104  -2.70     312300 -312301 -311302          imp:n=1 u=3671  $ Lower grid plate pin
+367101  105  -7.857     312300 -312301 -311302          imp:n=1 u=3671  $ Lower grid plate pin
 367102  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3671  $ Water around grid plate pin 
-367103  104  -2.70     312301 -312302 -311305          imp:n=1 u=3671  $ Bottom casing 
+367103  105  -7.857     312301 -312302 -311305          imp:n=1 u=3671  $ Bottom casing 
 367104  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3671  $ Water around fuel element
 367105  106  -1.56     312302 -312303 -311304          imp:n=1 u=3671  $ Lower graphite slug 
-367106  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3671  $ Fuel cladding
+367106  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3671  $ Fuel cladding
 367107  108   0.042234 312303 -312304 -311301          imp:n=1 u=3671  $ Zirc pin 
-367108 36711 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3671 $ Fuel meat section 1
-367109 36712 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3671 $ Fuel meat section 2
-367110 36713 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3671 $ Fuel meat section 3
-367111 36714 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3671 $ Fuel meat section 4
-367112 36715 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3671 $ Fuel meat section 5
+367108 3671 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3671 $ Fuel meat section 1
+367109 3671 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3671 $ Fuel meat section 2
+367110 3671 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3671 $ Fuel meat section 3
+367111 3671 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3671 $ Fuel meat section 4
+367112 3671 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3671 $ Fuel meat section 5
 367113  106  -1.56     312304 -312305 -311304          imp:n=1 u=3671  $ Upper graphite spacer
-367114  104  -2.70     312305 -312306 -311305          imp:n=1 u=3671  $ Al top cap 
-367115  104  -2.70     312306 -312307 -311303          imp:n=1 u=3671  $ Tri-flute 
+367114  105  -7.857     312305 -312306 -311305          imp:n=1 u=3671  $ SS top cap 
+367115  105  -7.857     312306 -312307 -311303          imp:n=1 u=3671  $ Tri-flute 
 367116  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3671  $ Water around tri-flute 
-367117  104  -2.70     312307 -312308 -311302          imp:n=1 u=3671  $ Fuel tip
+367117  105  -7.857     312307 -312308 -311302          imp:n=1 u=3671  $ Fuel tip
 367118  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3671  $ Water around fuel tip
 367119  102  -1.00     312308 -312309 -311306          imp:n=1 u=3671  $ Water above fuel element
 c
 c
 c
-c --- 8732 - Al (TOS210D130) universe ---
+c --- 8732 - SS clad (TOS210D210) universe ---
 c
-873201  104  -2.70     312300 -312301 -311302          imp:n=1 u=8732  $ Lower grid plate pin
+873201  105  -7.857     312300 -312301 -311302          imp:n=1 u=8732  $ Lower grid plate pin
 873202  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=8732  $ Water around grid plate pin 
-873203  104  -2.70     312301 -312302 -311305          imp:n=1 u=8732  $ Bottom casing 
+873203  105  -7.857     312301 -312302 -311305          imp:n=1 u=8732  $ Bottom casing 
 873204  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=8732  $ Water around fuel element
 873205  106  -1.56     312302 -312303 -311304          imp:n=1 u=8732  $ Lower graphite slug 
-873206  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=8732  $ Fuel cladding
+873206  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=8732  $ Fuel cladding
 873207  108   0.042234 312303 -312304 -311301          imp:n=1 u=8732  $ Zirc pin 
-873208 87321 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8732 $ Fuel meat section 1
-873209 87322 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8732 $ Fuel meat section 2
-873210 87323 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8732 $ Fuel meat section 3
-873211 87324 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8732 $ Fuel meat section 4
-873212 87325 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8732 $ Fuel meat section 5
+873208 8732 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8732 $ Fuel meat section 1
+873209 8732 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8732 $ Fuel meat section 2
+873210 8732 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8732 $ Fuel meat section 3
+873211 8732 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8732 $ Fuel meat section 4
+873212 8732 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8732 $ Fuel meat section 5
 873213  106  -1.56     312304 -312305 -311304          imp:n=1 u=8732  $ Upper graphite spacer
-873214  104  -2.70     312305 -312306 -311305          imp:n=1 u=8732  $ Al top cap 
-873215  104  -2.70     312306 -312307 -311303          imp:n=1 u=8732  $ Tri-flute 
+873214  105  -7.857     312305 -312306 -311305          imp:n=1 u=8732  $ SS top cap 
+873215  105  -7.857     312306 -312307 -311303          imp:n=1 u=8732  $ Tri-flute 
 873216  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=8732  $ Water around tri-flute 
-873217  104  -2.70     312307 -312308 -311302          imp:n=1 u=8732  $ Fuel tip
+873217  105  -7.857     312307 -312308 -311302          imp:n=1 u=8732  $ Fuel tip
 873218  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=8732  $ Water around fuel tip
 873219  102  -1.00     312308 -312309 -311306          imp:n=1 u=8732  $ Water above fuel element
 c
 c
 c
-c --- 8105 - Al (TOS210D130) universe ---
+c --- 8105 - SS clad (TOS210D210) universe ---
 c
-810501  104  -2.70     312300 -312301 -311302          imp:n=1 u=8105  $ Lower grid plate pin
+810501  105  -7.857     312300 -312301 -311302          imp:n=1 u=8105  $ Lower grid plate pin
 810502  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=8105  $ Water around grid plate pin 
-810503  104  -2.70     312301 -312302 -311305          imp:n=1 u=8105  $ Bottom casing 
+810503  105  -7.857     312301 -312302 -311305          imp:n=1 u=8105  $ Bottom casing 
 810504  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=8105  $ Water around fuel element
 810505  106  -1.56     312302 -312303 -311304          imp:n=1 u=8105  $ Lower graphite slug 
-810506  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=8105  $ Fuel cladding
+810506  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=8105  $ Fuel cladding
 810507  108   0.042234 312303 -312304 -311301          imp:n=1 u=8105  $ Zirc pin 
-810508 81051 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8105 $ Fuel meat section 1
-810509 81052 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8105 $ Fuel meat section 2
-810510 81053 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8105 $ Fuel meat section 3
-810511 81054 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8105 $ Fuel meat section 4
-810512 81055 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8105 $ Fuel meat section 5
+810508 8105 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8105 $ Fuel meat section 1
+810509 8105 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8105 $ Fuel meat section 2
+810510 8105 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8105 $ Fuel meat section 3
+810511 8105 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8105 $ Fuel meat section 4
+810512 8105 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8105 $ Fuel meat section 5
 810513  106  -1.56     312304 -312305 -311304          imp:n=1 u=8105  $ Upper graphite spacer
-810514  104  -2.70     312305 -312306 -311305          imp:n=1 u=8105  $ Al top cap 
-810515  104  -2.70     312306 -312307 -311303          imp:n=1 u=8105  $ Tri-flute 
+810514  105  -7.857     312305 -312306 -311305          imp:n=1 u=8105  $ SS top cap 
+810515  105  -7.857     312306 -312307 -311303          imp:n=1 u=8105  $ Tri-flute 
 810516  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=8105  $ Water around tri-flute 
-810517  104  -2.70     312307 -312308 -311302          imp:n=1 u=8105  $ Fuel tip
+810517  105  -7.857     312307 -312308 -311302          imp:n=1 u=8105  $ Fuel tip
 810518  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=8105  $ Water around fuel tip
 810519  102  -1.00     312308 -312309 -311306          imp:n=1 u=8105  $ Water above fuel element
 c
 c
 c
-c --- 4062 - Al (TOS210D130) universe ---
+c --- 4062 - SS clad (TOS210D210) universe ---
 c
-406201  104  -2.70     312300 -312301 -311302          imp:n=1 u=4062  $ Lower grid plate pin
+406201  105  -7.857     312300 -312301 -311302          imp:n=1 u=4062  $ Lower grid plate pin
 406202  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4062  $ Water around grid plate pin 
-406203  104  -2.70     312301 -312302 -311305          imp:n=1 u=4062  $ Bottom casing 
+406203  105  -7.857     312301 -312302 -311305          imp:n=1 u=4062  $ Bottom casing 
 406204  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4062  $ Water around fuel element
 406205  106  -1.56     312302 -312303 -311304          imp:n=1 u=4062  $ Lower graphite slug 
-406206  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4062  $ Fuel cladding
+406206  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4062  $ Fuel cladding
 406207  108   0.042234 312303 -312304 -311301          imp:n=1 u=4062  $ Zirc pin 
-406208 40621 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4062 $ Fuel meat section 1
-406209 40622 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4062 $ Fuel meat section 2
-406210 40623 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4062 $ Fuel meat section 3
-406211 40624 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4062 $ Fuel meat section 4
-406212 40625 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4062 $ Fuel meat section 5
+406208 4062 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4062 $ Fuel meat section 1
+406209 4062 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4062 $ Fuel meat section 2
+406210 4062 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4062 $ Fuel meat section 3
+406211 4062 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4062 $ Fuel meat section 4
+406212 4062 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4062 $ Fuel meat section 5
 406213  106  -1.56     312304 -312305 -311304          imp:n=1 u=4062  $ Upper graphite spacer
-406214  104  -2.70     312305 -312306 -311305          imp:n=1 u=4062  $ Al top cap 
-406215  104  -2.70     312306 -312307 -311303          imp:n=1 u=4062  $ Tri-flute 
+406214  105  -7.857     312305 -312306 -311305          imp:n=1 u=4062  $ SS top cap 
+406215  105  -7.857     312306 -312307 -311303          imp:n=1 u=4062  $ Tri-flute 
 406216  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4062  $ Water around tri-flute 
-406217  104  -2.70     312307 -312308 -311302          imp:n=1 u=4062  $ Fuel tip
+406217  105  -7.857     312307 -312308 -311302          imp:n=1 u=4062  $ Fuel tip
 406218  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4062  $ Water around fuel tip
 406219  102  -1.00     312308 -312309 -311306          imp:n=1 u=4062  $ Water above fuel element
 c
 c
 c
-c --- 9678 - Al (TOS210D130) universe ---
+c --- 9678 - SS clad (TOS210D210) universe ---
 c
-967801  104  -2.70     312300 -312301 -311302          imp:n=1 u=9678  $ Lower grid plate pin
+967801  105  -7.857     312300 -312301 -311302          imp:n=1 u=9678  $ Lower grid plate pin
 967802  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=9678  $ Water around grid plate pin 
-967803  104  -2.70     312301 -312302 -311305          imp:n=1 u=9678  $ Bottom casing 
+967803  105  -7.857     312301 -312302 -311305          imp:n=1 u=9678  $ Bottom casing 
 967804  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=9678  $ Water around fuel element
 967805  106  -1.56     312302 -312303 -311304          imp:n=1 u=9678  $ Lower graphite slug 
-967806  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=9678  $ Fuel cladding
+967806  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=9678  $ Fuel cladding
 967807  108   0.042234 312303 -312304 -311301          imp:n=1 u=9678  $ Zirc pin 
-967808 96781 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=9678 $ Fuel meat section 1
-967809 96782 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=9678 $ Fuel meat section 2
-967810 96783 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=9678 $ Fuel meat section 3
-967811 96784 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=9678 $ Fuel meat section 4
-967812 96785 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=9678 $ Fuel meat section 5
+967808 9678 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=9678 $ Fuel meat section 1
+967809 9678 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=9678 $ Fuel meat section 2
+967810 9678 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=9678 $ Fuel meat section 3
+967811 9678 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=9678 $ Fuel meat section 4
+967812 9678 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=9678 $ Fuel meat section 5
 967813  106  -1.56     312304 -312305 -311304          imp:n=1 u=9678  $ Upper graphite spacer
-967814  104  -2.70     312305 -312306 -311305          imp:n=1 u=9678  $ Al top cap 
-967815  104  -2.70     312306 -312307 -311303          imp:n=1 u=9678  $ Tri-flute 
+967814  105  -7.857     312305 -312306 -311305          imp:n=1 u=9678  $ SS top cap 
+967815  105  -7.857     312306 -312307 -311303          imp:n=1 u=9678  $ Tri-flute 
 967816  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=9678  $ Water around tri-flute 
-967817  104  -2.70     312307 -312308 -311302          imp:n=1 u=9678  $ Fuel tip
+967817  105  -7.857     312307 -312308 -311302          imp:n=1 u=9678  $ Fuel tip
 967818  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=9678  $ Water around fuel tip
 967819  102  -1.00     312308 -312309 -311306          imp:n=1 u=9678  $ Water above fuel element
 c
 c
 c
-c --- 4103 - Al (TOS210D130) universe ---
+c --- 4103 - SS clad (TOS210D210) universe ---
 c
-410301  104  -2.70     312300 -312301 -311302          imp:n=1 u=4103  $ Lower grid plate pin
+410301  105  -7.857     312300 -312301 -311302          imp:n=1 u=4103  $ Lower grid plate pin
 410302  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4103  $ Water around grid plate pin 
-410303  104  -2.70     312301 -312302 -311305          imp:n=1 u=4103  $ Bottom casing 
+410303  105  -7.857     312301 -312302 -311305          imp:n=1 u=4103  $ Bottom casing 
 410304  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4103  $ Water around fuel element
 410305  106  -1.56     312302 -312303 -311304          imp:n=1 u=4103  $ Lower graphite slug 
-410306  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4103  $ Fuel cladding
+410306  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4103  $ Fuel cladding
 410307  108   0.042234 312303 -312304 -311301          imp:n=1 u=4103  $ Zirc pin 
-410308 41031 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4103 $ Fuel meat section 1
-410309 41032 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4103 $ Fuel meat section 2
-410310 41033 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4103 $ Fuel meat section 3
-410311 41034 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4103 $ Fuel meat section 4
-410312 41035 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4103 $ Fuel meat section 5
+410308 4103 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4103 $ Fuel meat section 1
+410309 4103 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4103 $ Fuel meat section 2
+410310 4103 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4103 $ Fuel meat section 3
+410311 4103 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4103 $ Fuel meat section 4
+410312 4103 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4103 $ Fuel meat section 5
 410313  106  -1.56     312304 -312305 -311304          imp:n=1 u=4103  $ Upper graphite spacer
-410314  104  -2.70     312305 -312306 -311305          imp:n=1 u=4103  $ Al top cap 
-410315  104  -2.70     312306 -312307 -311303          imp:n=1 u=4103  $ Tri-flute 
+410314  105  -7.857     312305 -312306 -311305          imp:n=1 u=4103  $ SS top cap 
+410315  105  -7.857     312306 -312307 -311303          imp:n=1 u=4103  $ Tri-flute 
 410316  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4103  $ Water around tri-flute 
-410317  104  -2.70     312307 -312308 -311302          imp:n=1 u=4103  $ Fuel tip
+410317  105  -7.857     312307 -312308 -311302          imp:n=1 u=4103  $ Fuel tip
 410318  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4103  $ Water around fuel tip
 410319  102  -1.00     312308 -312309 -311306          imp:n=1 u=4103  $ Water above fuel element
 c
 c
 c
-c --- 9679 - Al (TOS210D130) universe ---
+c --- 9679 - SS clad (TOS210D210) universe ---
 c
-967901  104  -2.70     312300 -312301 -311302          imp:n=1 u=9679  $ Lower grid plate pin
+967901  105  -7.857     312300 -312301 -311302          imp:n=1 u=9679  $ Lower grid plate pin
 967902  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=9679  $ Water around grid plate pin 
-967903  104  -2.70     312301 -312302 -311305          imp:n=1 u=9679  $ Bottom casing 
+967903  105  -7.857     312301 -312302 -311305          imp:n=1 u=9679  $ Bottom casing 
 967904  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=9679  $ Water around fuel element
 967905  106  -1.56     312302 -312303 -311304          imp:n=1 u=9679  $ Lower graphite slug 
-967906  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=9679  $ Fuel cladding
+967906  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=9679  $ Fuel cladding
 967907  108   0.042234 312303 -312304 -311301          imp:n=1 u=9679  $ Zirc pin 
-967908 96791 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=9679 $ Fuel meat section 1
-967909 96792 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=9679 $ Fuel meat section 2
-967910 96793 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=9679 $ Fuel meat section 3
-967911 96794 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=9679 $ Fuel meat section 4
-967912 96795 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=9679 $ Fuel meat section 5
+967908 9679 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=9679 $ Fuel meat section 1
+967909 9679 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=9679 $ Fuel meat section 2
+967910 9679 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=9679 $ Fuel meat section 3
+967911 9679 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=9679 $ Fuel meat section 4
+967912 9679 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=9679 $ Fuel meat section 5
 967913  106  -1.56     312304 -312305 -311304          imp:n=1 u=9679  $ Upper graphite spacer
-967914  104  -2.70     312305 -312306 -311305          imp:n=1 u=9679  $ Al top cap 
-967915  104  -2.70     312306 -312307 -311303          imp:n=1 u=9679  $ Tri-flute 
+967914  105  -7.857     312305 -312306 -311305          imp:n=1 u=9679  $ SS top cap 
+967915  105  -7.857     312306 -312307 -311303          imp:n=1 u=9679  $ Tri-flute 
 967916  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=9679  $ Water around tri-flute 
-967917  104  -2.70     312307 -312308 -311302          imp:n=1 u=9679  $ Fuel tip
+967917  105  -7.857     312307 -312308 -311302          imp:n=1 u=9679  $ Fuel tip
 967918  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=9679  $ Water around fuel tip
 967919  102  -1.00     312308 -312309 -311306          imp:n=1 u=9679  $ Water above fuel element
 c
 c
 c
-c --- 8736 - Al (TOS210D130) universe ---
+c --- 8736 - SS clad (TOS210D210) universe ---
 c
-873601  104  -2.70     312300 -312301 -311302          imp:n=1 u=8736  $ Lower grid plate pin
+873601  105  -7.857     312300 -312301 -311302          imp:n=1 u=8736  $ Lower grid plate pin
 873602  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=8736  $ Water around grid plate pin 
-873603  104  -2.70     312301 -312302 -311305          imp:n=1 u=8736  $ Bottom casing 
+873603  105  -7.857     312301 -312302 -311305          imp:n=1 u=8736  $ Bottom casing 
 873604  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=8736  $ Water around fuel element
 873605  106  -1.56     312302 -312303 -311304          imp:n=1 u=8736  $ Lower graphite slug 
-873606  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=8736  $ Fuel cladding
+873606  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=8736  $ Fuel cladding
 873607  108   0.042234 312303 -312304 -311301          imp:n=1 u=8736  $ Zirc pin 
-873608 87361 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8736 $ Fuel meat section 1
-873609 87362 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8736 $ Fuel meat section 2
-873610 87363 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8736 $ Fuel meat section 3
-873611 87364 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8736 $ Fuel meat section 4
-873612 87365 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8736 $ Fuel meat section 5
+873608 8736 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8736 $ Fuel meat section 1
+873609 8736 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8736 $ Fuel meat section 2
+873610 8736 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8736 $ Fuel meat section 3
+873611 8736 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8736 $ Fuel meat section 4
+873612 8736 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8736 $ Fuel meat section 5
 873613  106  -1.56     312304 -312305 -311304          imp:n=1 u=8736  $ Upper graphite spacer
-873614  104  -2.70     312305 -312306 -311305          imp:n=1 u=8736  $ Al top cap 
-873615  104  -2.70     312306 -312307 -311303          imp:n=1 u=8736  $ Tri-flute 
+873614  105  -7.857     312305 -312306 -311305          imp:n=1 u=8736  $ SS top cap 
+873615  105  -7.857     312306 -312307 -311303          imp:n=1 u=8736  $ Tri-flute 
 873616  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=8736  $ Water around tri-flute 
-873617  104  -2.70     312307 -312308 -311302          imp:n=1 u=8736  $ Fuel tip
+873617  105  -7.857     312307 -312308 -311302          imp:n=1 u=8736  $ Fuel tip
 873618  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=8736  $ Water around fuel tip
 873619  102  -1.00     312308 -312309 -311306          imp:n=1 u=8736  $ Water above fuel element
 c
 c
 c
-c --- 8734 - Al (TOS210D130) universe ---
+c --- 8734 - SS clad (TOS210D210) universe ---
 c
-873401  104  -2.70     312300 -312301 -311302          imp:n=1 u=8734  $ Lower grid plate pin
+873401  105  -7.857     312300 -312301 -311302          imp:n=1 u=8734  $ Lower grid plate pin
 873402  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=8734  $ Water around grid plate pin 
-873403  104  -2.70     312301 -312302 -311305          imp:n=1 u=8734  $ Bottom casing 
+873403  105  -7.857     312301 -312302 -311305          imp:n=1 u=8734  $ Bottom casing 
 873404  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=8734  $ Water around fuel element
 873405  106  -1.56     312302 -312303 -311304          imp:n=1 u=8734  $ Lower graphite slug 
-873406  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=8734  $ Fuel cladding
+873406  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=8734  $ Fuel cladding
 873407  108   0.042234 312303 -312304 -311301          imp:n=1 u=8734  $ Zirc pin 
-873408 87341 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8734 $ Fuel meat section 1
-873409 87342 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8734 $ Fuel meat section 2
-873410 87343 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8734 $ Fuel meat section 3
-873411 87344 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8734 $ Fuel meat section 4
-873412 87345 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8734 $ Fuel meat section 5
+873408 8734 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8734 $ Fuel meat section 1
+873409 8734 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8734 $ Fuel meat section 2
+873410 8734 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8734 $ Fuel meat section 3
+873411 8734 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8734 $ Fuel meat section 4
+873412 8734 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8734 $ Fuel meat section 5
 873413  106  -1.56     312304 -312305 -311304          imp:n=1 u=8734  $ Upper graphite spacer
-873414  104  -2.70     312305 -312306 -311305          imp:n=1 u=8734  $ Al top cap 
-873415  104  -2.70     312306 -312307 -311303          imp:n=1 u=8734  $ Tri-flute 
+873414  105  -7.857     312305 -312306 -311305          imp:n=1 u=8734  $ SS top cap 
+873415  105  -7.857     312306 -312307 -311303          imp:n=1 u=8734  $ Tri-flute 
 873416  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=8734  $ Water around tri-flute 
-873417  104  -2.70     312307 -312308 -311302          imp:n=1 u=8734  $ Fuel tip
+873417  105  -7.857     312307 -312308 -311302          imp:n=1 u=8734  $ Fuel tip
 873418  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=8734  $ Water around fuel tip
 873419  102  -1.00     312308 -312309 -311306          imp:n=1 u=8734  $ Water above fuel element
 c
 c
 c
-c --- 4121 - Al (TOS210D130) universe ---
+c --- 4121 - SS clad (TOS210D210) universe ---
 c
-412101  104  -2.70     312300 -312301 -311302          imp:n=1 u=4121  $ Lower grid plate pin
+412101  105  -7.857     312300 -312301 -311302          imp:n=1 u=4121  $ Lower grid plate pin
 412102  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4121  $ Water around grid plate pin 
-412103  104  -2.70     312301 -312302 -311305          imp:n=1 u=4121  $ Bottom casing 
+412103  105  -7.857     312301 -312302 -311305          imp:n=1 u=4121  $ Bottom casing 
 412104  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4121  $ Water around fuel element
 412105  106  -1.56     312302 -312303 -311304          imp:n=1 u=4121  $ Lower graphite slug 
-412106  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4121  $ Fuel cladding
+412106  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4121  $ Fuel cladding
 412107  108   0.042234 312303 -312304 -311301          imp:n=1 u=4121  $ Zirc pin 
-412108 41211 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4121 $ Fuel meat section 1
-412109 41212 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4121 $ Fuel meat section 2
-412110 41213 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4121 $ Fuel meat section 3
-412111 41214 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4121 $ Fuel meat section 4
-412112 41215 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4121 $ Fuel meat section 5
+412108 4121 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4121 $ Fuel meat section 1
+412109 4121 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4121 $ Fuel meat section 2
+412110 4121 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4121 $ Fuel meat section 3
+412111 4121 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4121 $ Fuel meat section 4
+412112 4121 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4121 $ Fuel meat section 5
 412113  106  -1.56     312304 -312305 -311304          imp:n=1 u=4121  $ Upper graphite spacer
-412114  104  -2.70     312305 -312306 -311305          imp:n=1 u=4121  $ Al top cap 
-412115  104  -2.70     312306 -312307 -311303          imp:n=1 u=4121  $ Tri-flute 
+412114  105  -7.857     312305 -312306 -311305          imp:n=1 u=4121  $ SS top cap 
+412115  105  -7.857     312306 -312307 -311303          imp:n=1 u=4121  $ Tri-flute 
 412116  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4121  $ Water around tri-flute 
-412117  104  -2.70     312307 -312308 -311302          imp:n=1 u=4121  $ Fuel tip
+412117  105  -7.857     312307 -312308 -311302          imp:n=1 u=4121  $ Fuel tip
 412118  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4121  $ Water around fuel tip
 412119  102  -1.00     312308 -312309 -311306          imp:n=1 u=4121  $ Water above fuel element
 c
 c
 c
-c --- 10705 - Al (TOS210D130) universe ---
+c --- 10705 - SS clad (TOS210D210) universe ---
 c
-1070501  104  -2.70     312300 -312301 -311302          imp:n=1 u=10705  $ Lower grid plate pin
+1070501  105  -7.857     312300 -312301 -311302          imp:n=1 u=10705  $ Lower grid plate pin
 1070502  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=10705  $ Water around grid plate pin 
-1070503  104  -2.70     312301 -312302 -311305          imp:n=1 u=10705  $ Bottom casing 
+1070503  105  -7.857     312301 -312302 -311305          imp:n=1 u=10705  $ Bottom casing 
 1070504  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=10705  $ Water around fuel element
 1070505  106  -1.56     312302 -312303 -311304          imp:n=1 u=10705  $ Lower graphite slug 
-1070506  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=10705  $ Fuel cladding
+1070506  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=10705  $ Fuel cladding
 1070507  108   0.042234 312303 -312304 -311301          imp:n=1 u=10705  $ Zirc pin 
-1070508 107051 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=10705 $ Fuel meat section 1
-1070509 107052 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=10705 $ Fuel meat section 2
-1070510 107053 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=10705 $ Fuel meat section 3
-1070511 107054 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=10705 $ Fuel meat section 4
-1070512 107055 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=10705 $ Fuel meat section 5
+1070508 10705 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=10705 $ Fuel meat section 1
+1070509 10705 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=10705 $ Fuel meat section 2
+1070510 10705 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=10705 $ Fuel meat section 3
+1070511 10705 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=10705 $ Fuel meat section 4
+1070512 10705 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=10705 $ Fuel meat section 5
 1070513  106  -1.56     312304 -312305 -311304          imp:n=1 u=10705  $ Upper graphite spacer
-1070514  104  -2.70     312305 -312306 -311305          imp:n=1 u=10705  $ Al top cap 
-1070515  104  -2.70     312306 -312307 -311303          imp:n=1 u=10705  $ Tri-flute 
+1070514  105  -7.857     312305 -312306 -311305          imp:n=1 u=10705  $ SS top cap 
+1070515  105  -7.857     312306 -312307 -311303          imp:n=1 u=10705  $ Tri-flute 
 1070516  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=10705  $ Water around tri-flute 
-1070517  104  -2.70     312307 -312308 -311302          imp:n=1 u=10705  $ Fuel tip
+1070517  105  -7.857     312307 -312308 -311302          imp:n=1 u=10705  $ Fuel tip
 1070518  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=10705  $ Water around fuel tip
 1070519  102  -1.00     312308 -312309 -311306          imp:n=1 u=10705  $ Water above fuel element
 c
 c
 c
-c --- 3685 - Al (TOS210D130) universe ---
+c --- 3685 - SS clad (TOS210D210) universe ---
 c
-368501  104  -2.70     312300 -312301 -311302          imp:n=1 u=3685  $ Lower grid plate pin
+368501  105  -7.857     312300 -312301 -311302          imp:n=1 u=3685  $ Lower grid plate pin
 368502  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3685  $ Water around grid plate pin 
-368503  104  -2.70     312301 -312302 -311305          imp:n=1 u=3685  $ Bottom casing 
+368503  105  -7.857     312301 -312302 -311305          imp:n=1 u=3685  $ Bottom casing 
 368504  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3685  $ Water around fuel element
 368505  106  -1.56     312302 -312303 -311304          imp:n=1 u=3685  $ Lower graphite slug 
-368506  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3685  $ Fuel cladding
+368506  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3685  $ Fuel cladding
 368507  108   0.042234 312303 -312304 -311301          imp:n=1 u=3685  $ Zirc pin 
-368508 36851 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3685 $ Fuel meat section 1
-368509 36852 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3685 $ Fuel meat section 2
-368510 36853 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3685 $ Fuel meat section 3
-368511 36854 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3685 $ Fuel meat section 4
-368512 36855 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3685 $ Fuel meat section 5
+368508 3685 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3685 $ Fuel meat section 1
+368509 3685 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3685 $ Fuel meat section 2
+368510 3685 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3685 $ Fuel meat section 3
+368511 3685 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3685 $ Fuel meat section 4
+368512 3685 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3685 $ Fuel meat section 5
 368513  106  -1.56     312304 -312305 -311304          imp:n=1 u=3685  $ Upper graphite spacer
-368514  104  -2.70     312305 -312306 -311305          imp:n=1 u=3685  $ Al top cap 
-368515  104  -2.70     312306 -312307 -311303          imp:n=1 u=3685  $ Tri-flute 
+368514  105  -7.857     312305 -312306 -311305          imp:n=1 u=3685  $ SS top cap 
+368515  105  -7.857     312306 -312307 -311303          imp:n=1 u=3685  $ Tri-flute 
 368516  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3685  $ Water around tri-flute 
-368517  104  -2.70     312307 -312308 -311302          imp:n=1 u=3685  $ Fuel tip
+368517  105  -7.857     312307 -312308 -311302          imp:n=1 u=3685  $ Fuel tip
 368518  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3685  $ Water around fuel tip
 368519  102  -1.00     312308 -312309 -311306          imp:n=1 u=3685  $ Water above fuel element
 c
 c
 c
-c --- 4095 - Al (TOS210D130) universe ---
+c --- 4095 - SS clad (TOS210D210) universe ---
 c
-409501  104  -2.70     312300 -312301 -311302          imp:n=1 u=4095  $ Lower grid plate pin
+409501  105  -7.857     312300 -312301 -311302          imp:n=1 u=4095  $ Lower grid plate pin
 409502  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4095  $ Water around grid plate pin 
-409503  104  -2.70     312301 -312302 -311305          imp:n=1 u=4095  $ Bottom casing 
+409503  105  -7.857     312301 -312302 -311305          imp:n=1 u=4095  $ Bottom casing 
 409504  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4095  $ Water around fuel element
 409505  106  -1.56     312302 -312303 -311304          imp:n=1 u=4095  $ Lower graphite slug 
-409506  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4095  $ Fuel cladding
+409506  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4095  $ Fuel cladding
 409507  108   0.042234 312303 -312304 -311301          imp:n=1 u=4095  $ Zirc pin 
-409508 40951 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4095 $ Fuel meat section 1
-409509 40952 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4095 $ Fuel meat section 2
-409510 40953 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4095 $ Fuel meat section 3
-409511 40954 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4095 $ Fuel meat section 4
-409512 40955 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4095 $ Fuel meat section 5
+409508 4095 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4095 $ Fuel meat section 1
+409509 4095 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4095 $ Fuel meat section 2
+409510 4095 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4095 $ Fuel meat section 3
+409511 4095 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4095 $ Fuel meat section 4
+409512 4095 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4095 $ Fuel meat section 5
 409513  106  -1.56     312304 -312305 -311304          imp:n=1 u=4095  $ Upper graphite spacer
-409514  104  -2.70     312305 -312306 -311305          imp:n=1 u=4095  $ Al top cap 
-409515  104  -2.70     312306 -312307 -311303          imp:n=1 u=4095  $ Tri-flute 
+409514  105  -7.857     312305 -312306 -311305          imp:n=1 u=4095  $ SS top cap 
+409515  105  -7.857     312306 -312307 -311303          imp:n=1 u=4095  $ Tri-flute 
 409516  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4095  $ Water around tri-flute 
-409517  104  -2.70     312307 -312308 -311302          imp:n=1 u=4095  $ Fuel tip
+409517  105  -7.857     312307 -312308 -311302          imp:n=1 u=4095  $ Fuel tip
 409518  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4095  $ Water around fuel tip
 409519  102  -1.00     312308 -312309 -311306          imp:n=1 u=4095  $ Water above fuel element
 c
 c
 c
-c --- 4086 - Al (TOS210D130) universe ---
+c --- 4086 - SS clad (TOS210D210) universe ---
 c
-408601  104  -2.70     312300 -312301 -311302          imp:n=1 u=4086  $ Lower grid plate pin
+408601  105  -7.857     312300 -312301 -311302          imp:n=1 u=4086  $ Lower grid plate pin
 408602  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4086  $ Water around grid plate pin 
-408603  104  -2.70     312301 -312302 -311305          imp:n=1 u=4086  $ Bottom casing 
+408603  105  -7.857     312301 -312302 -311305          imp:n=1 u=4086  $ Bottom casing 
 408604  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4086  $ Water around fuel element
 408605  106  -1.56     312302 -312303 -311304          imp:n=1 u=4086  $ Lower graphite slug 
-408606  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4086  $ Fuel cladding
+408606  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4086  $ Fuel cladding
 408607  108   0.042234 312303 -312304 -311301          imp:n=1 u=4086  $ Zirc pin 
-408608 40861 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4086 $ Fuel meat section 1
-408609 40862 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4086 $ Fuel meat section 2
-408610 40863 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4086 $ Fuel meat section 3
-408611 40864 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4086 $ Fuel meat section 4
-408612 40865 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4086 $ Fuel meat section 5
+408608 4086 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4086 $ Fuel meat section 1
+408609 4086 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4086 $ Fuel meat section 2
+408610 4086 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4086 $ Fuel meat section 3
+408611 4086 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4086 $ Fuel meat section 4
+408612 4086 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4086 $ Fuel meat section 5
 408613  106  -1.56     312304 -312305 -311304          imp:n=1 u=4086  $ Upper graphite spacer
-408614  104  -2.70     312305 -312306 -311305          imp:n=1 u=4086  $ Al top cap 
-408615  104  -2.70     312306 -312307 -311303          imp:n=1 u=4086  $ Tri-flute 
+408614  105  -7.857     312305 -312306 -311305          imp:n=1 u=4086  $ SS top cap 
+408615  105  -7.857     312306 -312307 -311303          imp:n=1 u=4086  $ Tri-flute 
 408616  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4086  $ Water around tri-flute 
-408617  104  -2.70     312307 -312308 -311302          imp:n=1 u=4086  $ Fuel tip
+408617  105  -7.857     312307 -312308 -311302          imp:n=1 u=4086  $ Fuel tip
 408618  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4086  $ Water around fuel tip
 408619  102  -1.00     312308 -312309 -311306          imp:n=1 u=4086  $ Water above fuel element
 c
 c
 c
-c --- 7202 - Al (TOS210D130) universe ---
+c --- 7202 - SS clad (TOS210D210) universe ---
 c
-720201  104  -2.70     312300 -312301 -311302          imp:n=1 u=7202  $ Lower grid plate pin
+720201  105  -7.857     312300 -312301 -311302          imp:n=1 u=7202  $ Lower grid plate pin
 720202  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=7202  $ Water around grid plate pin 
-720203  104  -2.70     312301 -312302 -311305          imp:n=1 u=7202  $ Bottom casing 
+720203  105  -7.857     312301 -312302 -311305          imp:n=1 u=7202  $ Bottom casing 
 720204  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=7202  $ Water around fuel element
 720205  106  -1.56     312302 -312303 -311304          imp:n=1 u=7202  $ Lower graphite slug 
-720206  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=7202  $ Fuel cladding
+720206  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=7202  $ Fuel cladding
 720207  108   0.042234 312303 -312304 -311301          imp:n=1 u=7202  $ Zirc pin 
-720208 72021 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=7202 $ Fuel meat section 1
-720209 72022 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=7202 $ Fuel meat section 2
-720210 72023 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=7202 $ Fuel meat section 3
-720211 72024 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=7202 $ Fuel meat section 4
-720212 72025 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=7202 $ Fuel meat section 5
+720208 7202 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=7202 $ Fuel meat section 1
+720209 7202 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=7202 $ Fuel meat section 2
+720210 7202 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=7202 $ Fuel meat section 3
+720211 7202 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=7202 $ Fuel meat section 4
+720212 7202 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=7202 $ Fuel meat section 5
 720213  106  -1.56     312304 -312305 -311304          imp:n=1 u=7202  $ Upper graphite spacer
-720214  104  -2.70     312305 -312306 -311305          imp:n=1 u=7202  $ Al top cap 
-720215  104  -2.70     312306 -312307 -311303          imp:n=1 u=7202  $ Tri-flute 
+720214  105  -7.857     312305 -312306 -311305          imp:n=1 u=7202  $ SS top cap 
+720215  105  -7.857     312306 -312307 -311303          imp:n=1 u=7202  $ Tri-flute 
 720216  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=7202  $ Water around tri-flute 
-720217  104  -2.70     312307 -312308 -311302          imp:n=1 u=7202  $ Fuel tip
+720217  105  -7.857     312307 -312308 -311302          imp:n=1 u=7202  $ Fuel tip
 720218  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=7202  $ Water around fuel tip
 720219  102  -1.00     312308 -312309 -311306          imp:n=1 u=7202  $ Water above fuel element
 c
 c
 c
-c --- 4114 - Al (TOS210D130) universe ---
+c --- 4114 - SS clad (TOS210D210) universe ---
 c
-411401  104  -2.70     312300 -312301 -311302          imp:n=1 u=4114  $ Lower grid plate pin
+411401  105  -7.857     312300 -312301 -311302          imp:n=1 u=4114  $ Lower grid plate pin
 411402  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4114  $ Water around grid plate pin 
-411403  104  -2.70     312301 -312302 -311305          imp:n=1 u=4114  $ Bottom casing 
+411403  105  -7.857     312301 -312302 -311305          imp:n=1 u=4114  $ Bottom casing 
 411404  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4114  $ Water around fuel element
 411405  106  -1.56     312302 -312303 -311304          imp:n=1 u=4114  $ Lower graphite slug 
-411406  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4114  $ Fuel cladding
+411406  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4114  $ Fuel cladding
 411407  108   0.042234 312303 -312304 -311301          imp:n=1 u=4114  $ Zirc pin 
-411408 41141 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4114 $ Fuel meat section 1
-411409 41142 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4114 $ Fuel meat section 2
-411410 41143 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4114 $ Fuel meat section 3
-411411 41144 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4114 $ Fuel meat section 4
-411412 41145 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4114 $ Fuel meat section 5
+411408 4114 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4114 $ Fuel meat section 1
+411409 4114 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4114 $ Fuel meat section 2
+411410 4114 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4114 $ Fuel meat section 3
+411411 4114 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4114 $ Fuel meat section 4
+411412 4114 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4114 $ Fuel meat section 5
 411413  106  -1.56     312304 -312305 -311304          imp:n=1 u=4114  $ Upper graphite spacer
-411414  104  -2.70     312305 -312306 -311305          imp:n=1 u=4114  $ Al top cap 
-411415  104  -2.70     312306 -312307 -311303          imp:n=1 u=4114  $ Tri-flute 
+411414  105  -7.857     312305 -312306 -311305          imp:n=1 u=4114  $ SS top cap 
+411415  105  -7.857     312306 -312307 -311303          imp:n=1 u=4114  $ Tri-flute 
 411416  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4114  $ Water around tri-flute 
-411417  104  -2.70     312307 -312308 -311302          imp:n=1 u=4114  $ Fuel tip
+411417  105  -7.857     312307 -312308 -311302          imp:n=1 u=4114  $ Fuel tip
 411418  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4114  $ Water around fuel tip
 411419  102  -1.00     312308 -312309 -311306          imp:n=1 u=4114  $ Water above fuel element
 c
 c
 c
-c --- 4077 - Al (TOS210D130) universe ---
+c --- 4077 - SS clad (TOS210D210) universe ---
 c
-407701  104  -2.70     312300 -312301 -311302          imp:n=1 u=4077  $ Lower grid plate pin
+407701  105  -7.857     312300 -312301 -311302          imp:n=1 u=4077  $ Lower grid plate pin
 407702  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4077  $ Water around grid plate pin 
-407703  104  -2.70     312301 -312302 -311305          imp:n=1 u=4077  $ Bottom casing 
+407703  105  -7.857     312301 -312302 -311305          imp:n=1 u=4077  $ Bottom casing 
 407704  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4077  $ Water around fuel element
 407705  106  -1.56     312302 -312303 -311304          imp:n=1 u=4077  $ Lower graphite slug 
-407706  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4077  $ Fuel cladding
+407706  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4077  $ Fuel cladding
 407707  108   0.042234 312303 -312304 -311301          imp:n=1 u=4077  $ Zirc pin 
-407708 40771 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4077 $ Fuel meat section 1
-407709 40772 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4077 $ Fuel meat section 2
-407710 40773 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4077 $ Fuel meat section 3
-407711 40774 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4077 $ Fuel meat section 4
-407712 40775 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4077 $ Fuel meat section 5
+407708 4077 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4077 $ Fuel meat section 1
+407709 4077 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4077 $ Fuel meat section 2
+407710 4077 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4077 $ Fuel meat section 3
+407711 4077 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4077 $ Fuel meat section 4
+407712 4077 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4077 $ Fuel meat section 5
 407713  106  -1.56     312304 -312305 -311304          imp:n=1 u=4077  $ Upper graphite spacer
-407714  104  -2.70     312305 -312306 -311305          imp:n=1 u=4077  $ Al top cap 
-407715  104  -2.70     312306 -312307 -311303          imp:n=1 u=4077  $ Tri-flute 
+407714  105  -7.857     312305 -312306 -311305          imp:n=1 u=4077  $ SS top cap 
+407715  105  -7.857     312306 -312307 -311303          imp:n=1 u=4077  $ Tri-flute 
 407716  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4077  $ Water around tri-flute 
-407717  104  -2.70     312307 -312308 -311302          imp:n=1 u=4077  $ Fuel tip
+407717  105  -7.857     312307 -312308 -311302          imp:n=1 u=4077  $ Fuel tip
 407718  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4077  $ Water around fuel tip
 407719  102  -1.00     312308 -312309 -311306          imp:n=1 u=4077  $ Water above fuel element
 c
 c
 c
-c --- 4070 - Al (TOS210D130) universe ---
+c --- 4070 - SS clad (TOS210D210) universe ---
 c
-407001  104  -2.70     312300 -312301 -311302          imp:n=1 u=4070  $ Lower grid plate pin
+407001  105  -7.857     312300 -312301 -311302          imp:n=1 u=4070  $ Lower grid plate pin
 407002  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4070  $ Water around grid plate pin 
-407003  104  -2.70     312301 -312302 -311305          imp:n=1 u=4070  $ Bottom casing 
+407003  105  -7.857     312301 -312302 -311305          imp:n=1 u=4070  $ Bottom casing 
 407004  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4070  $ Water around fuel element
 407005  106  -1.56     312302 -312303 -311304          imp:n=1 u=4070  $ Lower graphite slug 
-407006  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4070  $ Fuel cladding
+407006  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4070  $ Fuel cladding
 407007  108   0.042234 312303 -312304 -311301          imp:n=1 u=4070  $ Zirc pin 
-407008 40701 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4070 $ Fuel meat section 1
-407009 40702 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4070 $ Fuel meat section 2
-407010 40703 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4070 $ Fuel meat section 3
-407011 40704 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4070 $ Fuel meat section 4
-407012 40705 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4070 $ Fuel meat section 5
+407008 4070  -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4070 $ Fuel meat section 1
+407009 4070 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4070 $ Fuel meat section 2
+407010 4070 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4070 $ Fuel meat section 3
+407011 4070 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4070 $ Fuel meat section 4
+407012 4070 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4070 $ Fuel meat section 5
 407013  106  -1.56     312304 -312305 -311304          imp:n=1 u=4070  $ Upper graphite spacer
-407014  104  -2.70     312305 -312306 -311305          imp:n=1 u=4070  $ Al top cap 
-407015  104  -2.70     312306 -312307 -311303          imp:n=1 u=4070  $ Tri-flute 
+407014  105  -7.857     312305 -312306 -311305          imp:n=1 u=4070  $ SS top cap 
+407015  105  -7.857     312306 -312307 -311303          imp:n=1 u=4070  $ Tri-flute 
 407016  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4070  $ Water around tri-flute 
-407017  104  -2.70     312307 -312308 -311302          imp:n=1 u=4070  $ Fuel tip
+407017  105  -7.857     312307 -312308 -311302          imp:n=1 u=4070  $ Fuel tip
 407018  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4070  $ Water around fuel tip
 407019  102  -1.00     312308 -312309 -311306          imp:n=1 u=4070  $ Water above fuel element
 c
 c
 c
-c --- 4104 - Al (TOS210D130) universe ---
+c --- 4104 - SS clad (TOS210D210) universe ---
 c
-410401  104  -2.70     312300 -312301 -311302          imp:n=1 u=4104  $ Lower grid plate pin
+410401  105  -7.857     312300 -312301 -311302          imp:n=1 u=4104  $ Lower grid plate pin
 410402  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4104  $ Water around grid plate pin 
-410403  104  -2.70     312301 -312302 -311305          imp:n=1 u=4104  $ Bottom casing 
+410403  105  -7.857     312301 -312302 -311305          imp:n=1 u=4104  $ Bottom casing 
 410404  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4104  $ Water around fuel element
 410405  106  -1.56     312302 -312303 -311304          imp:n=1 u=4104  $ Lower graphite slug 
-410406  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4104  $ Fuel cladding
+410406  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4104  $ Fuel cladding
 410407  108   0.042234 312303 -312304 -311301          imp:n=1 u=4104  $ Zirc pin 
-410408 41041 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4104 $ Fuel meat section 1
-410409 41042 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4104 $ Fuel meat section 2
-410410 41043 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4104 $ Fuel meat section 3
-410411 41044 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4104 $ Fuel meat section 4
-410412 41045 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4104 $ Fuel meat section 5
+410408 4104 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4104 $ Fuel meat section 1
+410409 4104 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4104 $ Fuel meat section 2
+410410 4104 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4104 $ Fuel meat section 3
+410411 4104 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4104 $ Fuel meat section 4
+410412 4104 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4104 $ Fuel meat section 5
 410413  106  -1.56     312304 -312305 -311304          imp:n=1 u=4104  $ Upper graphite spacer
-410414  104  -2.70     312305 -312306 -311305          imp:n=1 u=4104  $ Al top cap 
-410415  104  -2.70     312306 -312307 -311303          imp:n=1 u=4104  $ Tri-flute 
+410414  105  -7.857     312305 -312306 -311305          imp:n=1 u=4104  $ SS top cap 
+410415  105  -7.857     312306 -312307 -311303          imp:n=1 u=4104  $ Tri-flute 
 410416  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4104  $ Water around tri-flute 
-410417  104  -2.70     312307 -312308 -311302          imp:n=1 u=4104  $ Fuel tip
+410417  105  -7.857     312307 -312308 -311302          imp:n=1 u=4104  $ Fuel tip
 410418  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4104  $ Water around fuel tip
 410419  102  -1.00     312308 -312309 -311306          imp:n=1 u=4104  $ Water above fuel element
 c
 c
 c
-c --- 3679 - Al (TOS210D130) universe ---
+c --- 3679 - SS clad (TOS210D210) universe ---
 c
-367901  104  -2.70     312300 -312301 -311302          imp:n=1 u=3679  $ Lower grid plate pin
+367901  105  -7.857     312300 -312301 -311302          imp:n=1 u=3679  $ Lower grid plate pin
 367902  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3679  $ Water around grid plate pin 
-367903  104  -2.70     312301 -312302 -311305          imp:n=1 u=3679  $ Bottom casing 
+367903  105  -7.857     312301 -312302 -311305          imp:n=1 u=3679  $ Bottom casing 
 367904  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3679  $ Water around fuel element
 367905  106  -1.56     312302 -312303 -311304          imp:n=1 u=3679  $ Lower graphite slug 
-367906  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3679  $ Fuel cladding
+367906  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3679  $ Fuel cladding
 367907  108   0.042234 312303 -312304 -311301          imp:n=1 u=3679  $ Zirc pin 
-367908 36791 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3679 $ Fuel meat section 1
-367909 36792 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3679 $ Fuel meat section 2
-367910 36793 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3679 $ Fuel meat section 3
-367911 36794 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3679 $ Fuel meat section 4
-367912 36795 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3679 $ Fuel meat section 5
+367908 3679 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3679 $ Fuel meat section 1
+367909 3679 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3679 $ Fuel meat section 2
+367910 3679 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3679 $ Fuel meat section 3
+367911 3679 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3679 $ Fuel meat section 4
+367912 3679 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3679 $ Fuel meat section 5
 367913  106  -1.56     312304 -312305 -311304          imp:n=1 u=3679  $ Upper graphite spacer
-367914  104  -2.70     312305 -312306 -311305          imp:n=1 u=3679  $ Al top cap 
-367915  104  -2.70     312306 -312307 -311303          imp:n=1 u=3679  $ Tri-flute 
+367914  105  -7.857     312305 -312306 -311305          imp:n=1 u=3679  $ SS top cap 
+367915  105  -7.857     312306 -312307 -311303          imp:n=1 u=3679  $ Tri-flute 
 367916  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3679  $ Water around tri-flute 
-367917  104  -2.70     312307 -312308 -311302          imp:n=1 u=3679  $ Fuel tip
+367917  105  -7.857     312307 -312308 -311302          imp:n=1 u=3679  $ Fuel tip
 367918  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3679  $ Water around fuel tip
 367919  102  -1.00     312308 -312309 -311306          imp:n=1 u=3679  $ Water above fuel element
 c
 c
 c
-c --- 8102 - Al (TOS210D130) universe ---
+c --- 8102 - SS clad (TOS210D210) universe ---
 c
-810201  104  -2.70     312300 -312301 -311302          imp:n=1 u=8102  $ Lower grid plate pin
+810201  105  -7.857     312300 -312301 -311302          imp:n=1 u=8102  $ Lower grid plate pin
 810202  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=8102  $ Water around grid plate pin 
-810203  104  -2.70     312301 -312302 -311305          imp:n=1 u=8102  $ Bottom casing 
+810203  105  -7.857     312301 -312302 -311305          imp:n=1 u=8102  $ Bottom casing 
 810204  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=8102  $ Water around fuel element
 810205  106  -1.56     312302 -312303 -311304          imp:n=1 u=8102  $ Lower graphite slug 
-810206  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=8102  $ Fuel cladding
+810206  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=8102  $ Fuel cladding
 810207  108   0.042234 312303 -312304 -311301          imp:n=1 u=8102  $ Zirc pin 
-810208 81021 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8102 $ Fuel meat section 1
-810209 81022 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8102 $ Fuel meat section 2
-810210 81023 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8102 $ Fuel meat section 3
-810211 81024 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8102 $ Fuel meat section 4
-810212 81025 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8102 $ Fuel meat section 5
+810208 8102 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8102 $ Fuel meat section 1
+810209 8102 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8102 $ Fuel meat section 2
+810210 8102 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8102 $ Fuel meat section 3
+810211 8102 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8102 $ Fuel meat section 4
+810212 8102 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8102 $ Fuel meat section 5
 810213  106  -1.56     312304 -312305 -311304          imp:n=1 u=8102  $ Upper graphite spacer
-810214  104  -2.70     312305 -312306 -311305          imp:n=1 u=8102  $ Al top cap 
-810215  104  -2.70     312306 -312307 -311303          imp:n=1 u=8102  $ Tri-flute 
+810214  105  -7.857     312305 -312306 -311305          imp:n=1 u=8102  $ SS top cap 
+810215  105  -7.857     312306 -312307 -311303          imp:n=1 u=8102  $ Tri-flute 
 810216  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=8102  $ Water around tri-flute 
-810217  104  -2.70     312307 -312308 -311302          imp:n=1 u=8102  $ Fuel tip
+810217  105  -7.857     312307 -312308 -311302          imp:n=1 u=8102  $ Fuel tip
 810218  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=8102  $ Water around fuel tip
 810219  102  -1.00     312308 -312309 -311306          imp:n=1 u=8102  $ Water above fuel element
 c
 c
 c
-c --- 4054 - Al (TOS210D130) universe ---
+c --- 4054 - SS clad (TOS210D210) universe ---
 c
-405401  104  -2.70     312300 -312301 -311302          imp:n=1 u=4054  $ Lower grid plate pin
+405401  105  -7.857     312300 -312301 -311302          imp:n=1 u=4054  $ Lower grid plate pin
 405402  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4054  $ Water around grid plate pin 
-405403  104  -2.70     312301 -312302 -311305          imp:n=1 u=4054  $ Bottom casing 
+405403  105  -7.857     312301 -312302 -311305          imp:n=1 u=4054  $ Bottom casing 
 405404  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4054  $ Water around fuel element
 405405  106  -1.56     312302 -312303 -311304          imp:n=1 u=4054  $ Lower graphite slug 
-405406  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4054  $ Fuel cladding
+405406  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4054  $ Fuel cladding
 405407  108   0.042234 312303 -312304 -311301          imp:n=1 u=4054  $ Zirc pin 
-405408 40541 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4054 $ Fuel meat section 1
-405409 40542 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4054 $ Fuel meat section 2
-405410 40543 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4054 $ Fuel meat section 3
-405411 40544 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4054 $ Fuel meat section 4
-405412 40545 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4054 $ Fuel meat section 5
+405408 4054 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4054 $ Fuel meat section 1
+405409 4054 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4054 $ Fuel meat section 2
+405410 4054 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4054 $ Fuel meat section 3
+405411 4054 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4054 $ Fuel meat section 4
+405412 4054 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4054 $ Fuel meat section 5
 405413  106  -1.56     312304 -312305 -311304          imp:n=1 u=4054  $ Upper graphite spacer
-405414  104  -2.70     312305 -312306 -311305          imp:n=1 u=4054  $ Al top cap 
-405415  104  -2.70     312306 -312307 -311303          imp:n=1 u=4054  $ Tri-flute 
+405414  105  -7.857     312305 -312306 -311305          imp:n=1 u=4054  $ SS top cap 
+405415  105  -7.857     312306 -312307 -311303          imp:n=1 u=4054  $ Tri-flute 
 405416  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4054  $ Water around tri-flute 
-405417  104  -2.70     312307 -312308 -311302          imp:n=1 u=4054  $ Fuel tip
+405417  105  -7.857     312307 -312308 -311302          imp:n=1 u=4054  $ Fuel tip
 405418  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4054  $ Water around fuel tip
 405419  102  -1.00     312308 -312309 -311306          imp:n=1 u=4054  $ Water above fuel element
 c
 c
 c
-c --- 4122 - Al (TOS210D130) universe ---
+c --- 4122 - SS clad (TOS210D210) universe ---
 c
-412201  104  -2.70     312300 -312301 -311302          imp:n=1 u=4122  $ Lower grid plate pin
+412201  105  -7.857     312300 -312301 -311302          imp:n=1 u=4122  $ Lower grid plate pin
 412202  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4122  $ Water around grid plate pin 
-412203  104  -2.70     312301 -312302 -311305          imp:n=1 u=4122  $ Bottom casing 
+412203  105  -7.857     312301 -312302 -311305          imp:n=1 u=4122  $ Bottom casing 
 412204  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4122  $ Water around fuel element
 412205  106  -1.56     312302 -312303 -311304          imp:n=1 u=4122  $ Lower graphite slug 
-412206  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4122  $ Fuel cladding
+412206  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4122  $ Fuel cladding
 412207  108   0.042234 312303 -312304 -311301          imp:n=1 u=4122  $ Zirc pin 
-412208 41221 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4122 $ Fuel meat section 1
-412209 41222 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4122 $ Fuel meat section 2
-412210 41223 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4122 $ Fuel meat section 3
-412211 41224 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4122 $ Fuel meat section 4
-412212 41225 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4122 $ Fuel meat section 5
+412208 4122 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4122 $ Fuel meat section 1
+412209 4122 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4122 $ Fuel meat section 2
+412210 4122 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4122 $ Fuel meat section 3
+412211 4122 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4122 $ Fuel meat section 4
+412212 4122 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4122 $ Fuel meat section 5
 412213  106  -1.56     312304 -312305 -311304          imp:n=1 u=4122  $ Upper graphite spacer
-412214  104  -2.70     312305 -312306 -311305          imp:n=1 u=4122  $ Al top cap 
-412215  104  -2.70     312306 -312307 -311303          imp:n=1 u=4122  $ Tri-flute 
+412214  105  -7.857     312305 -312306 -311305          imp:n=1 u=4122  $ SS top cap 
+412215  105  -7.857     312306 -312307 -311303          imp:n=1 u=4122  $ Tri-flute 
 412216  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4122  $ Water around tri-flute 
-412217  104  -2.70     312307 -312308 -311302          imp:n=1 u=4122  $ Fuel tip
+412217  105  -7.857     312307 -312308 -311302          imp:n=1 u=4122  $ Fuel tip
 412218  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4122  $ Water around fuel tip
 412219  102  -1.00     312308 -312309 -311306          imp:n=1 u=4122  $ Water above fuel element
 c
 c
 c
-c --- 4118 - Al (TOS210D130) universe ---
+c --- 4118 - SS clad (TOS210D210) universe ---
 c
-411801  104  -2.70     312300 -312301 -311302          imp:n=1 u=4118  $ Lower grid plate pin
+411801  105  -7.857     312300 -312301 -311302          imp:n=1 u=4118  $ Lower grid plate pin
 411802  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4118  $ Water around grid plate pin 
-411803  104  -2.70     312301 -312302 -311305          imp:n=1 u=4118  $ Bottom casing 
+411803  105  -7.857     312301 -312302 -311305          imp:n=1 u=4118  $ Bottom casing 
 411804  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4118  $ Water around fuel element
 411805  106  -1.56     312302 -312303 -311304          imp:n=1 u=4118  $ Lower graphite slug 
-411806  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4118  $ Fuel cladding
+411806  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4118  $ Fuel cladding
 411807  108   0.042234 312303 -312304 -311301          imp:n=1 u=4118  $ Zirc pin 
-411808 41181 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4118 $ Fuel meat section 1
-411809 41182 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4118 $ Fuel meat section 2
-411810 41183 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4118 $ Fuel meat section 3
-411811 41184 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4118 $ Fuel meat section 4
-411812 41185 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4118 $ Fuel meat section 5
+411808 4118 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4118 $ Fuel meat section 1
+411809 4118 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4118 $ Fuel meat section 2
+411810 4118 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4118 $ Fuel meat section 3
+411811 4118 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4118 $ Fuel meat section 4
+411812 4118 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4118 $ Fuel meat section 5
 411813  106  -1.56     312304 -312305 -311304          imp:n=1 u=4118  $ Upper graphite spacer
-411814  104  -2.70     312305 -312306 -311305          imp:n=1 u=4118  $ Al top cap 
-411815  104  -2.70     312306 -312307 -311303          imp:n=1 u=4118  $ Tri-flute 
+411814  105  -7.857     312305 -312306 -311305          imp:n=1 u=4118  $ SS top cap 
+411815  105  -7.857     312306 -312307 -311303          imp:n=1 u=4118  $ Tri-flute 
 411816  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4118  $ Water around tri-flute 
-411817  104  -2.70     312307 -312308 -311302          imp:n=1 u=4118  $ Fuel tip
+411817  105  -7.857     312307 -312308 -311302          imp:n=1 u=4118  $ Fuel tip
 411818  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4118  $ Water around fuel tip
 411819  102  -1.00     312308 -312309 -311306          imp:n=1 u=4118  $ Water above fuel element
 c
 c
 c
-c --- 3872 - Al (TOS210D130) universe ---
+c --- 3872 - SS clad (TOS210D210) universe ---
 c
-387201  104  -2.70     312300 -312301 -311302          imp:n=1 u=3872  $ Lower grid plate pin
+387201  105  -7.857     312300 -312301 -311302          imp:n=1 u=3872  $ Lower grid plate pin
 387202  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3872  $ Water around grid plate pin 
-387203  104  -2.70     312301 -312302 -311305          imp:n=1 u=3872  $ Bottom casing 
+387203  105  -7.857     312301 -312302 -311305          imp:n=1 u=3872  $ Bottom casing 
 387204  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3872  $ Water around fuel element
 387205  106  -1.56     312302 -312303 -311304          imp:n=1 u=3872  $ Lower graphite slug 
-387206  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3872  $ Fuel cladding
+387206  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3872  $ Fuel cladding
 387207  108   0.042234 312303 -312304 -311301          imp:n=1 u=3872  $ Zirc pin 
-387208 38721 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3872 $ Fuel meat section 1
-387209 38722 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3872 $ Fuel meat section 2
-387210 38723 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3872 $ Fuel meat section 3
-387211 38724 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3872 $ Fuel meat section 4
-387212 38725 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3872 $ Fuel meat section 5
+387208 3872 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3872 $ Fuel meat section 1
+387209 3872 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3872 $ Fuel meat section 2
+387210 3872 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3872 $ Fuel meat section 3
+387211 3872 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3872 $ Fuel meat section 4
+387212 3872 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3872 $ Fuel meat section 5
 387213  106  -1.56     312304 -312305 -311304          imp:n=1 u=3872  $ Upper graphite spacer
-387214  104  -2.70     312305 -312306 -311305          imp:n=1 u=3872  $ Al top cap 
-387215  104  -2.70     312306 -312307 -311303          imp:n=1 u=3872  $ Tri-flute 
+387214  105  -7.857     312305 -312306 -311305          imp:n=1 u=3872  $ SS top cap 
+387215  105  -7.857     312306 -312307 -311303          imp:n=1 u=3872  $ Tri-flute 
 387216  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3872  $ Water around tri-flute 
-387217  104  -2.70     312307 -312308 -311302          imp:n=1 u=3872  $ Fuel tip
+387217  105  -7.857     312307 -312308 -311302          imp:n=1 u=3872  $ Fuel tip
 387218  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3872  $ Water around fuel tip
 387219  102  -1.00     312308 -312309 -311306          imp:n=1 u=3872  $ Water above fuel element
 c
 c
 c
-c --- 4083 - Al (TOS210D130) universe ---
+c --- 4083 - SS clad (TOS210D210) universe ---
 c
-408301  104  -2.70     312300 -312301 -311302          imp:n=1 u=4083  $ Lower grid plate pin
+408301  105  -7.857     312300 -312301 -311302          imp:n=1 u=4083  $ Lower grid plate pin
 408302  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4083  $ Water around grid plate pin 
-408303  104  -2.70     312301 -312302 -311305          imp:n=1 u=4083  $ Bottom casing 
+408303  105  -7.857     312301 -312302 -311305          imp:n=1 u=4083  $ Bottom casing 
 408304  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4083  $ Water around fuel element
 408305  106  -1.56     312302 -312303 -311304          imp:n=1 u=4083  $ Lower graphite slug 
-408306  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4083  $ Fuel cladding
+408306  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4083  $ Fuel cladding
 408307  108   0.042234 312303 -312304 -311301          imp:n=1 u=4083  $ Zirc pin 
-408308 40831 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4083 $ Fuel meat section 1
-408309 40832 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4083 $ Fuel meat section 2
-408310 40833 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4083 $ Fuel meat section 3
-408311 40834 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4083 $ Fuel meat section 4
-408312 40835 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4083 $ Fuel meat section 5
+408308 4083 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4083 $ Fuel meat section 1
+408309 4083 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4083 $ Fuel meat section 2
+408310 4083 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4083 $ Fuel meat section 3
+408311 4083 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4083 $ Fuel meat section 4
+408312 4083 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4083 $ Fuel meat section 5
 408313  106  -1.56     312304 -312305 -311304          imp:n=1 u=4083  $ Upper graphite spacer
-408314  104  -2.70     312305 -312306 -311305          imp:n=1 u=4083  $ Al top cap 
-408315  104  -2.70     312306 -312307 -311303          imp:n=1 u=4083  $ Tri-flute 
+408314  105  -7.857     312305 -312306 -311305          imp:n=1 u=4083  $ SS top cap 
+408315  105  -7.857     312306 -312307 -311303          imp:n=1 u=4083  $ Tri-flute 
 408316  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4083  $ Water around tri-flute 
-408317  104  -2.70     312307 -312308 -311302          imp:n=1 u=4083  $ Fuel tip
+408317  105  -7.857     312307 -312308 -311302          imp:n=1 u=4083  $ Fuel tip
 408318  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4083  $ Water around fuel tip
 408319  102  -1.00     312308 -312309 -311306          imp:n=1 u=4083  $ Water above fuel element
 c
 c
 c
-c --- 7946 - Al (TOS210D130) universe ---
+c --- 7946 - SS clad (TOS210D210) universe ---
 c
-794601  104  -2.70     312300 -312301 -311302          imp:n=1 u=7946  $ Lower grid plate pin
+794601  105  -7.857     312300 -312301 -311302          imp:n=1 u=7946  $ Lower grid plate pin
 794602  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=7946  $ Water around grid plate pin 
-794603  104  -2.70     312301 -312302 -311305          imp:n=1 u=7946  $ Bottom casing 
+794603  105  -7.857     312301 -312302 -311305          imp:n=1 u=7946  $ Bottom casing 
 794604  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=7946  $ Water around fuel element
 794605  106  -1.56     312302 -312303 -311304          imp:n=1 u=7946  $ Lower graphite slug 
-794606  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=7946  $ Fuel cladding
+794606  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=7946  $ Fuel cladding
 794607  108   0.042234 312303 -312304 -311301          imp:n=1 u=7946  $ Zirc pin 
-794608 79461 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=7946 $ Fuel meat section 1
-794609 79462 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=7946 $ Fuel meat section 2
-794610 79463 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=7946 $ Fuel meat section 3
-794611 79464 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=7946 $ Fuel meat section 4
-794612 79465 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=7946 $ Fuel meat section 5
+794608 7946 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=7946 $ Fuel meat section 1
+794609 7946 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=7946 $ Fuel meat section 2
+794610 7946 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=7946 $ Fuel meat section 3
+794611 7946 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=7946 $ Fuel meat section 4
+794612 7946 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=7946 $ Fuel meat section 5
 794613  106  -1.56     312304 -312305 -311304          imp:n=1 u=7946  $ Upper graphite spacer
-794614  104  -2.70     312305 -312306 -311305          imp:n=1 u=7946  $ Al top cap 
-794615  104  -2.70     312306 -312307 -311303          imp:n=1 u=7946  $ Tri-flute 
+794614  105  -7.857     312305 -312306 -311305          imp:n=1 u=7946  $ SS top cap 
+794615  105  -7.857     312306 -312307 -311303          imp:n=1 u=7946  $ Tri-flute 
 794616  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=7946  $ Water around tri-flute 
-794617  104  -2.70     312307 -312308 -311302          imp:n=1 u=7946  $ Fuel tip
+794617  105  -7.857     312307 -312308 -311302          imp:n=1 u=7946  $ Fuel tip
 794618  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=7946  $ Water around fuel tip
 794619  102  -1.00     312308 -312309 -311306          imp:n=1 u=7946  $ Water above fuel element
 c
 c
 c
-c --- 3853 - Al (TOS210D130) universe ---
+c --- 3853 - SS clad (TOS210D210) universe ---
 c
-385301  104  -2.70     312300 -312301 -311302          imp:n=1 u=3853  $ Lower grid plate pin
+385301  105  -7.857     312300 -312301 -311302          imp:n=1 u=3853  $ Lower grid plate pin
 385302  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3853  $ Water around grid plate pin 
-385303  104  -2.70     312301 -312302 -311305          imp:n=1 u=3853  $ Bottom casing 
+385303  105  -7.857     312301 -312302 -311305          imp:n=1 u=3853  $ Bottom casing 
 385304  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3853  $ Water around fuel element
 385305  106  -1.56     312302 -312303 -311304          imp:n=1 u=3853  $ Lower graphite slug 
-385306  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3853  $ Fuel cladding
+385306  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3853  $ Fuel cladding
 385307  108   0.042234 312303 -312304 -311301          imp:n=1 u=3853  $ Zirc pin 
-385308 38531 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3853 $ Fuel meat section 1
-385309 38532 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3853 $ Fuel meat section 2
-385310 38533 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3853 $ Fuel meat section 3
-385311 38534 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3853 $ Fuel meat section 4
-385312 38535 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3853 $ Fuel meat section 5
+385308 3853 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3853 $ Fuel meat section 1
+385309 3853 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3853 $ Fuel meat section 2
+385310 3853 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3853 $ Fuel meat section 3
+385311 3853 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3853 $ Fuel meat section 4
+385312 3853 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3853 $ Fuel meat section 5
 385313  106  -1.56     312304 -312305 -311304          imp:n=1 u=3853  $ Upper graphite spacer
-385314  104  -2.70     312305 -312306 -311305          imp:n=1 u=3853  $ Al top cap 
-385315  104  -2.70     312306 -312307 -311303          imp:n=1 u=3853  $ Tri-flute 
+385314  105  -7.857     312305 -312306 -311305          imp:n=1 u=3853  $ SS top cap 
+385315  105  -7.857     312306 -312307 -311303          imp:n=1 u=3853  $ Tri-flute 
 385316  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3853  $ Water around tri-flute 
-385317  104  -2.70     312307 -312308 -311302          imp:n=1 u=3853  $ Fuel tip
+385317  105  -7.857     312307 -312308 -311302          imp:n=1 u=3853  $ Fuel tip
 385318  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3853  $ Water around fuel tip
 385319  102  -1.00     312308 -312309 -311306          imp:n=1 u=3853  $ Water above fuel element
 c
 c
 c
-c --- 3856 - Al (TOS210D130) universe ---
+c --- 3856 - SS clad (TOS210D210) universe ---
 c
-385601  104  -2.70     312300 -312301 -311302          imp:n=1 u=3856  $ Lower grid plate pin
+385601  105  -7.857     312300 -312301 -311302          imp:n=1 u=3856  $ Lower grid plate pin
 385602  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3856  $ Water around grid plate pin 
-385603  104  -2.70     312301 -312302 -311305          imp:n=1 u=3856  $ Bottom casing 
+385603  105  -7.857     312301 -312302 -311305          imp:n=1 u=3856  $ Bottom casing 
 385604  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3856  $ Water around fuel element
 385605  106  -1.56     312302 -312303 -311304          imp:n=1 u=3856  $ Lower graphite slug 
-385606  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3856  $ Fuel cladding
+385606  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3856  $ Fuel cladding
 385607  108   0.042234 312303 -312304 -311301          imp:n=1 u=3856  $ Zirc pin 
-385608 38561 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3856 $ Fuel meat section 1
-385609 38562 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3856 $ Fuel meat section 2
-385610 38563 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3856 $ Fuel meat section 3
-385611 38564 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3856 $ Fuel meat section 4
-385612 38565 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3856 $ Fuel meat section 5
+385608 3856 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3856 $ Fuel meat section 1
+385609 3856 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3856 $ Fuel meat section 2
+385610 3856 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3856 $ Fuel meat section 3
+385611 3856 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3856 $ Fuel meat section 4
+385612 3856 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3856 $ Fuel meat section 5
 385613  106  -1.56     312304 -312305 -311304          imp:n=1 u=3856  $ Upper graphite spacer
-385614  104  -2.70     312305 -312306 -311305          imp:n=1 u=3856  $ Al top cap 
-385615  104  -2.70     312306 -312307 -311303          imp:n=1 u=3856  $ Tri-flute 
+385614  105  -7.857     312305 -312306 -311305          imp:n=1 u=3856  $ SS top cap 
+385615  105  -7.857     312306 -312307 -311303          imp:n=1 u=3856  $ Tri-flute 
 385616  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3856  $ Water around tri-flute 
-385617  104  -2.70     312307 -312308 -311302          imp:n=1 u=3856  $ Fuel tip
+385617  105  -7.857     312307 -312308 -311302          imp:n=1 u=3856  $ Fuel tip
 385618  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3856  $ Water around fuel tip
 385619  102  -1.00     312308 -312309 -311306          imp:n=1 u=3856  $ Water above fuel element
 c
 c
 c
-c --- 4134 - Al (TOS210D130) universe ---
+c --- 4134 - SS clad (TOS210D210) universe ---
 c
-413401  104  -2.70     312300 -312301 -311302          imp:n=1 u=4134  $ Lower grid plate pin
+413401  105  -7.857     312300 -312301 -311302          imp:n=1 u=4134  $ Lower grid plate pin
 413402  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4134  $ Water around grid plate pin 
-413403  104  -2.70     312301 -312302 -311305          imp:n=1 u=4134  $ Bottom casing 
+413403  105  -7.857     312301 -312302 -311305          imp:n=1 u=4134  $ Bottom casing 
 413404  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4134  $ Water around fuel element
 413405  106  -1.56     312302 -312303 -311304          imp:n=1 u=4134  $ Lower graphite slug 
-413406  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4134  $ Fuel cladding
+413406  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4134  $ Fuel cladding
 413407  108   0.042234 312303 -312304 -311301          imp:n=1 u=4134  $ Zirc pin 
-413408 41341 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4134 $ Fuel meat section 1
-413409 41342 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4134 $ Fuel meat section 2
-413410 41343 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4134 $ Fuel meat section 3
-413411 41344 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4134 $ Fuel meat section 4
-413412 41345 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4134 $ Fuel meat section 5
+413408 4134 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4134 $ Fuel meat section 1
+413409 4134 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4134 $ Fuel meat section 2
+413410 4134 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4134 $ Fuel meat section 3
+413411 4134 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4134 $ Fuel meat section 4
+413412 4134 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4134 $ Fuel meat section 5
 413413  106  -1.56     312304 -312305 -311304          imp:n=1 u=4134  $ Upper graphite spacer
-413414  104  -2.70     312305 -312306 -311305          imp:n=1 u=4134  $ Al top cap 
-413415  104  -2.70     312306 -312307 -311303          imp:n=1 u=4134  $ Tri-flute 
+413414  105  -7.857     312305 -312306 -311305          imp:n=1 u=4134  $ SS top cap 
+413415  105  -7.857     312306 -312307 -311303          imp:n=1 u=4134  $ Tri-flute 
 413416  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4134  $ Water around tri-flute 
-413417  104  -2.70     312307 -312308 -311302          imp:n=1 u=4134  $ Fuel tip
+413417  105  -7.857     312307 -312308 -311302          imp:n=1 u=4134  $ Fuel tip
 413418  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4134  $ Water around fuel tip
 413419  102  -1.00     312308 -312309 -311306          imp:n=1 u=4134  $ Water above fuel element
 c
 c
 c
-c --- 4133 - Al (TOS210D130) universe ---
+c --- 4133 - SS clad (TOS210D210) universe ---
 c
-413301  104  -2.70     312300 -312301 -311302          imp:n=1 u=4133  $ Lower grid plate pin
+413301  105  -7.857     312300 -312301 -311302          imp:n=1 u=4133  $ Lower grid plate pin
 413302  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4133  $ Water around grid plate pin 
-413303  104  -2.70     312301 -312302 -311305          imp:n=1 u=4133  $ Bottom casing 
+413303  105  -7.857     312301 -312302 -311305          imp:n=1 u=4133  $ Bottom casing 
 413304  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4133  $ Water around fuel element
 413305  106  -1.56     312302 -312303 -311304          imp:n=1 u=4133  $ Lower graphite slug 
-413306  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4133  $ Fuel cladding
+413306  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4133  $ Fuel cladding
 413307  108   0.042234 312303 -312304 -311301          imp:n=1 u=4133  $ Zirc pin 
-413308 41331 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4133 $ Fuel meat section 1
-413309 41332 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4133 $ Fuel meat section 2
-413310 41333 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4133 $ Fuel meat section 3
-413311 41334 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4133 $ Fuel meat section 4
-413312 41335 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4133 $ Fuel meat section 5
+413308 4133 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4133 $ Fuel meat section 1
+413309 4133 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4133 $ Fuel meat section 2
+413310 4133 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4133 $ Fuel meat section 3
+413311 4133 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4133 $ Fuel meat section 4
+413312 4133 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4133 $ Fuel meat section 5
 413313  106  -1.56     312304 -312305 -311304          imp:n=1 u=4133  $ Upper graphite spacer
-413314  104  -2.70     312305 -312306 -311305          imp:n=1 u=4133  $ Al top cap 
-413315  104  -2.70     312306 -312307 -311303          imp:n=1 u=4133  $ Tri-flute 
+413314  105  -7.857     312305 -312306 -311305          imp:n=1 u=4133  $ SS top cap 
+413315  105  -7.857     312306 -312307 -311303          imp:n=1 u=4133  $ Tri-flute 
 413316  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4133  $ Water around tri-flute 
-413317  104  -2.70     312307 -312308 -311302          imp:n=1 u=4133  $ Fuel tip
+413317  105  -7.857     312307 -312308 -311302          imp:n=1 u=4133  $ Fuel tip
 413318  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4133  $ Water around fuel tip
 413319  102  -1.00     312308 -312309 -311306          imp:n=1 u=4133  $ Water above fuel element
 c
 c
 c
-c --- 4085 - Al (TOS210D130) universe ---
+c --- 4085 - SS clad (TOS210D210) universe ---
 c
-408501  104  -2.70     312300 -312301 -311302          imp:n=1 u=4085  $ Lower grid plate pin
+408501  105  -7.857     312300 -312301 -311302          imp:n=1 u=4085  $ Lower grid plate pin
 408502  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4085  $ Water around grid plate pin 
-408503  104  -2.70     312301 -312302 -311305          imp:n=1 u=4085  $ Bottom casing 
+408503  105  -7.857     312301 -312302 -311305          imp:n=1 u=4085  $ Bottom casing 
 408504  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4085  $ Water around fuel element
 408505  106  -1.56     312302 -312303 -311304          imp:n=1 u=4085  $ Lower graphite slug 
-408506  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4085  $ Fuel cladding
+408506  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4085  $ Fuel cladding
 408507  108   0.042234 312303 -312304 -311301          imp:n=1 u=4085  $ Zirc pin 
-408508 40851 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4085 $ Fuel meat section 1
-408509 40852 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4085 $ Fuel meat section 2
-408510 40853 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4085 $ Fuel meat section 3
-408511 40854 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4085 $ Fuel meat section 4
-408512 40855 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4085 $ Fuel meat section 5
+408508 4085 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4085 $ Fuel meat section 1
+408509 4085 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4085 $ Fuel meat section 2
+408510 4085 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4085 $ Fuel meat section 3
+408511 4085 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4085 $ Fuel meat section 4
+408512 4085 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4085 $ Fuel meat section 5
 408513  106  -1.56     312304 -312305 -311304          imp:n=1 u=4085  $ Upper graphite spacer
-408514  104  -2.70     312305 -312306 -311305          imp:n=1 u=4085  $ Al top cap 
-408515  104  -2.70     312306 -312307 -311303          imp:n=1 u=4085  $ Tri-flute 
+408514  105  -7.857     312305 -312306 -311305          imp:n=1 u=4085  $ SS top cap 
+408515  105  -7.857     312306 -312307 -311303          imp:n=1 u=4085  $ Tri-flute 
 408516  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4085  $ Water around tri-flute 
-408517  104  -2.70     312307 -312308 -311302          imp:n=1 u=4085  $ Fuel tip
+408517  105  -7.857     312307 -312308 -311302          imp:n=1 u=4085  $ Fuel tip
 408518  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4085  $ Water around fuel tip
 408519  102  -1.00     312308 -312309 -311306          imp:n=1 u=4085  $ Water above fuel element
 c
 c
 c
-c --- 4110 - Al (TOS210D130) universe ---
+c --- 4110 - SS clad (TOS210D210) universe ---
 c
-411001  104  -2.70     312300 -312301 -311302          imp:n=1 u=4110  $ Lower grid plate pin
+411001  105  -7.857     312300 -312301 -311302          imp:n=1 u=4110  $ Lower grid plate pin
 411002  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4110  $ Water around grid plate pin 
-411003  104  -2.70     312301 -312302 -311305          imp:n=1 u=4110  $ Bottom casing 
+411003  105  -7.857     312301 -312302 -311305          imp:n=1 u=4110  $ Bottom casing 
 411004  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4110  $ Water around fuel element
 411005  106  -1.56     312302 -312303 -311304          imp:n=1 u=4110  $ Lower graphite slug 
-411006  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4110  $ Fuel cladding
+411006  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4110  $ Fuel cladding
 411007  108   0.042234 312303 -312304 -311301          imp:n=1 u=4110  $ Zirc pin 
-411008 41101 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4110 $ Fuel meat section 1
-411009 41102 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4110 $ Fuel meat section 2
-411010 41103 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4110 $ Fuel meat section 3
-411011 41104 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4110 $ Fuel meat section 4
-411012 41105 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4110 $ Fuel meat section 5
+411008 4110 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4110 $ Fuel meat section 1
+411009 4110 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4110 $ Fuel meat section 2
+411010 4110 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4110 $ Fuel meat section 3
+411011 4110 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4110 $ Fuel meat section 4
+411012 4110 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4110 $ Fuel meat section 5
 411013  106  -1.56     312304 -312305 -311304          imp:n=1 u=4110  $ Upper graphite spacer
-411014  104  -2.70     312305 -312306 -311305          imp:n=1 u=4110  $ Al top cap 
-411015  104  -2.70     312306 -312307 -311303          imp:n=1 u=4110  $ Tri-flute 
+411014  105  -7.857     312305 -312306 -311305          imp:n=1 u=4110  $ SS top cap 
+411015  105  -7.857     312306 -312307 -311303          imp:n=1 u=4110  $ Tri-flute 
 411016  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4110  $ Water around tri-flute 
-411017  104  -2.70     312307 -312308 -311302          imp:n=1 u=4110  $ Fuel tip
+411017  105  -7.857     312307 -312308 -311302          imp:n=1 u=4110  $ Fuel tip
 411018  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4110  $ Water around fuel tip
 411019  102  -1.00     312308 -312309 -311306          imp:n=1 u=4110  $ Water above fuel element
 c
 c
 c
-c --- 3677 - Al (TOS210D130) universe ---
+c --- 3677 - SS clad (TOS210D210) universe ---
 c
-367701  104  -2.70     312300 -312301 -311302          imp:n=1 u=3677  $ Lower grid plate pin
+367701  105  -7.857     312300 -312301 -311302          imp:n=1 u=3677  $ Lower grid plate pin
 367702  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3677  $ Water around grid plate pin 
-367703  104  -2.70     312301 -312302 -311305          imp:n=1 u=3677  $ Bottom casing 
+367703  105  -7.857     312301 -312302 -311305          imp:n=1 u=3677  $ Bottom casing 
 367704  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3677  $ Water around fuel element
 367705  106  -1.56     312302 -312303 -311304          imp:n=1 u=3677  $ Lower graphite slug 
-367706  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3677  $ Fuel cladding
+367706  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3677  $ Fuel cladding
 367707  108   0.042234 312303 -312304 -311301          imp:n=1 u=3677  $ Zirc pin 
-367708 36771 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3677 $ Fuel meat section 1
-367709 36772 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3677 $ Fuel meat section 2
-367710 36773 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3677 $ Fuel meat section 3
-367711 36774 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3677 $ Fuel meat section 4
-367712 36775 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3677 $ Fuel meat section 5
+367708 3677 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3677 $ Fuel meat section 1
+367709 3677 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3677 $ Fuel meat section 2
+367710 3677 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3677 $ Fuel meat section 3
+367711 3677 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3677 $ Fuel meat section 4
+367712 3677 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3677 $ Fuel meat section 5
 367713  106  -1.56     312304 -312305 -311304          imp:n=1 u=3677  $ Upper graphite spacer
-367714  104  -2.70     312305 -312306 -311305          imp:n=1 u=3677  $ Al top cap 
-367715  104  -2.70     312306 -312307 -311303          imp:n=1 u=3677  $ Tri-flute 
+367714  105  -7.857     312305 -312306 -311305          imp:n=1 u=3677  $ SS top cap 
+367715  105  -7.857     312306 -312307 -311303          imp:n=1 u=3677  $ Tri-flute 
 367716  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3677  $ Water around tri-flute 
-367717  104  -2.70     312307 -312308 -311302          imp:n=1 u=3677  $ Fuel tip
+367717  105  -7.857     312307 -312308 -311302          imp:n=1 u=3677  $ Fuel tip
 367718  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3677  $ Water around fuel tip
 367719  102  -1.00     312308 -312309 -311306          imp:n=1 u=3677  $ Water above fuel element
 c
 c
 c
-c --- 4131 - Al (TOS210D130) universe ---
+c --- 4131 - SS clad (TOS210D210) universe ---
 c
-413101  104  -2.70     312300 -312301 -311302          imp:n=1 u=4131  $ Lower grid plate pin
+413101  105  -7.857     312300 -312301 -311302          imp:n=1 u=4131  $ Lower grid plate pin
 413102  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4131  $ Water around grid plate pin 
-413103  104  -2.70     312301 -312302 -311305          imp:n=1 u=4131  $ Bottom casing 
+413103  105  -7.857     312301 -312302 -311305          imp:n=1 u=4131  $ Bottom casing 
 413104  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4131  $ Water around fuel element
 413105  106  -1.56     312302 -312303 -311304          imp:n=1 u=4131  $ Lower graphite slug 
-413106  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4131  $ Fuel cladding
+413106  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4131  $ Fuel cladding
 413107  108   0.042234 312303 -312304 -311301          imp:n=1 u=4131  $ Zirc pin 
-413108 41311 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4131 $ Fuel meat section 1
-413109 41312 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4131 $ Fuel meat section 2
-413110 41313 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4131 $ Fuel meat section 3
-413111 41314 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4131 $ Fuel meat section 4
-413112 41315 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4131 $ Fuel meat section 5
+413108 4131 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4131 $ Fuel meat section 1
+413109 4131 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4131 $ Fuel meat section 2
+413110 4131 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4131 $ Fuel meat section 3
+413111 4131 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4131 $ Fuel meat section 4
+413112 4131 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4131 $ Fuel meat section 5
 413113  106  -1.56     312304 -312305 -311304          imp:n=1 u=4131  $ Upper graphite spacer
-413114  104  -2.70     312305 -312306 -311305          imp:n=1 u=4131  $ Al top cap 
-413115  104  -2.70     312306 -312307 -311303          imp:n=1 u=4131  $ Tri-flute 
+413114  105  -7.857     312305 -312306 -311305          imp:n=1 u=4131  $ SS top cap 
+413115  105  -7.857     312306 -312307 -311303          imp:n=1 u=4131  $ Tri-flute 
 413116  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4131  $ Water around tri-flute 
-413117  104  -2.70     312307 -312308 -311302          imp:n=1 u=4131  $ Fuel tip
+413117  105  -7.857     312307 -312308 -311302          imp:n=1 u=4131  $ Fuel tip
 413118  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4131  $ Water around fuel tip
 413119  102  -1.00     312308 -312309 -311306          imp:n=1 u=4131  $ Water above fuel element
 c
 c
 c
-c --- 4065 - Al (TOS210D130) universe ---
+c --- 4065 - SS clad (TOS210D210) universe ---
 c
-406501  104  -2.70     312300 -312301 -311302          imp:n=1 u=4065  $ Lower grid plate pin
+406501  105  -7.857     312300 -312301 -311302          imp:n=1 u=4065  $ Lower grid plate pin
 406502  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4065  $ Water around grid plate pin 
-406503  104  -2.70     312301 -312302 -311305          imp:n=1 u=4065  $ Bottom casing 
+406503  105  -7.857     312301 -312302 -311305          imp:n=1 u=4065  $ Bottom casing 
 406504  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4065  $ Water around fuel element
 406505  106  -1.56     312302 -312303 -311304          imp:n=1 u=4065  $ Lower graphite slug 
-406506  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4065  $ Fuel cladding
+406506  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4065  $ Fuel cladding
 406507  108   0.042234 312303 -312304 -311301          imp:n=1 u=4065  $ Zirc pin 
-406508 40651 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4065 $ Fuel meat section 1
-406509 40652 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4065 $ Fuel meat section 2
-406510 40653 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4065 $ Fuel meat section 3
-406511 40654 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4065 $ Fuel meat section 4
-406512 40655 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4065 $ Fuel meat section 5
+406508 4065 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4065 $ Fuel meat section 1
+406509 4065 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4065 $ Fuel meat section 2
+406510 4065 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4065 $ Fuel meat section 3
+406511 4065 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4065 $ Fuel meat section 4
+406512 4065 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4065 $ Fuel meat section 5
 406513  106  -1.56     312304 -312305 -311304          imp:n=1 u=4065  $ Upper graphite spacer
-406514  104  -2.70     312305 -312306 -311305          imp:n=1 u=4065  $ Al top cap 
-406515  104  -2.70     312306 -312307 -311303          imp:n=1 u=4065  $ Tri-flute 
+406514  105  -7.857     312305 -312306 -311305          imp:n=1 u=4065  $ SS top cap 
+406515  105  -7.857     312306 -312307 -311303          imp:n=1 u=4065  $ Tri-flute 
 406516  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4065  $ Water around tri-flute 
-406517  104  -2.70     312307 -312308 -311302          imp:n=1 u=4065  $ Fuel tip
+406517  105  -7.857     312307 -312308 -311302          imp:n=1 u=4065  $ Fuel tip
 406518  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4065  $ Water around fuel tip
 406519  102  -1.00     312308 -312309 -311306          imp:n=1 u=4065  $ Water above fuel element
 c
 c
 c
-c --- 3851 - Al (TOS210D130) universe ---
+c --- 3851 - SS clad (TOS210D210) universe ---
 c
-385101  104  -2.70     312300 -312301 -311302          imp:n=1 u=3851  $ Lower grid plate pin
+385101  105  -7.857     312300 -312301 -311302          imp:n=1 u=3851  $ Lower grid plate pin
 385102  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3851  $ Water around grid plate pin 
-385103  104  -2.70     312301 -312302 -311305          imp:n=1 u=3851  $ Bottom casing 
+385103  105  -7.857     312301 -312302 -311305          imp:n=1 u=3851  $ Bottom casing 
 385104  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3851  $ Water around fuel element
 385105  106  -1.56     312302 -312303 -311304          imp:n=1 u=3851  $ Lower graphite slug 
-385106  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3851  $ Fuel cladding
+385106  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3851  $ Fuel cladding
 385107  108   0.042234 312303 -312304 -311301          imp:n=1 u=3851  $ Zirc pin 
-385108 38511 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3851 $ Fuel meat section 1
-385109 38512 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3851 $ Fuel meat section 2
-385110 38513 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3851 $ Fuel meat section 3
-385111 38514 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3851 $ Fuel meat section 4
-385112 38515 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3851 $ Fuel meat section 5
+385108 3851 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3851 $ Fuel meat section 1
+385109 3851 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3851 $ Fuel meat section 2
+385110 3851 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3851 $ Fuel meat section 3
+385111 3851 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3851 $ Fuel meat section 4
+385112 3851 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3851 $ Fuel meat section 5
 385113  106  -1.56     312304 -312305 -311304          imp:n=1 u=3851  $ Upper graphite spacer
-385114  104  -2.70     312305 -312306 -311305          imp:n=1 u=3851  $ Al top cap 
-385115  104  -2.70     312306 -312307 -311303          imp:n=1 u=3851  $ Tri-flute 
+385114  105  -7.857     312305 -312306 -311305          imp:n=1 u=3851  $ SS top cap 
+385115  105  -7.857     312306 -312307 -311303          imp:n=1 u=3851  $ Tri-flute 
 385116  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3851  $ Water around tri-flute 
-385117  104  -2.70     312307 -312308 -311302          imp:n=1 u=3851  $ Fuel tip
+385117  105  -7.857     312307 -312308 -311302          imp:n=1 u=3851  $ Fuel tip
 385118  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3851  $ Water around fuel tip
 385119  102  -1.00     312308 -312309 -311306          imp:n=1 u=3851  $ Water above fuel element
 c
 c
 c
-c --- 4055 - Al (TOS210D130) universe ---
+c --- 4055 - SS clad (TOS210D210) universe ---
 c
-405501  104  -2.70     312300 -312301 -311302          imp:n=1 u=4055  $ Lower grid plate pin
+405501  105  -7.857     312300 -312301 -311302          imp:n=1 u=4055  $ Lower grid plate pin
 405502  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4055  $ Water around grid plate pin 
-405503  104  -2.70     312301 -312302 -311305          imp:n=1 u=4055  $ Bottom casing 
+405503  105  -7.857     312301 -312302 -311305          imp:n=1 u=4055  $ Bottom casing 
 405504  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4055  $ Water around fuel element
 405505  106  -1.56     312302 -312303 -311304          imp:n=1 u=4055  $ Lower graphite slug 
-405506  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4055  $ Fuel cladding
+405506  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4055  $ Fuel cladding
 405507  108   0.042234 312303 -312304 -311301          imp:n=1 u=4055  $ Zirc pin 
-405508 40551 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4055 $ Fuel meat section 1
-405509 40552 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4055 $ Fuel meat section 2
-405510 40553 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4055 $ Fuel meat section 3
-405511 40554 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4055 $ Fuel meat section 4
-405512 40555 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4055 $ Fuel meat section 5
+405508 4055 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4055 $ Fuel meat section 1
+405509 4055 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4055 $ Fuel meat section 2
+405510 4055 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4055 $ Fuel meat section 3
+405511 4055 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4055 $ Fuel meat section 4
+405512 4055 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4055 $ Fuel meat section 5
 405513  106  -1.56     312304 -312305 -311304          imp:n=1 u=4055  $ Upper graphite spacer
-405514  104  -2.70     312305 -312306 -311305          imp:n=1 u=4055  $ Al top cap 
-405515  104  -2.70     312306 -312307 -311303          imp:n=1 u=4055  $ Tri-flute 
+405514  105  -7.857     312305 -312306 -311305          imp:n=1 u=4055  $ SS top cap 
+405515  105  -7.857     312306 -312307 -311303          imp:n=1 u=4055  $ Tri-flute 
 405516  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4055  $ Water around tri-flute 
-405517  104  -2.70     312307 -312308 -311302          imp:n=1 u=4055  $ Fuel tip
+405517  105  -7.857     312307 -312308 -311302          imp:n=1 u=4055  $ Fuel tip
 405518  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4055  $ Water around fuel tip
 403862  102  -1.00     312308 -312309 -311306          imp:n=1 u=4055  $ Water above fuel element
 c
 c
 c
-c --- 3862 - Al (TOS210D130) universe ---
+c --- 3862 - SS clad (TOS210D210) universe ---
 c
-386201  104  -2.70     312300 -312301 -311302          imp:n=1 u=3862  $ Lower grid plate pin
+386201  105  -7.857     312300 -312301 -311302          imp:n=1 u=3862  $ Lower grid plate pin
 386202  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3862  $ Water around grid plate pin 
-386203  104  -2.70     312301 -312302 -311305          imp:n=1 u=3862  $ Bottom casing 
+386203  105  -7.857     312301 -312302 -311305          imp:n=1 u=3862  $ Bottom casing 
 386204  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3862  $ Water around fuel element
 386205  106  -1.56     312302 -312303 -311304          imp:n=1 u=3862  $ Lower graphite slug 
-386206  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3862  $ Fuel cladding
+386206  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3862  $ Fuel cladding
 386207  108   0.042234 312303 -312304 -311301          imp:n=1 u=3862  $ Zirc pin 
-386208 38621 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3862 $ Fuel meat section 1
-386209 38622 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3862 $ Fuel meat section 2
-386210 38623 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3862 $ Fuel meat section 3
-386211 38624 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3862 $ Fuel meat section 4
-386212 38625 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3862 $ Fuel meat section 5
+386208 3862 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3862 $ Fuel meat section 1
+386209 3862 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3862 $ Fuel meat section 2
+386210 3862 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3862 $ Fuel meat section 3
+386211 3862 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3862 $ Fuel meat section 4
+386212 3862 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3862 $ Fuel meat section 5
 386213  106  -1.56     312304 -312305 -311304          imp:n=1 u=3862  $ Upper graphite spacer
-386214  104  -2.70     312305 -312306 -311305          imp:n=1 u=3862  $ Al top cap 
-386215  104  -2.70     312306 -312307 -311303          imp:n=1 u=3862  $ Tri-flute 
+386214  105  -7.857     312305 -312306 -311305          imp:n=1 u=3862  $ SS top cap 
+386215  105  -7.857     312306 -312307 -311303          imp:n=1 u=3862  $ Tri-flute 
 386216  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3862  $ Water around tri-flute 
-386217  104  -2.70     312307 -312308 -311302          imp:n=1 u=3862  $ Fuel tip
+386217  105  -7.857     312307 -312308 -311302          imp:n=1 u=3862  $ Fuel tip
 386218  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3862  $ Water around fuel tip
 386219  102  -1.00     312308 -312309 -311306          imp:n=1 u=3862  $ Water above fuel element
 c
 c
 c
-c --- 4064 - Al (TOS210D130) universe ---
+c --- 4064 - SS clad (TOS210D210) universe ---
 c
-406401  104  -2.70     312300 -312301 -311302          imp:n=1 u=4064  $ Lower grid plate pin
+406401  105  -7.857     312300 -312301 -311302          imp:n=1 u=4064  $ Lower grid plate pin
 406402  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4064  $ Water around grid plate pin 
-406403  104  -2.70     312301 -312302 -311305          imp:n=1 u=4064  $ Bottom casing 
+406403  105  -7.857     312301 -312302 -311305          imp:n=1 u=4064  $ Bottom casing 
 406404  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4064  $ Water around fuel element
 406405  106  -1.56     312302 -312303 -311304          imp:n=1 u=4064  $ Lower graphite slug 
-406406  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4064  $ Fuel cladding
+406406  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4064  $ Fuel cladding
 406407  108   0.042234 312303 -312304 -311301          imp:n=1 u=4064  $ Zirc pin 
-406408 40641 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4064 $ Fuel meat section 1
-406409 40642 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4064 $ Fuel meat section 2
-406410 40643 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4064 $ Fuel meat section 3
-406411 40644 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4064 $ Fuel meat section 4
-406412 40645 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4064 $ Fuel meat section 5
+406408 4064 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4064 $ Fuel meat section 1
+406409 4064 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4064 $ Fuel meat section 2
+406410 4064 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4064 $ Fuel meat section 3
+406411 4064 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4064 $ Fuel meat section 4
+406412 4064 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4064 $ Fuel meat section 5
 406413  106  -1.56     312304 -312305 -311304          imp:n=1 u=4064  $ Upper graphite spacer
-406414  104  -2.70     312305 -312306 -311305          imp:n=1 u=4064  $ Al top cap 
-406415  104  -2.70     312306 -312307 -311303          imp:n=1 u=4064  $ Tri-flute 
+406414  105  -7.857     312305 -312306 -311305          imp:n=1 u=4064  $ SS top cap 
+406415  105  -7.857     312306 -312307 -311303          imp:n=1 u=4064  $ Tri-flute 
 406416  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4064  $ Water around tri-flute 
-406417  104  -2.70     312307 -312308 -311302          imp:n=1 u=4064  $ Fuel tip
+406417  105  -7.857     312307 -312308 -311302          imp:n=1 u=4064  $ Fuel tip
 406418  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4064  $ Water around fuel tip
 406419  102  -1.00     312308 -312309 -311306          imp:n=1 u=4064  $ Water above fuel element
 c
 c
 c
-c --- 3858 - Al (TOS210D130) universe ---
+c --- 3858 - SS clad (TOS210D210) universe ---
 c
-385801  104  -2.70     312300 -312301 -311302          imp:n=1 u=3858  $ Lower grid plate pin
+385801  105  -7.857     312300 -312301 -311302          imp:n=1 u=3858  $ Lower grid plate pin
 385802  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3858  $ Water around grid plate pin 
-385803  104  -2.70     312301 -312302 -311305          imp:n=1 u=3858  $ Bottom casing 
+385803  105  -7.857     312301 -312302 -311305          imp:n=1 u=3858  $ Bottom casing 
 385804  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3858  $ Water around fuel element
 385805  106  -1.56     312302 -312303 -311304          imp:n=1 u=3858  $ Lower graphite slug 
-385806  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3858  $ Fuel cladding
+385806  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3858  $ Fuel cladding
 385807  108   0.042234 312303 -312304 -311301          imp:n=1 u=3858  $ Zirc pin 
-385808 38581 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3858 $ Fuel meat section 1
-385809 38582 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3858 $ Fuel meat section 2
-385810 38583 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3858 $ Fuel meat section 3
-385811 38584 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3858 $ Fuel meat section 4
-385812 38585 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3858 $ Fuel meat section 5
+385808 3858 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3858 $ Fuel meat section 1
+385809 3858 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3858 $ Fuel meat section 2
+385810 3858 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3858 $ Fuel meat section 3
+385811 3858 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3858 $ Fuel meat section 4
+385812 3858 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3858 $ Fuel meat section 5
 385813  106  -1.56     312304 -312305 -311304          imp:n=1 u=3858  $ Upper graphite spacer
-385814  104  -2.70     312305 -312306 -311305          imp:n=1 u=3858  $ Al top cap 
-385815  104  -2.70     312306 -312307 -311303          imp:n=1 u=3858  $ Tri-flute 
+385814  105  -7.857     312305 -312306 -311305          imp:n=1 u=3858  $ SS top cap 
+385815  105  -7.857     312306 -312307 -311303          imp:n=1 u=3858  $ Tri-flute 
 385816  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3858  $ Water around tri-flute 
-385817  104  -2.70     312307 -312308 -311302          imp:n=1 u=3858  $ Fuel tip
+385817  105  -7.857     312307 -312308 -311302          imp:n=1 u=3858  $ Fuel tip
 385818  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3858  $ Water around fuel tip
 385819  102  -1.00     312308 -312309 -311306          imp:n=1 u=3858  $ Water above fuel element
 c
 c
 c
-c --- 4053 - Al (TOS210D130) universe ---
+c --- 4053 - SS clad (TOS210D210) universe ---
 c
-405301  104  -2.70     312300 -312301 -311302          imp:n=1 u=4053  $ Lower grid plate pin
+405301  105  -7.857     312300 -312301 -311302          imp:n=1 u=4053  $ Lower grid plate pin
 405302  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4053  $ Water around grid plate pin 
-405303  104  -2.70     312301 -312302 -311305          imp:n=1 u=4053  $ Bottom casing 
+405303  105  -7.857     312301 -312302 -311305          imp:n=1 u=4053  $ Bottom casing 
 405304  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4053  $ Water around fuel element
 405305  106  -1.56     312302 -312303 -311304          imp:n=1 u=4053  $ Lower graphite slug 
-405306  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4053  $ Fuel cladding
+405306  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4053  $ Fuel cladding
 405307  108   0.042234 312303 -312304 -311301          imp:n=1 u=4053  $ Zirc pin 
-405308 40531 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4053 $ Fuel meat section 1
-405309 40532 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4053 $ Fuel meat section 2
-405310 40533 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4053 $ Fuel meat section 3
-405311 40534 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4053 $ Fuel meat section 4
-405312 40535 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4053 $ Fuel meat section 5
+405308 4053 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4053 $ Fuel meat section 1
+405309 4053 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4053 $ Fuel meat section 2
+405310 4053 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4053 $ Fuel meat section 3
+405311 4053 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4053 $ Fuel meat section 4
+405312 4053 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4053 $ Fuel meat section 5
 405313  106  -1.56     312304 -312305 -311304          imp:n=1 u=4053  $ Upper graphite spacer
-405314  104  -2.70     312305 -312306 -311305          imp:n=1 u=4053  $ Al top cap 
-405315  104  -2.70     312306 -312307 -311303          imp:n=1 u=4053  $ Tri-flute 
+405314  105  -7.857     312305 -312306 -311305          imp:n=1 u=4053  $ SS top cap 
+405315  105  -7.857     312306 -312307 -311303          imp:n=1 u=4053  $ Tri-flute 
 405316  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4053  $ Water around tri-flute 
-405317  104  -2.70     312307 -312308 -311302          imp:n=1 u=4053  $ Fuel tip
+405317  105  -7.857     312307 -312308 -311302          imp:n=1 u=4053  $ Fuel tip
 405318  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4053  $ Water around fuel tip
 405319  102  -1.00     312308 -312309 -311306          imp:n=1 u=4053  $ Water above fuel element
 c
 c
 c
-c --- 8735 - Al (TOS210D130) universe ---
+c --- 8735 - SS clad (TOS210D210) universe ---
 c
-873501  104  -2.70     312300 -312301 -311302          imp:n=1 u=8735  $ Lower grid plate pin
+873501  105  -7.857     312300 -312301 -311302          imp:n=1 u=8735  $ Lower grid plate pin
 873502  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=8735  $ Water around grid plate pin 
-873503  104  -2.70     312301 -312302 -311305          imp:n=1 u=8735  $ Bottom casing 
+873503  105  -7.857     312301 -312302 -311305          imp:n=1 u=8735  $ Bottom casing 
 873504  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=8735  $ Water around fuel element
 873505  106  -1.56     312302 -312303 -311304          imp:n=1 u=8735  $ Lower graphite slug 
-873506  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=8735  $ Fuel cladding
+873506  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=8735  $ Fuel cladding
 873507  108   0.042234 312303 -312304 -311301          imp:n=1 u=8735  $ Zirc pin 
-873508 87351 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8735 $ Fuel meat section 1
-873509 87352 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8735 $ Fuel meat section 2
-873510 87353 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8735 $ Fuel meat section 3
-873511 87354 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8735 $ Fuel meat section 4
-873512 87355 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8735 $ Fuel meat section 5
+873508 8735 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8735 $ Fuel meat section 1
+873509 8735 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8735 $ Fuel meat section 2
+873510 8735 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8735 $ Fuel meat section 3
+873511 8735 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8735 $ Fuel meat section 4
+873512 8735 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8735 $ Fuel meat section 5
 873513  106  -1.56     312304 -312305 -311304          imp:n=1 u=8735  $ Upper graphite spacer
-873514  104  -2.70     312305 -312306 -311305          imp:n=1 u=8735  $ Al top cap 
-873515  104  -2.70     312306 -312307 -311303          imp:n=1 u=8735  $ Tri-flute 
+873514  105  -7.857     312305 -312306 -311305          imp:n=1 u=8735  $ SS top cap 
+873515  105  -7.857     312306 -312307 -311303          imp:n=1 u=8735  $ Tri-flute 
 873516  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=8735  $ Water around tri-flute 
-873517  104  -2.70     312307 -312308 -311302          imp:n=1 u=8735  $ Fuel tip
+873517  105  -7.857     312307 -312308 -311302          imp:n=1 u=8735  $ Fuel tip
 873518  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=8735  $ Water around fuel tip
 873519  102  -1.00     312308 -312309 -311306          imp:n=1 u=8735  $ Water above fuel element
 c
 c
 c
-c --- 3748 - Al (TOS210D130) universe ---
+c --- 3748 - SS clad (TOS210D210) universe ---
 c
-374801  104  -2.70     312300 -312301 -311302          imp:n=1 u=3748  $ Lower grid plate pin
+374801  105  -7.857     312300 -312301 -311302          imp:n=1 u=3748  $ Lower grid plate pin
 374802  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3748  $ Water around grid plate pin 
-374803  104  -2.70     312301 -312302 -311305          imp:n=1 u=3748  $ Bottom casing 
+374803  105  -7.857     312301 -312302 -311305          imp:n=1 u=3748  $ Bottom casing 
 374804  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3748  $ Water around fuel element
 374805  106  -1.56     312302 -312303 -311304          imp:n=1 u=3748  $ Lower graphite slug 
-374806  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3748  $ Fuel cladding
+374806  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3748  $ Fuel cladding
 374807  108   0.042234 312303 -312304 -311301          imp:n=1 u=3748  $ Zirc pin 
-374808 37481 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3748 $ Fuel meat section 1
-374809 37482 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3748 $ Fuel meat section 2
-374810 37483 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3748 $ Fuel meat section 3
-374811 37484 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3748 $ Fuel meat section 4
-374812 37485 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3748 $ Fuel meat section 5
+374808 3748 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3748 $ Fuel meat section 1
+374809 3748 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3748 $ Fuel meat section 2
+374810 3748 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3748 $ Fuel meat section 3
+374811 3748 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3748 $ Fuel meat section 4
+374812 3748 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3748 $ Fuel meat section 5
 374813  106  -1.56     312304 -312305 -311304          imp:n=1 u=3748  $ Upper graphite spacer
-374814  104  -2.70     312305 -312306 -311305          imp:n=1 u=3748  $ Al top cap 
-374815  104  -2.70     312306 -312307 -311303          imp:n=1 u=3748  $ Tri-flute 
+374814  105  -7.857     312305 -312306 -311305          imp:n=1 u=3748  $ SS top cap 
+374815  105  -7.857     312306 -312307 -311303          imp:n=1 u=3748  $ Tri-flute 
 374816  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3748  $ Water around tri-flute 
-374817  104  -2.70     312307 -312308 -311302          imp:n=1 u=3748  $ Fuel tip
+374817  105  -7.857     312307 -312308 -311302          imp:n=1 u=3748  $ Fuel tip
 374818  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3748  $ Water around fuel tip
 374819  102  -1.00     312308 -312309 -311306          imp:n=1 u=3748  $ Water above fuel element
 c
 c
 c
-c --- 7945 - Al (TOS210D130) universe ---
+c --- 7945 - SS clad (TOS210D210) universe ---
 c
-794501  104  -2.70     312300 -312301 -311302          imp:n=1 u=7945  $ Lower grid plate pin
+794501  105  -7.857     312300 -312301 -311302          imp:n=1 u=7945  $ Lower grid plate pin
 794502  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=7945  $ Water around grid plate pin 
-794503  104  -2.70     312301 -312302 -311305          imp:n=1 u=7945  $ Bottom casing 
+794503  105  -7.857     312301 -312302 -311305          imp:n=1 u=7945  $ Bottom casing 
 794504  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=7945  $ Water around fuel element
 794505  106  -1.56     312302 -312303 -311304          imp:n=1 u=7945  $ Lower graphite slug 
-794506  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=7945  $ Fuel cladding
+794506  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=7945  $ Fuel cladding
 794507  108   0.042234 312303 -312304 -311301          imp:n=1 u=7945  $ Zirc pin 
-794508 79451 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=7945 $ Fuel meat section 1
-794509 79452 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=7945 $ Fuel meat section 2
-794510 79453 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=7945 $ Fuel meat section 3
-794511 79454 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=7945 $ Fuel meat section 4
-794512 79455 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=7945 $ Fuel meat section 5
+794508 7945 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=7945 $ Fuel meat section 1
+794509 7945 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=7945 $ Fuel meat section 2
+794510 7945 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=7945 $ Fuel meat section 3
+794511 7945 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=7945 $ Fuel meat section 4
+794512 7945 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=7945 $ Fuel meat section 5
 794513  106  -1.56     312304 -312305 -311304          imp:n=1 u=7945  $ Upper graphite spacer
-794514  104  -2.70     312305 -312306 -311305          imp:n=1 u=7945  $ Al top cap 
-794515  104  -2.70     312306 -312307 -311303          imp:n=1 u=7945  $ Tri-flute 
+794514  105  -7.857     312305 -312306 -311305          imp:n=1 u=7945  $ SS top cap 
+794515  105  -7.857     312306 -312307 -311303          imp:n=1 u=7945  $ Tri-flute 
 794516  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=7945  $ Water around tri-flute 
-794517  104  -2.70     312307 -312308 -311302          imp:n=1 u=7945  $ Fuel tip
+794517  105  -7.857     312307 -312308 -311302          imp:n=1 u=7945  $ Fuel tip
 794518  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=7945  $ Water around fuel tip
 794519  102  -1.00     312308 -312309 -311306          imp:n=1 u=7945  $ Water above fuel element
 c
 c
 c
-c --- 3866 - Al (TOS210D130) universe ---
+c --- 3866 - SS clad (TOS210D210) universe ---
 c
-386601  104  -2.70     312300 -312301 -311302          imp:n=1 u=3866  $ Lower grid plate pin
+386601  105  -7.857     312300 -312301 -311302          imp:n=1 u=3866  $ Lower grid plate pin
 386602  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3866  $ Water around grid plate pin 
-386603  104  -2.70     312301 -312302 -311305          imp:n=1 u=3866  $ Bottom casing 
+386603  105  -7.857     312301 -312302 -311305          imp:n=1 u=3866  $ Bottom casing 
 386604  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3866  $ Water around fuel element
 386605  106  -1.56     312302 -312303 -311304          imp:n=1 u=3866  $ Lower graphite slug 
-386606  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3866  $ Fuel cladding
+386606  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3866  $ Fuel cladding
 386607  108   0.042234 312303 -312304 -311301          imp:n=1 u=3866  $ Zirc pin 
-386608 38661 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3866 $ Fuel meat section 1
-386609 38662 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3866 $ Fuel meat section 2
-386610 38663 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3866 $ Fuel meat section 3
-386611 38664 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3866 $ Fuel meat section 4
-386612 38665 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3866 $ Fuel meat section 5
+386608 3866 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3866 $ Fuel meat section 1
+386609 3866 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3866 $ Fuel meat section 2
+386610 3866 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3866 $ Fuel meat section 3
+386611 3866 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3866 $ Fuel meat section 4
+386612 3866 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3866 $ Fuel meat section 5
 386613  106  -1.56     312304 -312305 -311304          imp:n=1 u=3866  $ Upper graphite spacer
-386614  104  -2.70     312305 -312306 -311305          imp:n=1 u=3866  $ Al top cap 
-386615  104  -2.70     312306 -312307 -311303          imp:n=1 u=3866  $ Tri-flute 
+386614  105  -7.857     312305 -312306 -311305          imp:n=1 u=3866  $ SS top cap 
+386615  105  -7.857     312306 -312307 -311303          imp:n=1 u=3866  $ Tri-flute 
 386616  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3866  $ Water around tri-flute 
-386617  104  -2.70     312307 -312308 -311302          imp:n=1 u=3866  $ Fuel tip
+386617  105  -7.857     312307 -312308 -311302          imp:n=1 u=3866  $ Fuel tip
 386618  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3866  $ Water around fuel tip
 386619  102  -1.00     312308 -312309 -311306          imp:n=1 u=3866  $ Water above fuel element
 c
 c
 c
-c --- 3852 - Al (TOS210D130) universe ---
+c --- 3852 - SS clad (TOS210D210) universe ---
 c
-385201  104  -2.70     312300 -312301 -311302          imp:n=1 u=3852  $ Lower grid plate pin
+385201  105  -7.857     312300 -312301 -311302          imp:n=1 u=3852  $ Lower grid plate pin
 385202  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3852  $ Water around grid plate pin 
-385203  104  -2.70     312301 -312302 -311305          imp:n=1 u=3852  $ Bottom casing 
+385203  105  -7.857     312301 -312302 -311305          imp:n=1 u=3852  $ Bottom casing 
 385204  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3852  $ Water around fuel element
 385205  106  -1.56     312302 -312303 -311304          imp:n=1 u=3852  $ Lower graphite slug 
-385206  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3852  $ Fuel cladding
+385206  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3852  $ Fuel cladding
 385207  108   0.042234 312303 -312304 -311301          imp:n=1 u=3852  $ Zirc pin 
-385208 38521 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3852 $ Fuel meat section 1
-385209 38522 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3852 $ Fuel meat section 2
-385210 38523 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3852 $ Fuel meat section 3
-385211 38524 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3852 $ Fuel meat section 4
-385212 38525 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3852 $ Fuel meat section 5
+385208 3852 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3852 $ Fuel meat section 1
+385209 3852 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3852 $ Fuel meat section 2
+385210 3852 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3852 $ Fuel meat section 3
+385211 3852 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3852 $ Fuel meat section 4
+385212 3852 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3852 $ Fuel meat section 5
 385213  106  -1.56     312304 -312305 -311304          imp:n=1 u=3852  $ Upper graphite spacer
-385214  104  -2.70     312305 -312306 -311305          imp:n=1 u=3852  $ Al top cap 
-385215  104  -2.70     312306 -312307 -311303          imp:n=1 u=3852  $ Tri-flute 
+385214  105  -7.857     312305 -312306 -311305          imp:n=1 u=3852  $ SS top cap 
+385215  105  -7.857     312306 -312307 -311303          imp:n=1 u=3852  $ Tri-flute 
 385216  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3852  $ Water around tri-flute 
-385217  104  -2.70     312307 -312308 -311302          imp:n=1 u=3852  $ Fuel tip
+385217  105  -7.857     312307 -312308 -311302          imp:n=1 u=3852  $ Fuel tip
 385218  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3852  $ Water around fuel tip
 385219  102  -1.00     312308 -312309 -311306          imp:n=1 u=3852  $ Water above fuel element
 c
 c
 c
-c --- 4071 - Al (TOS210D130) universe ---
+c --- 4071 - SS clad (TOS210D210) universe ---
 c
-407101  104  -2.70     312300 -312301 -311302          imp:n=1 u=4071  $ Lower grid plate pin
+407101  105  -7.857     312300 -312301 -311302          imp:n=1 u=4071  $ Lower grid plate pin
 407102  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4071  $ Water around grid plate pin 
-407103  104  -2.70     312301 -312302 -311305          imp:n=1 u=4071  $ Bottom casing 
+407103  105  -7.857     312301 -312302 -311305          imp:n=1 u=4071  $ Bottom casing 
 407104  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4071  $ Water around fuel element
 407105  106  -1.56     312302 -312303 -311304          imp:n=1 u=4071  $ Lower graphite slug 
-407106  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4071  $ Fuel cladding
+407106  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4071  $ Fuel cladding
 407107  108   0.042234 312303 -312304 -311301          imp:n=1 u=4071  $ Zirc pin 
-407108 40711 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4071 $ Fuel meat section 1
-407109 40712 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4071 $ Fuel meat section 2
-407110 40713 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4071 $ Fuel meat section 3
-407111 40714 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4071 $ Fuel meat section 4
-407112 40715 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4071 $ Fuel meat section 5
+407108 4071 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4071 $ Fuel meat section 1
+407109 4071 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4071 $ Fuel meat section 2
+407110 4071 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4071 $ Fuel meat section 3
+407111 4071 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4071 $ Fuel meat section 4
+407112 4071 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4071 $ Fuel meat section 5
 407113  106  -1.56     312304 -312305 -311304          imp:n=1 u=4071  $ Upper graphite spacer
-407114  104  -2.70     312305 -312306 -311305          imp:n=1 u=4071  $ Al top cap 
-407115  104  -2.70     312306 -312307 -311303          imp:n=1 u=4071  $ Tri-flute 
+407114  105  -7.857     312305 -312306 -311305          imp:n=1 u=4071  $ SS top cap 
+407115  105  -7.857     312306 -312307 -311303          imp:n=1 u=4071  $ Tri-flute 
 407116  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4071  $ Water around tri-flute 
-407117  104  -2.70     312307 -312308 -311302          imp:n=1 u=4071  $ Fuel tip
+407117  105  -7.857     312307 -312308 -311302          imp:n=1 u=4071  $ Fuel tip
 407118  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4071  $ Water around fuel tip
 407119  102  -1.00     312308 -312309 -311306          imp:n=1 u=4071  $ Water above fuel element
 c
 c
 c
-c --- 4094 - Al (TOS210D130) universe ---
+c --- 4094 - SS clad (TOS210D210) universe ---
 c
-409401  104  -2.70     312300 -312301 -311302          imp:n=1 u=4094  $ Lower grid plate pin
+409401  105  -7.857     312300 -312301 -311302          imp:n=1 u=4094  $ Lower grid plate pin
 409402  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4094  $ Water around grid plate pin 
-409403  104  -2.70     312301 -312302 -311305          imp:n=1 u=4094  $ Bottom casing 
+409403  105  -7.857     312301 -312302 -311305          imp:n=1 u=4094  $ Bottom casing 
 409404  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4094  $ Water around fuel element
 409405  106  -1.56     312302 -312303 -311304          imp:n=1 u=4094  $ Lower graphite slug 
-409406  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4094  $ Fuel cladding
+409406  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4094  $ Fuel cladding
 409407  108   0.042234 312303 -312304 -311301          imp:n=1 u=4094  $ Zirc pin 
-409408 40941 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4094 $ Fuel meat section 1
-409409 40942 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4094 $ Fuel meat section 2
-409410 40943 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4094 $ Fuel meat section 3
-409411 40944 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4094 $ Fuel meat section 4
-409412 40945 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4094 $ Fuel meat section 5
+409408 4094 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4094 $ Fuel meat section 1
+409409 4094 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4094 $ Fuel meat section 2
+409410 4094 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4094 $ Fuel meat section 3
+409411 4094 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4094 $ Fuel meat section 4
+409412 4094 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4094 $ Fuel meat section 5
 409413  106  -1.56     312304 -312305 -311304          imp:n=1 u=4094  $ Upper graphite spacer
-409414  104  -2.70     312305 -312306 -311305          imp:n=1 u=4094  $ Al top cap 
-409415  104  -2.70     312306 -312307 -311303          imp:n=1 u=4094  $ Tri-flute 
+409414  105  -7.857     312305 -312306 -311305          imp:n=1 u=4094  $ SS top cap 
+409415  105  -7.857     312306 -312307 -311303          imp:n=1 u=4094  $ Tri-flute 
 409416  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4094  $ Water around tri-flute 
-409417  104  -2.70     312307 -312308 -311302          imp:n=1 u=4094  $ Fuel tip
+409417  105  -7.857     312307 -312308 -311302          imp:n=1 u=4094  $ Fuel tip
 409418  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4094  $ Water around fuel tip
 409419  102  -1.00     312308 -312309 -311306          imp:n=1 u=4094  $ Water above fuel element
 c
 c
 c
-c --- 4129 - Al (TOS210D130) universe ---
+c --- 4129 - SS clad (TOS210D210) universe ---
 c
-412901  104  -2.70     312300 -312301 -311302          imp:n=1 u=4129  $ Lower grid plate pin
+412901  105  -7.857     312300 -312301 -311302          imp:n=1 u=4129  $ Lower grid plate pin
 412902  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4129  $ Water around grid plate pin 
-412903  104  -2.70     312301 -312302 -311305          imp:n=1 u=4129  $ Bottom casing 
+412903  105  -7.857     312301 -312302 -311305          imp:n=1 u=4129  $ Bottom casing 
 412904  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4129  $ Water around fuel element
 412905  106  -1.56     312302 -312303 -311304          imp:n=1 u=4129  $ Lower graphite slug 
-412906  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4129  $ Fuel cladding
+412906  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4129  $ Fuel cladding
 412907  108   0.042234 312303 -312304 -311301          imp:n=1 u=4129  $ Zirc pin 
-412908 41291 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4129 $ Fuel meat section 1
-412909 41292 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4129 $ Fuel meat section 2
-412910 41293 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4129 $ Fuel meat section 3
-412911 41294 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4129 $ Fuel meat section 4
-412912 41295 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4129 $ Fuel meat section 5
+412908 4129 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=4129 $ Fuel meat section 1
+412909 4129 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=4129 $ Fuel meat section 2
+412910 4129 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=4129 $ Fuel meat section 3
+412911 4129 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=4129 $ Fuel meat section 4
+412912 4129 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=4129 $ Fuel meat section 5
 412913  106  -1.56     312304 -312305 -311304          imp:n=1 u=4129  $ Upper graphite spacer
-412914  104  -2.70     312305 -312306 -311305          imp:n=1 u=4129  $ Al top cap 
-412915  104  -2.70     312306 -312307 -311303          imp:n=1 u=4129  $ Tri-flute 
+412914  105  -7.857     312305 -312306 -311305          imp:n=1 u=4129  $ SS top cap 
+412915  105  -7.857     312306 -312307 -311303          imp:n=1 u=4129  $ Tri-flute 
 412916  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4129  $ Water around tri-flute 
-412917  104  -2.70     312307 -312308 -311302          imp:n=1 u=4129  $ Fuel tip
+412917  105  -7.857     312307 -312308 -311302          imp:n=1 u=4129  $ Fuel tip
 412918  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4129  $ Water around fuel tip
 412919  102  -1.00     312308 -312309 -311306          imp:n=1 u=4129  $ Water above fuel element
 c
 c
 c
-c --- 3874 - Al (TOS210D130) universe ---
+c --- 3874 - SS clad (TOS210D210) universe ---
 c
-387401  104  -2.70     312300 -312301 -311302          imp:n=1 u=3874  $ Lower grid plate pin
+387401  105  -7.857     312300 -312301 -311302          imp:n=1 u=3874  $ Lower grid plate pin
 387402  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3874  $ Water around grid plate pin 
-387403  104  -2.70     312301 -312302 -311305          imp:n=1 u=3874  $ Bottom casing 
+387403  105  -7.857     312301 -312302 -311305          imp:n=1 u=3874  $ Bottom casing 
 387404  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3874  $ Water around fuel element
 387405  106  -1.56     312302 -312303 -311304          imp:n=1 u=3874  $ Lower graphite slug 
-387406  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3874  $ Fuel cladding
+387406  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3874  $ Fuel cladding
 387407  108   0.042234 312303 -312304 -311301          imp:n=1 u=3874  $ Zirc pin 
-387408 38741 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3874 $ Fuel meat section 1
-387409 38742 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3874 $ Fuel meat section 2
-387410 38743 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3874 $ Fuel meat section 3
-387411 38744 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3874 $ Fuel meat section 4
-387412 38745 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3874 $ Fuel meat section 5
+387408 3874 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=3874 $ Fuel meat section 1
+387409 3874 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=3874 $ Fuel meat section 2
+387410 3874 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=3874 $ Fuel meat section 3
+387411 3874 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=3874 $ Fuel meat section 4
+387412 3874 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=3874 $ Fuel meat section 5
 387413  106  -1.56     312304 -312305 -311304          imp:n=1 u=3874  $ Upper graphite spacer
-387414  104  -2.70     312305 -312306 -311305          imp:n=1 u=3874  $ Al top cap 
-387415  104  -2.70     312306 -312307 -311303          imp:n=1 u=3874  $ Tri-flute 
+387414  105  -7.857     312305 -312306 -311305          imp:n=1 u=3874  $ SS top cap 
+387415  105  -7.857     312306 -312307 -311303          imp:n=1 u=3874  $ Tri-flute 
 387416  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3874  $ Water around tri-flute 
-387417  104  -2.70     312307 -312308 -311302          imp:n=1 u=3874  $ Fuel tip
+387417  105  -7.857     312307 -312308 -311302          imp:n=1 u=3874  $ Fuel tip
 387418  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3874  $ Water around fuel tip
 387419  102  -1.00     312308 -312309 -311306          imp:n=1 u=3874  $ Water above fuel element
 c
 c
 c
-c --- 8103 - Al (TOS210D130) universe ---
+c --- 8103 - SS clad (TOS210D210) universe ---
 c
-810301  104  -2.70     312300 -312301 -311302          imp:n=1 u=8103  $ Lower grid plate pin
+810301  105  -7.857     312300 -312301 -311302          imp:n=1 u=8103  $ Lower grid plate pin
 810302  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=8103  $ Water around grid plate pin 
-810303  104  -2.70     312301 -312302 -311305          imp:n=1 u=8103  $ Bottom casing 
+810303  105  -7.857     312301 -312302 -311305          imp:n=1 u=8103  $ Bottom casing 
 810304  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=8103  $ Water around fuel element
 810305  106  -1.56     312302 -312303 -311304          imp:n=1 u=8103  $ Lower graphite slug 
-810306  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=8103  $ Fuel cladding
+810306  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=8103  $ Fuel cladding
 810307  108   0.042234 312303 -312304 -311301          imp:n=1 u=8103  $ Zirc pin 
-810308 81031 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8103 $ Fuel meat section 1
-810309 81032 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8103 $ Fuel meat section 2
-810310 81033 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8103 $ Fuel meat section 3
-810311 81034 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8103 $ Fuel meat section 4
-810312 81035 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8103 $ Fuel meat section 5
+810308 8103 -5.66 312303 -302303  311301 -311304 vol=77.096 imp:n=1 u=8103 $ Fuel meat section 1
+810309 8103 -5.66 302303 -302306  311301 -311304 vol=77.096 imp:n=1 u=8103 $ Fuel meat section 2
+810310 8103 -5.66 302306 -302309  311301 -311304 vol=77.096 imp:n=1 u=8103 $ Fuel meat section 3
+810311 8103 -5.66 302309 -302312  311301 -311304 vol=77.096 imp:n=1 u=8103 $ Fuel meat section 4
+810312 8103 -5.66 302312 -312304  311301 -311304 vol=77.096 imp:n=1 u=8103 $ Fuel meat section 5
 810313  106  -1.56     312304 -312305 -311304          imp:n=1 u=8103  $ Upper graphite spacer
-810314  104  -2.70     312305 -312306 -311305          imp:n=1 u=8103  $ Al top cap 
-810315  104  -2.70     312306 -312307 -311303          imp:n=1 u=8103  $ Tri-flute 
+810314  105  -7.857     312305 -312306 -311305          imp:n=1 u=8103  $ SS top cap 
+810315  105  -7.857     312306 -312307 -311303          imp:n=1 u=8103  $ Tri-flute 
 810316  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=8103  $ Water around tri-flute 
-810317  104  -2.70     312307 -312308 -311302          imp:n=1 u=8103  $ Fuel tip
+810317  105  -7.857     312307 -312308 -311302          imp:n=1 u=8103  $ Fuel tip
 810318  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=8103  $ Water around fuel tip
 810319  102  -1.00     312308 -312309 -311306          imp:n=1 u=8103  $ Water above fuel element
 c
 c
 c  F RING ELEMENTS
 c
-c --- F1 - 4057 - Al (TOS210D130) universe ---
+c --- F1 - 4057 - SS clad (TOS210D210) universe ---
 c
-405701  104  -2.70     312300 -312301 -311302          imp:n=1 u=4057  $ Lower grid plate pin
+405701  105  -7.857     312300 -312301 -311302          imp:n=1 u=4057  $ Lower grid plate pin
 405702  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4057  $ Water around grid plate pin 
-405703  104  -2.70     312301 -312302 -311305          imp:n=1 u=4057  $ Bottom casing 
+405703  105  -7.857     312301 -312302 -311305          imp:n=1 u=4057  $ Bottom casing 
 405704  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4057  $ Water around fuel element
 405705  106  -1.56     312302 -312303 -311304          imp:n=1 u=4057  $ Lower graphite slug 
-405706  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4057  $ Fuel cladding
+405706  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4057  $ Fuel cladding
 405707  108   0.042234 312303 -312304 -311301          imp:n=1 u=4057  $ Zirc pin 
-405708 40571 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4057  $ Fuel meat section 1
-405709 40572 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4057  $ Fuel meat section 2
-405710 40573 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4057  $ Fuel meat section 3
-405711 40574 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4057  $ Fuel meat section 4
-405712 40575 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4057  $ Fuel meat section 5
+405708 4057 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4057  $ Fuel meat section 1
+405709 4057 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4057  $ Fuel meat section 2
+405710 4057 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4057  $ Fuel meat section 3
+405711 4057 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4057  $ Fuel meat section 4
+405712 4057 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4057  $ Fuel meat section 5
 405713  106  -1.56     312304 -312305 -311304          imp:n=1 u=4057  $ Upper graphite spacer
-405714  104  -2.70     312305 -312306 -311305          imp:n=1 u=4057  $ Al top cap 
-405715  104  -2.70     312306 -312307 -311303          imp:n=1 u=4057  $ Tri-flute 
+405714  105  -7.857     312305 -312306 -311305          imp:n=1 u=4057  $ SS top cap 
+405715  105  -7.857     312306 -312307 -311303          imp:n=1 u=4057  $ Tri-flute 
 405716  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4057  $ Water around tri-flute 
-405717  104  -2.70     312307 -312308 -311302          imp:n=1 u=4057  $ Fuel tip
+405717  105  -7.857     312307 -312308 -311302          imp:n=1 u=4057  $ Fuel tip
 405718  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4057  $ Water around fuel tip
 405719  102  -1.00     312308 -312309 -311306          imp:n=1 u=4057  $ Water above fuel element
 c
 c
 c
-c --- F2 - 4125 - Al (TOS210D130) universe ---
+c --- F2 - 4125 - SS clad (TOS210D210) universe ---
 c
-412501  104  -2.70     312300 -312301 -311302          imp:n=1 u=4125  $ Lower grid plate pin
+412501  105  -7.857     312300 -312301 -311302          imp:n=1 u=4125  $ Lower grid plate pin
 412502  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4125  $ Water around grid plate pin 
-412503  104  -2.70     312301 -312302 -311305          imp:n=1 u=4125  $ Bottom casing 
+412503  105  -7.857     312301 -312302 -311305          imp:n=1 u=4125  $ Bottom casing 
 412504  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4125  $ Water around fuel element
 412505  106  -1.56     312302 -312303 -311304          imp:n=1 u=4125  $ Lower graphite slug 
-412506  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4125  $ Fuel cladding
+412506  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4125  $ Fuel cladding
 412507  108   0.042234 312303 -312304 -311301          imp:n=1 u=4125  $ Zirc pin 
-412508 41251 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4125  $ Fuel meat section 1
-412509 41252 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4125  $ Fuel meat section 2
-412510 41253 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4125  $ Fuel meat section 3
-412511 41254 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4125  $ Fuel meat section 4
-412512 41255 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4125  $ Fuel meat section 5
+412508 4125 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4125  $ Fuel meat section 1
+412509 4125 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4125  $ Fuel meat section 2
+412510 4125 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4125  $ Fuel meat section 3
+412511 4125 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4125  $ Fuel meat section 4
+412512 4125 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4125  $ Fuel meat section 5
 412513  106  -1.56     312304 -312305 -311304          imp:n=1 u=4125  $ Upper graphite spacer
-412514  104  -2.70     312305 -312306 -311305          imp:n=1 u=4125  $ Al top cap 
-412515  104  -2.70     312306 -312307 -311303          imp:n=1 u=4125  $ Tri-flute 
+412514  105  -7.857     312305 -312306 -311305          imp:n=1 u=4125  $ SS top cap 
+412515  105  -7.857     312306 -312307 -311303          imp:n=1 u=4125  $ Tri-flute 
 412516  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4125  $ Water around tri-flute 
-412517  104  -2.70     312307 -312308 -311302          imp:n=1 u=4125  $ Fuel tip
+412517  105  -7.857     312307 -312308 -311302          imp:n=1 u=4125  $ Fuel tip
 412518  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4125  $ Water around fuel tip
 412519  102  -1.00     312308 -312309 -311306          imp:n=1 u=4125  $ Water above fuel element
 c
 c
 c
-c --- F3 - 4074 - Al (TOS210D130) universe ---
+c --- F3 - 4074 - SS clad (TOS210D210) universe ---
 c
-407401  104  -2.70     312300 -312301 -311302          imp:n=1 u=4074  $ Lower grid plate pin
+407401  105  -7.857     312300 -312301 -311302          imp:n=1 u=4074  $ Lower grid plate pin
 407402  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4074  $ Water around grid plate pin 
-407403  104  -2.70     312301 -312302 -311305          imp:n=1 u=4074  $ Bottom casing 
+407403  105  -7.857     312301 -312302 -311305          imp:n=1 u=4074  $ Bottom casing 
 407404  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4074  $ Water around fuel element
 407405  106  -1.56     312302 -312303 -311304          imp:n=1 u=4074  $ Lower graphite slug 
-407406  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4074  $ Fuel cladding
+407406  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4074  $ Fuel cladding
 407407  108   0.042234 312303 -312304 -311301          imp:n=1 u=4074  $ Zirc pin 
-407408 40741 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4074  $ Fuel meat section 1
-407409 40742 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4074  $ Fuel meat section 2
-407410 40743 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4074  $ Fuel meat section 3
-407411 40744 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4074  $ Fuel meat section 4
-407412 40745 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4074  $ Fuel meat section 5
+407408 4074 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4074  $ Fuel meat section 1
+407409 4074 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4074  $ Fuel meat section 2
+407410 4074 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4074  $ Fuel meat section 3
+407411 4074 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4074  $ Fuel meat section 4
+407412 4074 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4074  $ Fuel meat section 5
 407413  106  -1.56     312304 -312305 -311304          imp:n=1 u=4074  $ Upper graphite spacer
-407414  104  -2.70     312305 -312306 -311305          imp:n=1 u=4074  $ Al top cap 
-407415  104  -2.70     312306 -312307 -311303          imp:n=1 u=4074  $ Tri-flute 
+407414  105  -7.857     312305 -312306 -311305          imp:n=1 u=4074  $ SS top cap 
+407415  105  -7.857     312306 -312307 -311303          imp:n=1 u=4074  $ Tri-flute 
 407416  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4074  $ Water around tri-flute 
-407417  104  -2.70     312307 -312308 -311302          imp:n=1 u=4074  $ Fuel tip
+407417  105  -7.857     312307 -312308 -311302          imp:n=1 u=4074  $ Fuel tip
 407418  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4074  $ Water around fuel tip
 407419  102  -1.00     312308 -312309 -311306          imp:n=1 u=4074  $ Water above fuel element
 c
 c
 c
-c --- F4 - 4069 - Al (TOS210D130) universe ---
+c --- F4 - 4069 - SS clad (TOS210D210) universe ---
 c
-406901  104  -2.70     312300 -312301 -311302          imp:n=1 u=4069  $ Lower grid plate pin
+406901  105  -7.857     312300 -312301 -311302          imp:n=1 u=4069  $ Lower grid plate pin
 406902  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4069  $ Water around grid plate pin 
-406903  104  -2.70     312301 -312302 -311305          imp:n=1 u=4069  $ Bottom casing 
+406903  105  -7.857     312301 -312302 -311305          imp:n=1 u=4069  $ Bottom casing 
 406904  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4069  $ Water around fuel element
 406905  106  -1.56     312302 -312303 -311304          imp:n=1 u=4069  $ Lower graphite slug 
-406906  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4069  $ Fuel cladding
+406906  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4069  $ Fuel cladding
 406907  108   0.042234 312303 -312304 -311301          imp:n=1 u=4069  $ Zirc pin 
-406908 40691 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4069  $ Fuel meat section 1
-406909 40692 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4069  $ Fuel meat section 2
-406910 40693 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4069  $ Fuel meat section 3
-406911 40694 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4069  $ Fuel meat section 4
-406912 40695 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4069  $ Fuel meat section 5
+406908 4069 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4069  $ Fuel meat section 1
+406909 4069 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4069  $ Fuel meat section 2
+406910 4069 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4069  $ Fuel meat section 3
+406911 4069 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4069  $ Fuel meat section 4
+406912 4069 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4069  $ Fuel meat section 5
 406913  106  -1.56     312304 -312305 -311304          imp:n=1 u=4069  $ Upper graphite spacer
-406914  104  -2.70     312305 -312306 -311305          imp:n=1 u=4069  $ Al top cap 
-406915  104  -2.70     312306 -312307 -311303          imp:n=1 u=4069  $ Tri-flute 
+406914  105  -7.857     312305 -312306 -311305          imp:n=1 u=4069  $ SS top cap 
+406915  105  -7.857     312306 -312307 -311303          imp:n=1 u=4069  $ Tri-flute 
 406916  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4069  $ Water around tri-flute 
-406917  104  -2.70     312307 -312308 -311302          imp:n=1 u=4069  $ Fuel tip
+406917  105  -7.857     312307 -312308 -311302          imp:n=1 u=4069  $ Fuel tip
 406918  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4069  $ Water around fuel tip
 406919  102  -1.00     312308 -312309 -311306          imp:n=1 u=4069  $ Water above fuel element
 c
 c
 c
-c --- F5 - 4088 - Al (TOS210D130) universe ---
+c --- F5 - 4088 - SS clad (TOS210D210) universe ---
 c
-408801  104  -2.70     312300 -312301 -311302          imp:n=1 u=4088  $ Lower grid plate pin
+408801  105  -7.857     312300 -312301 -311302          imp:n=1 u=4088  $ Lower grid plate pin
 408802  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4088  $ Water around grid plate pin 
-408803  104  -2.70     312301 -312302 -311305          imp:n=1 u=4088  $ Bottom casing 
+408803  105  -7.857     312301 -312302 -311305          imp:n=1 u=4088  $ Bottom casing 
 408804  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4088  $ Water around fuel element
 408805  106  -1.56     312302 -312303 -311304          imp:n=1 u=4088  $ Lower graphite slug 
-408806  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4088  $ Fuel cladding
+408806  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4088  $ Fuel cladding
 408807  108   0.042234 312303 -312304 -311301          imp:n=1 u=4088  $ Zirc pin 
-408808 40881 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4088  $ Fuel meat section 1
-408809 40882 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4088  $ Fuel meat section 2
-408810 40883 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4088  $ Fuel meat section 3
-408811 40884 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4088  $ Fuel meat section 4
-408812 40885 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4088  $ Fuel meat section 5
+408808 4088 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4088  $ Fuel meat section 1
+408809 4088 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4088  $ Fuel meat section 2
+408810 4088 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4088  $ Fuel meat section 3
+408811 4088 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4088  $ Fuel meat section 4
+408812 4088 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4088  $ Fuel meat section 5
 408813  106  -1.56     312304 -312305 -311304          imp:n=1 u=4088  $ Upper graphite spacer
-408814  104  -2.70     312305 -312306 -311305          imp:n=1 u=4088  $ Al top cap 
-408815  104  -2.70     312306 -312307 -311303          imp:n=1 u=4088  $ Tri-flute 
+408814  105  -7.857     312305 -312306 -311305          imp:n=1 u=4088  $ SS top cap 
+408815  105  -7.857     312306 -312307 -311303          imp:n=1 u=4088  $ Tri-flute 
 408816  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4088  $ Water around tri-flute 
-408817  104  -2.70     312307 -312308 -311302          imp:n=1 u=4088  $ Fuel tip
+408817  105  -7.857     312307 -312308 -311302          imp:n=1 u=4088  $ Fuel tip
 408818  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4088  $ Water around fuel tip
 408819  102  -1.00     312308 -312309 -311306          imp:n=1 u=4088  $ Water above fuel element
 c
@@ -1882,49 +1882,49 @@ c
 c
 c
 c
-c --- F7 - 3868 - Al (TOS210D130) universe ---
+c --- F7 - 3868 - SS clad (TOS210D210) universe ---
 c
-386801  104  -2.70     312300 -312301 -311302          imp:n=1 u=3868  $ Lower grid plate pin
+386801  105  -7.857     312300 -312301 -311302          imp:n=1 u=3868  $ Lower grid plate pin
 386802  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3868  $ Water around grid plate pin 
-386803  104  -2.70     312301 -312302 -311305          imp:n=1 u=3868  $ Bottom casing 
+386803  105  -7.857     312301 -312302 -311305          imp:n=1 u=3868  $ Bottom casing 
 386804  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3868  $ Water around fuel element
 386805  106  -1.56     312302 -312303 -311304          imp:n=1 u=3868  $ Lower graphite slug 
-386806  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3868  $ Fuel cladding
+386806  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3868  $ Fuel cladding
 386807  108   0.042234 312303 -312304 -311301          imp:n=1 u=3868  $ Zirc pin 
-386808 38681 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3868  $ Fuel meat section 1
-386809 38682 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3868  $ Fuel meat section 2
-386810 38683 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3868  $ Fuel meat section 3
-386811 38684 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3868  $ Fuel meat section 4
-386812 38685 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3868  $ Fuel meat section 5
+386808 3868 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3868  $ Fuel meat section 1
+386809 3868 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3868  $ Fuel meat section 2
+386810 3868 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3868  $ Fuel meat section 3
+386811 3868 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3868  $ Fuel meat section 4
+386812 3868 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3868  $ Fuel meat section 5
 386813  106  -1.56     312304 -312305 -311304          imp:n=1 u=3868  $ Upper graphite spacer
-386814  104  -2.70     312305 -312306 -311305          imp:n=1 u=3868  $ Al top cap 
-386815  104  -2.70     312306 -312307 -311303          imp:n=1 u=3868  $ Tri-flute 
+386814  105  -7.857     312305 -312306 -311305          imp:n=1 u=3868  $ SS top cap 
+386815  105  -7.857     312306 -312307 -311303          imp:n=1 u=3868  $ Tri-flute 
 386816  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3868  $ Water around tri-flute 
-386817  104  -2.70     312307 -312308 -311302          imp:n=1 u=3868  $ Fuel tip
+386817  105  -7.857     312307 -312308 -311302          imp:n=1 u=3868  $ Fuel tip
 386818  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3868  $ Water around fuel tip
 386819  102  -1.00     312308 -312309 -311306          imp:n=1 u=3868  $ Water above fuel element
 c
 c
 c
-c --- F8 - 4120 - Al (TOS210D130) universe ---
+c --- F8 - 4120 - SS clad (TOS210D210) universe ---
 c
-412001  104  -2.70     312300 -312301 -311302          imp:n=1 u=4120  $ Lower grid plate pin
+412001  105  -7.857     312300 -312301 -311302          imp:n=1 u=4120  $ Lower grid plate pin
 412002  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4120  $ Water around grid plate pin 
-412003  104  -2.70     312301 -312302 -311305          imp:n=1 u=4120  $ Bottom casing 
+412003  105  -7.857     312301 -312302 -311305          imp:n=1 u=4120  $ Bottom casing 
 412004  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4120  $ Water around fuel element
 412005  106  -1.56     312302 -312303 -311304          imp:n=1 u=4120  $ Lower graphite slug 
-412006  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4120  $ Fuel cladding
+412006  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4120  $ Fuel cladding
 412007  108   0.042234 312303 -312304 -311301          imp:n=1 u=4120  $ Zirc pin 
-412008 41201 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4120  $ Fuel meat section 1
-412009 41202 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4120  $ Fuel meat section 2
-412010 41203 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4120  $ Fuel meat section 3
-412011 41204 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4120  $ Fuel meat section 4
-412012 41205 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4120  $ Fuel meat section 5
+412008 4120 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4120  $ Fuel meat section 1
+412009 4120 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4120  $ Fuel meat section 2
+412010 4120 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4120  $ Fuel meat section 3
+412011 4120 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4120  $ Fuel meat section 4
+412012 4120 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4120  $ Fuel meat section 5
 412013  106  -1.56     312304 -312305 -311304          imp:n=1 u=4120  $ Upper graphite spacer
-412014  104  -2.70     312305 -312306 -311305          imp:n=1 u=4120  $ Al top cap 
-412015  104  -2.70     312306 -312307 -311303          imp:n=1 u=4120  $ Tri-flute 
+412014  105  -7.857     312305 -312306 -311305          imp:n=1 u=4120  $ SS top cap 
+412015  105  -7.857     312306 -312307 -311303          imp:n=1 u=4120  $ Tri-flute 
 412016  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4120  $ Water around tri-flute 
-412017  104  -2.70     312307 -312308 -311302          imp:n=1 u=4120  $ Fuel tip
+412017  105  -7.857     312307 -312308 -311302          imp:n=1 u=4120  $ Fuel tip
 412018  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4120  $ Water around fuel tip
 412019  102  -1.00     312308 -312309 -311306          imp:n=1 u=4120  $ Water above fuel element
 c
@@ -1955,217 +1955,217 @@ c
 c
 c
 c
-c --- F14 - 3810 - Al (TOS210D130) universe ---
+c --- F14 - 3810 - SS clad (TOS210D210) universe ---
 c
-381001  104  -2.70     312300 -312301 -311302          imp:n=1 u=3810  $ Lower grid plate pin
+381001  105  -7.857     312300 -312301 -311302          imp:n=1 u=3810  $ Lower grid plate pin
 381002  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3810  $ Water around grid plate pin 
-381003  104  -2.70     312301 -312302 -311305          imp:n=1 u=3810  $ Bottom casing 
+381003  105  -7.857     312301 -312302 -311305          imp:n=1 u=3810  $ Bottom casing 
 381004  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3810  $ Water around fuel element
 381005  106  -1.56     312302 -312303 -311304          imp:n=1 u=3810  $ Lower graphite slug 
-381006  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3810  $ Fuel cladding
+381006  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3810  $ Fuel cladding
 381007  108   0.042234 312303 -312304 -311301          imp:n=1 u=3810  $ Zirc pin 
-381008 38101 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3810  $ Fuel meat section 1
-381009 38102 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3810  $ Fuel meat section 2
-381010 38103 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3810  $ Fuel meat section 3
-381011 38104 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3810  $ Fuel meat section 4
-381012 38105 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3810  $ Fuel meat section 5
+381008 3810 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3810  $ Fuel meat section 1
+381009 3810 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3810  $ Fuel meat section 2
+381010 3810 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3810  $ Fuel meat section 3
+381011 3810 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3810  $ Fuel meat section 4
+381012 3810 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3810  $ Fuel meat section 5
 381013  106  -1.56     312304 -312305 -311304          imp:n=1 u=3810  $ Upper graphite spacer
-381014  104  -2.70     312305 -312306 -311305          imp:n=1 u=3810  $ Al top cap 
-381015  104  -2.70     312306 -312307 -311303          imp:n=1 u=3810  $ Tri-flute 
+381014  105  -7.857     312305 -312306 -311305          imp:n=1 u=3810  $ SS top cap 
+381015  105  -7.857     312306 -312307 -311303          imp:n=1 u=3810  $ Tri-flute 
 381016  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3810  $ Water around tri-flute 
-381017  104  -2.70     312307 -312308 -311302          imp:n=1 u=3810  $ Fuel tip
+381017  105  -7.857     312307 -312308 -311302          imp:n=1 u=3810  $ Fuel tip
 381018  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3810  $ Water around fuel tip
 381019  102  -1.00     312308 -312309 -311306          imp:n=1 u=3810  $ Water above fuel element
 c
 c
 c
-c --- F15 - 4130 - Al (TOS210D130) universe ---
+c --- F15 - 4130 - SS clad (TOS210D210) universe ---
 c
-413001  104  -2.70     312300 -312301 -311302          imp:n=1 u=4130  $ Lower grid plate pin
+413001  105  -7.857     312300 -312301 -311302          imp:n=1 u=4130  $ Lower grid plate pin
 413002  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4130  $ Water around grid plate pin 
-413003  104  -2.70     312301 -312302 -311305          imp:n=1 u=4130  $ Bottom casing 
+413003  105  -7.857     312301 -312302 -311305          imp:n=1 u=4130  $ Bottom casing 
 413004  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4130  $ Water around fuel element
 413005  106  -1.56     312302 -312303 -311304          imp:n=1 u=4130  $ Lower graphite slug 
-413006  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4130  $ Fuel cladding
+413006  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4130  $ Fuel cladding
 413007  108   0.042234 312303 -312304 -311301          imp:n=1 u=4130  $ Zirc pin 
-413008 41301 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4130  $ Fuel meat section 1
-413009 41302 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4130  $ Fuel meat section 2
-413010 41303 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4130  $ Fuel meat section 3
-413011 41304 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4130  $ Fuel meat section 4
-413012 41305 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4130  $ Fuel meat section 5
+413008 4130 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4130  $ Fuel meat section 1
+413009 4130 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4130  $ Fuel meat section 2
+413010 4130 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4130  $ Fuel meat section 3
+413011 4130 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4130  $ Fuel meat section 4
+413012 4130 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4130  $ Fuel meat section 5
 413013  106  -1.56     312304 -312305 -311304          imp:n=1 u=4130  $ Upper graphite spacer
-413014  104  -2.70     312305 -312306 -311305          imp:n=1 u=4130  $ Al top cap 
-413015  104  -2.70     312306 -312307 -311303          imp:n=1 u=4130  $ Tri-flute 
+413014  105  -7.857     312305 -312306 -311305          imp:n=1 u=4130  $ SS top cap 
+413015  105  -7.857     312306 -312307 -311303          imp:n=1 u=4130  $ Tri-flute 
 413016  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4130  $ Water around tri-flute 
-413017  104  -2.70     312307 -312308 -311302          imp:n=1 u=4130  $ Fuel tip
+413017  105  -7.857     312307 -312308 -311302          imp:n=1 u=4130  $ Fuel tip
 413018  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4130  $ Water around fuel tip
 413019  102  -1.00     312308 -312309 -311306          imp:n=1 u=4130  $ Water above fuel element
 c
 c
 c
-c --- F16 - 4091 - Al (TOS210D130) universe ---
+c --- F16 - 4091 - SS clad (TOS210D210) universe ---
 c
-409101  104  -2.70     312300 -312301 -311302          imp:n=1 u=4091  $ Lower grid plate pin
+409101  105  -7.857     312300 -312301 -311302          imp:n=1 u=4091  $ Lower grid plate pin
 409102  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4091  $ Water around grid plate pin 
-409103  104  -2.70     312301 -312302 -311305          imp:n=1 u=4091  $ Bottom casing 
+409103  105  -7.857     312301 -312302 -311305          imp:n=1 u=4091  $ Bottom casing 
 409104  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4091  $ Water around fuel element
 409105  106  -1.56     312302 -312303 -311304          imp:n=1 u=4091  $ Lower graphite slug 
-409106  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4091  $ Fuel cladding
+409106  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4091  $ Fuel cladding
 409107  108   0.042234 312303 -312304 -311301          imp:n=1 u=4091  $ Zirc pin 
-409108 40911 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4091  $ Fuel meat section 1
-409109 40912 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4091  $ Fuel meat section 2
-409110 40913 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4091  $ Fuel meat section 3
-409111 40914 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4091  $ Fuel meat section 4
-409112 40915 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4091  $ Fuel meat section 5
+409108 4091 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4091  $ Fuel meat section 1
+409109 4091 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4091  $ Fuel meat section 2
+409110 4091 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4091  $ Fuel meat section 3
+409111 4091 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4091  $ Fuel meat section 4
+409112 4091 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4091  $ Fuel meat section 5
 409113  106  -1.56     312304 -312305 -311304          imp:n=1 u=4091  $ Upper graphite spacer
-409114  104  -2.70     312305 -312306 -311305          imp:n=1 u=4091  $ Al top cap 
-409115  104  -2.70     312306 -312307 -311303          imp:n=1 u=4091  $ Tri-flute 
+409114  105  -7.857     312305 -312306 -311305          imp:n=1 u=4091  $ SS top cap 
+409115  105  -7.857     312306 -312307 -311303          imp:n=1 u=4091  $ Tri-flute 
 409116  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4091  $ Water around tri-flute 
-409117  104  -2.70     312307 -312308 -311302          imp:n=1 u=4091  $ Fuel tip
+409117  105  -7.857     312307 -312308 -311302          imp:n=1 u=4091  $ Fuel tip
 409118  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4091  $ Water around fuel tip
 409119  102  -1.00     312308 -312309 -311306          imp:n=1 u=4091  $ Water above fuel element
 c
 c
 c
-c --- F17 - 3673 - Al (TOS210D130) universe ---
+c --- F17 - 3673 - SS clad (TOS210D210) universe ---
 c
-367301  104  -2.70     312300 -312301 -311302          imp:n=1 u=3673  $ Lower grid plate pin
+367301  105  -7.857     312300 -312301 -311302          imp:n=1 u=3673  $ Lower grid plate pin
 367302  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3673  $ Water around grid plate pin 
-367303  104  -2.70     312301 -312302 -311305          imp:n=1 u=3673  $ Bottom casing 
+367303  105  -7.857     312301 -312302 -311305          imp:n=1 u=3673  $ Bottom casing 
 367304  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3673  $ Water around fuel element
 367305  106  -1.56     312302 -312303 -311304          imp:n=1 u=3673  $ Lower graphite slug 
-367306  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3673  $ Fuel cladding
+367306  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3673  $ Fuel cladding
 367307  108   0.042234 312303 -312304 -311301          imp:n=1 u=3673  $ Zirc pin 
-367308 36731 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3673  $ Fuel meat section 1
-367309 36732 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3673  $ Fuel meat section 2
-367310 36733 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3673  $ Fuel meat section 3
-367311 36734 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3673  $ Fuel meat section 4
-367312 36735 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3673  $ Fuel meat section 5
+367308 3673 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3673  $ Fuel meat section 1
+367309 3673 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3673  $ Fuel meat section 2
+367310 3673 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3673  $ Fuel meat section 3
+367311 3673 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3673  $ Fuel meat section 4
+367312 3673 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3673  $ Fuel meat section 5
 367313  106  -1.56     312304 -312305 -311304          imp:n=1 u=3673  $ Upper graphite spacer
-367314  104  -2.70     312305 -312306 -311305          imp:n=1 u=3673  $ Al top cap 
-367315  104  -2.70     312306 -312307 -311303          imp:n=1 u=3673  $ Tri-flute 
+367314  105  -7.857     312305 -312306 -311305          imp:n=1 u=3673  $ SS top cap 
+367315  105  -7.857     312306 -312307 -311303          imp:n=1 u=3673  $ Tri-flute 
 367316  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3673  $ Water around tri-flute 
-367317  104  -2.70     312307 -312308 -311302          imp:n=1 u=3673  $ Fuel tip
+367317  105  -7.857     312307 -312308 -311302          imp:n=1 u=3673  $ Fuel tip
 367318  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3673  $ Water around fuel tip
 367319  102  -1.00     312308 -312309 -311306          imp:n=1 u=3673  $ Water above fuel element
 c
 c
 c
-c --- F18 - 3682 - Al (TOS210D130) universe ---
+c --- F18 - 3682 - SS clad (TOS210D210) universe ---
 c
-368201  104  -2.70     312300 -312301 -311302          imp:n=1 u=3682  $ Lower grid plate pin
+368201  105  -7.857     312300 -312301 -311302          imp:n=1 u=3682  $ Lower grid plate pin
 368202  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3682  $ Water around grid plate pin 
-368203  104  -2.70     312301 -312302 -311305          imp:n=1 u=3682  $ Bottom casing 
+368203  105  -7.857     312301 -312302 -311305          imp:n=1 u=3682  $ Bottom casing 
 368204  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3682  $ Water around fuel element
 368205  106  -1.56     312302 -312303 -311304          imp:n=1 u=3682  $ Lower graphite slug 
-368206  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3682  $ Fuel cladding
+368206  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3682  $ Fuel cladding
 368207  108   0.042234 312303 -312304 -311301          imp:n=1 u=3682  $ Zirc pin 
-368208 36821 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3682  $ Fuel meat section 1
-368209 36822 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3682  $ Fuel meat section 2
-368210 36823 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3682  $ Fuel meat section 3
-368211 36824 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3682  $ Fuel meat section 4
-368212 36825 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3682  $ Fuel meat section 5
+368208 3682 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3682  $ Fuel meat section 1
+368209 3682 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3682  $ Fuel meat section 2
+368210 3682 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3682  $ Fuel meat section 3
+368211 3682 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3682  $ Fuel meat section 4
+368212 3682 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3682  $ Fuel meat section 5
 368213  106  -1.56     312304 -312305 -311304          imp:n=1 u=3682  $ Upper graphite spacer
-368214  104  -2.70     312305 -312306 -311305          imp:n=1 u=3682  $ Al top cap 
-368215  104  -2.70     312306 -312307 -311303          imp:n=1 u=3682  $ Tri-flute 
+368214  105  -7.857     312305 -312306 -311305          imp:n=1 u=3682  $ SS top cap 
+368215  105  -7.857     312306 -312307 -311303          imp:n=1 u=3682  $ Tri-flute 
 368216  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3682  $ Water around tri-flute 
-368217  104  -2.70     312307 -312308 -311302          imp:n=1 u=3682  $ Fuel tip
+368217  105  -7.857     312307 -312308 -311302          imp:n=1 u=3682  $ Fuel tip
 368218  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3682  $ Water around fuel tip
 368219  102  -1.00     312308 -312309 -311306          imp:n=1 u=3682  $ Water above fuel element
 c
 c
 c
-c --- F19 - 4132 - Al (TOS210D130) universe ---
+c --- F19 - 4132 - SS clad (TOS210D210) universe ---
 c
-413201  104  -2.70     312300 -312301 -311302          imp:n=1 u=4132  $ Lower grid plate pin
+413201  105  -7.857     312300 -312301 -311302          imp:n=1 u=4132  $ Lower grid plate pin
 413202  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4132  $ Water around grid plate pin 
-413203  104  -2.70     312301 -312302 -311305          imp:n=1 u=4132  $ Bottom casing 
+413203  105  -7.857     312301 -312302 -311305          imp:n=1 u=4132  $ Bottom casing 
 413204  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4132  $ Water around fuel element
 413205  106  -1.56     312302 -312303 -311304          imp:n=1 u=4132  $ Lower graphite slug 
-413206  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4132  $ Fuel cladding
+413206  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4132  $ Fuel cladding
 413207  108   0.042234 312303 -312304 -311301          imp:n=1 u=4132  $ Zirc pin 
-413208 41321 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4132  $ Fuel meat section 1
-413209 41322 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4132  $ Fuel meat section 2
-413210 41323 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4132  $ Fuel meat section 3
-413211 41324 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4132  $ Fuel meat section 4
-413212 41325 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4132  $ Fuel meat section 5
+413208 4132 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4132  $ Fuel meat section 1
+413209 4132 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4132  $ Fuel meat section 2
+413210 4132 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4132  $ Fuel meat section 3
+413211 4132 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4132  $ Fuel meat section 4
+413212 4132 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4132  $ Fuel meat section 5
 413213  106  -1.56     312304 -312305 -311304          imp:n=1 u=4132  $ Upper graphite spacer
-413214  104  -2.70     312305 -312306 -311305          imp:n=1 u=4132  $ Al top cap 
-413215  104  -2.70     312306 -312307 -311303          imp:n=1 u=4132  $ Tri-flute 
+413214  105  -7.857     312305 -312306 -311305          imp:n=1 u=4132  $ SS top cap 
+413215  105  -7.857     312306 -312307 -311303          imp:n=1 u=4132  $ Tri-flute 
 413216  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4132  $ Water around tri-flute 
-413217  104  -2.70     312307 -312308 -311302          imp:n=1 u=4132  $ Fuel tip
+413217  105  -7.857     312307 -312308 -311302          imp:n=1 u=4132  $ Fuel tip
 413218  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4132  $ Water around fuel tip
 413219  102  -1.00     312308 -312309 -311306          imp:n=1 u=4132  $ Water above fuel element
 c
 c
 c
-c --- F20 - 4046 - Al (TOS210D130) universe ---
+c --- F20 - 4046 - SS clad (TOS210D210) universe ---
 c
-404601  104  -2.70     312300 -312301 -311302          imp:n=1 u=4046  $ Lower grid plate pin
+404601  105  -7.857     312300 -312301 -311302          imp:n=1 u=4046  $ Lower grid plate pin
 404602  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4046  $ Water around grid plate pin 
-404603  104  -2.70     312301 -312302 -311305          imp:n=1 u=4046  $ Bottom casing 
+404603  105  -7.857     312301 -312302 -311305          imp:n=1 u=4046  $ Bottom casing 
 404604  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4046  $ Water around fuel element
 404605  106  -1.56     312302 -312303 -311304          imp:n=1 u=4046  $ Lower graphite slug 
-404606  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4046  $ Fuel cladding
+404606  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=4046  $ Fuel cladding
 404607  108   0.042234 312303 -312304 -311301          imp:n=1 u=4046  $ Zirc pin 
-404608 40461 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4046  $ Fuel meat section 1
-404609 40462 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4046  $ Fuel meat section 2
-404610 40463 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4046  $ Fuel meat section 3
-404611 40464 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4046  $ Fuel meat section 4
-404612 40465 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4046  $ Fuel meat section 5
+404608 4046 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4046  $ Fuel meat section 1
+404609 4046 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4046  $ Fuel meat section 2
+404610 4046 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4046  $ Fuel meat section 3
+404611 4046 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4046  $ Fuel meat section 4
+404612 4046 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4046  $ Fuel meat section 5
 404613  106  -1.56     312304 -312305 -311304          imp:n=1 u=4046  $ Upper graphite spacer
-404614  104  -2.70     312305 -312306 -311305          imp:n=1 u=4046  $ Al top cap 
-404615  104  -2.70     312306 -312307 -311303          imp:n=1 u=4046  $ Tri-flute 
+404614  105  -7.857     312305 -312306 -311305          imp:n=1 u=4046  $ SS top cap 
+404615  105  -7.857     312306 -312307 -311303          imp:n=1 u=4046  $ Tri-flute 
 404616  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4046  $ Water around tri-flute 
-404617  104  -2.70     312307 -312308 -311302          imp:n=1 u=4046  $ Fuel tip
+404617  105  -7.857     312307 -312308 -311302          imp:n=1 u=4046  $ Fuel tip
 404618  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4046  $ Water around fuel tip
 404619  102  -1.00     312308 -312309 -311306          imp:n=1 u=4046  $ Water above fuel element
 c
 c
 c
-c --- F21 - 3865 - Al (TOS210D130) universe ---
+c --- F21 - 3865 - SS clad (TOS210D210) universe ---
 c
-386501  104  -2.70     312300 -312301 -311302          imp:n=1 u=3865  $ Lower grid plate pin
+386501  105  -7.857     312300 -312301 -311302          imp:n=1 u=3865  $ Lower grid plate pin
 386502  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3865  $ Water around grid plate pin 
-386503  104  -2.70     312301 -312302 -311305          imp:n=1 u=3865  $ Bottom casing 
+386503  105  -7.857     312301 -312302 -311305          imp:n=1 u=3865  $ Bottom casing 
 386504  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3865  $ Water around fuel element
 386505  106  -1.56     312302 -312303 -311304          imp:n=1 u=3865  $ Lower graphite slug 
-386506  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3865  $ Fuel cladding
+386506  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3865  $ Fuel cladding
 386507  108   0.042234 312303 -312304 -311301          imp:n=1 u=3865  $ Zirc pin 
-386508 38651 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3865  $ Fuel meat section 1
-386509 38652 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3865  $ Fuel meat section 2
-386510 38653 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3865  $ Fuel meat section 3
-386511 38654 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3865  $ Fuel meat section 4
-386512 38655 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3865  $ Fuel meat section 5
+386508 3865 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3865  $ Fuel meat section 1
+386509 3865 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3865  $ Fuel meat section 2
+386510 3865 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3865  $ Fuel meat section 3
+386511 3865 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3865  $ Fuel meat section 4
+386512 3865 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3865  $ Fuel meat section 5
 386513  106  -1.56     312304 -312305 -311304          imp:n=1 u=3865  $ Upper graphite spacer
-386514  104  -2.70     312305 -312306 -311305          imp:n=1 u=3865  $ Al top cap 
-386515  104  -2.70     312306 -312307 -311303          imp:n=1 u=3865  $ Tri-flute 
+386514  105  -7.857     312305 -312306 -311305          imp:n=1 u=3865  $ SS top cap 
+386515  105  -7.857     312306 -312307 -311303          imp:n=1 u=3865  $ Tri-flute 
 386516  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3865  $ Water around tri-flute 
-386517  104  -2.70     312307 -312308 -311302          imp:n=1 u=3865  $ Fuel tip
+386517  105  -7.857     312307 -312308 -311302          imp:n=1 u=3865  $ Fuel tip
 386518  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3865  $ Water around fuel tip
 386519  102  -1.00     312308 -312309 -311306          imp:n=1 u=3865  $ Water above fuel element
 c
 c
 c
-c --- F22 - 3743 - Al (TOS210D130) universe ---
+c --- F22 - 3743 - SS clad (TOS210D210) universe ---
 c
-374301  104  -2.70     312300 -312301 -311302          imp:n=1 u=3743  $ Lower grid plate pin
+374301  105  -7.857     312300 -312301 -311302          imp:n=1 u=3743  $ Lower grid plate pin
 374302  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3743  $ Water around grid plate pin 
-374303  104  -2.70     312301 -312302 -311305          imp:n=1 u=3743  $ Bottom casing 
+374303  105  -7.857     312301 -312302 -311305          imp:n=1 u=3743  $ Bottom casing 
 374304  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3743  $ Water around fuel element
 374305  106  -1.56     312302 -312303 -311304          imp:n=1 u=3743  $ Lower graphite slug 
-374306  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3743  $ Fuel cladding
+374306  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3743  $ Fuel cladding
 374307  108   0.042234 312303 -312304 -311301          imp:n=1 u=3743  $ Zirc pin 
-374308 37431 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3743  $ Fuel meat section 1
-374309 37432 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3743  $ Fuel meat section 2
-374310 37433 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3743  $ Fuel meat section 3
-374311 37434 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3743  $ Fuel meat section 4
-374312 37435 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3743  $ Fuel meat section 5
+374308 3743 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3743  $ Fuel meat section 1
+374309 3743 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3743  $ Fuel meat section 2
+374310 3743 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3743  $ Fuel meat section 3
+374311 3743 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3743  $ Fuel meat section 4
+374312 3743 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3743  $ Fuel meat section 5
 374313  106  -1.56     312304 -312305 -311304          imp:n=1 u=3743  $ Upper graphite spacer
-374314  104  -2.70     312305 -312306 -311305          imp:n=1 u=3743  $ Al top cap 
-374315  104  -2.70     312306 -312307 -311303          imp:n=1 u=3743  $ Tri-flute 
+374314  105  -7.857     312305 -312306 -311305          imp:n=1 u=3743  $ SS top cap 
+374315  105  -7.857     312306 -312307 -311303          imp:n=1 u=3743  $ Tri-flute 
 374316  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3743  $ Water around tri-flute 
-374317  104  -2.70     312307 -312308 -311302          imp:n=1 u=3743  $ Fuel tip
+374317  105  -7.857     312307 -312308 -311302          imp:n=1 u=3743  $ Fuel tip
 374318  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3743  $ Water around fuel tip
 374319  102  -1.00     312308 -312309 -311306          imp:n=1 u=3743  $ Water above fuel element
 c
@@ -2176,25 +2176,25 @@ c
 c
 c
 c
-c --- F24 - 3835 - Al (TOS210D130) universe ---
+c --- F24 - 3835 - SS clad (TOS210D210) universe ---
 c
-383501  104  -2.70     312300 -312301 -311302          imp:n=1 u=3835  $ Lower grid plate pin
+383501  105  -7.857     312300 -312301 -311302          imp:n=1 u=3835  $ Lower grid plate pin
 383502  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3835  $ Water around grid plate pin 
-383503  104  -2.70     312301 -312302 -311305          imp:n=1 u=3835  $ Bottom casing 
+383503  105  -7.857     312301 -312302 -311305          imp:n=1 u=3835  $ Bottom casing 
 383504  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3835  $ Water around fuel element
 383505  106  -1.56     312302 -312303 -311304          imp:n=1 u=3835  $ Lower graphite slug 
-383506  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3835  $ Fuel cladding
+383506  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3835  $ Fuel cladding
 383507  108   0.042234 312303 -312304 -311301          imp:n=1 u=3835  $ Zirc pin 
-383508 38351 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3835  $ Fuel meat section 1
-383509 38352 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3835  $ Fuel meat section 2
-383510 38353 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3835  $ Fuel meat section 3
-383511 38354 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3835  $ Fuel meat section 4
-383512 38355 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3835  $ Fuel meat section 5
+383508 3835 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3835  $ Fuel meat section 1
+383509 3835 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3835  $ Fuel meat section 2
+383510 3835 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3835  $ Fuel meat section 3
+383511 3835 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3835  $ Fuel meat section 4
+383512 3835 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3835  $ Fuel meat section 5
 383513  106  -1.56     312304 -312305 -311304          imp:n=1 u=3835  $ Upper graphite spacer
-383514  104  -2.70     312305 -312306 -311305          imp:n=1 u=3835  $ Al top cap 
-383515  104  -2.70     312306 -312307 -311303          imp:n=1 u=3835  $ Tri-flute 
+383514  105  -7.857     312305 -312306 -311305          imp:n=1 u=3835  $ SS top cap 
+383515  105  -7.857     312306 -312307 -311303          imp:n=1 u=3835  $ Tri-flute 
 383516  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3835  $ Water around tri-flute 
-383517  104  -2.70     312307 -312308 -311302          imp:n=1 u=3835  $ Fuel tip
+383517  105  -7.857     312307 -312308 -311302          imp:n=1 u=3835  $ Fuel tip
 383518  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3835  $ Water around fuel tip
 383519  102  -1.00     312308 -312309 -311306          imp:n=1 u=3835  $ Water above fuel element
 c
@@ -2205,121 +2205,121 @@ c
 c
 c
 c
-c --- F26 - 3676 - Al (TOS210D130) universe ---
+c --- F26 - 3676 - SS clad (TOS210D210) universe ---
 c
-367601  104  -2.70     312300 -312301 -311302          imp:n=1 u=3676  $ Lower grid plate pin
+367601  105  -7.857     312300 -312301 -311302          imp:n=1 u=3676  $ Lower grid plate pin
 367602  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3676  $ Water around grid plate pin 
-367603  104  -2.70     312301 -312302 -311305          imp:n=1 u=3676  $ Bottom casing 
+367603  105  -7.857     312301 -312302 -311305          imp:n=1 u=3676  $ Bottom casing 
 367604  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3676  $ Water around fuel element
 367605  106  -1.56     312302 -312303 -311304          imp:n=1 u=3676  $ Lower graphite slug 
-367606  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3676  $ Fuel cladding
+367606  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3676  $ Fuel cladding
 367607  108   0.042234 312303 -312304 -311301          imp:n=1 u=3676  $ Zirc pin 
-367608 36761 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3676  $ Fuel meat section 1
-367609 36762 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3676  $ Fuel meat section 2
-367610 36763 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3676  $ Fuel meat section 3
-367611 36764 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3676  $ Fuel meat section 4
-367612 36765 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3676  $ Fuel meat section 5
+367608 3676 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3676  $ Fuel meat section 1
+367609 3676 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3676  $ Fuel meat section 2
+367610 3676 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3676  $ Fuel meat section 3
+367611 3676 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3676  $ Fuel meat section 4
+367612 3676 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3676  $ Fuel meat section 5
 367613  106  -1.56     312304 -312305 -311304          imp:n=1 u=3676  $ Upper graphite spacer
-367614  104  -2.70     312305 -312306 -311305          imp:n=1 u=3676  $ Al top cap 
-367615  104  -2.70     312306 -312307 -311303          imp:n=1 u=3676  $ Tri-flute 
+367614  105  -7.857     312305 -312306 -311305          imp:n=1 u=3676  $ SS top cap 
+367615  105  -7.857     312306 -312307 -311303          imp:n=1 u=3676  $ Tri-flute 
 367616  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3676  $ Water around tri-flute 
-367617  104  -2.70     312307 -312308 -311302          imp:n=1 u=3676  $ Fuel tip
+367617  105  -7.857     312307 -312308 -311302          imp:n=1 u=3676  $ Fuel tip
 367618  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3676  $ Water around fuel tip
 367619  102  -1.00     312308 -312309 -311306          imp:n=1 u=3676  $ Water above fuel element
 c
 c
 c
-c --- F27 - 3840 - Al (TOS210D130) universe ---
+c --- F27 - 3840 - SS clad (TOS210D210) universe ---
 c
-384001  104  -2.70     312300 -312301 -311302          imp:n=1 u=3840  $ Lower grid plate pin
+384001  105  -7.857     312300 -312301 -311302          imp:n=1 u=3840  $ Lower grid plate pin
 384002  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3840  $ Water around grid plate pin 
-384003  104  -2.70     312301 -312302 -311305          imp:n=1 u=3840  $ Bottom casing 
+384003  105  -7.857     312301 -312302 -311305          imp:n=1 u=3840  $ Bottom casing 
 384004  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3840  $ Water around fuel element
 384005  106  -1.56     312302 -312303 -311304          imp:n=1 u=3840  $ Lower graphite slug 
-384006  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3840  $ Fuel cladding
+384006  105  -7.857     312302 -312305  311304 -311305  imp:n=1 u=3840  $ Fuel cladding
 384007  108   0.042234 312303 -312304 -311301          imp:n=1 u=3840  $ Zirc pin 
-384008 38401 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3840  $ Fuel meat section 1
-384009 38402 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3840  $ Fuel meat section 2
-384010 38403 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3840  $ Fuel meat section 3
-384011 38404 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3840  $ Fuel meat section 4
-384012 38405 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3840  $ Fuel meat section 5
+384008 3840 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3840  $ Fuel meat section 1
+384009 3840 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3840  $ Fuel meat section 2
+384010 3840 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3840  $ Fuel meat section 3
+384011 3840 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3840  $ Fuel meat section 4
+384012 3840 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3840  $ Fuel meat section 5
 384013  106  -1.56     312304 -312305 -311304          imp:n=1 u=3840  $ Upper graphite spacer
-384014  104  -2.70     312305 -312306 -311305          imp:n=1 u=3840  $ Al top cap 
-384015  104  -2.70     312306 -312307 -311303          imp:n=1 u=3840  $ Tri-flute 
+384014  105  -7.857     312305 -312306 -311305          imp:n=1 u=3840  $ SS top cap 
+384015  105  -7.857     312306 -312307 -311303          imp:n=1 u=3840  $ Tri-flute 
 384016  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3840  $ Water around tri-flute 
-384017  104  -2.70     312307 -312308 -311302          imp:n=1 u=3840  $ Fuel tip
+384017  105  -7.857    312307 -312308 -311302          imp:n=1 u=3840  $ Fuel tip
 384018  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3840  $ Water around fuel tip
 384019  102  -1.00     312308 -312309 -311306          imp:n=1 u=3840  $ Water above fuel element
 c
 c
 c
-c --- F28 - 3854 - Al (TOS210D130) universe ---
+c --- F28 - 3854 - SS clad (TOS210D210) universe ---
 c
-385401  104  -2.70     312300 -312301 -311302          imp:n=1 u=3854  $ Lower grid plate pin
+385401  105  -7.857    312300 -312301 -311302          imp:n=1 u=3854  $ Lower grid plate pin
 385402  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=3854  $ Water around grid plate pin 
-385403  104  -2.70     312301 -312302 -311305          imp:n=1 u=3854  $ Bottom casing 
+385403  105  -7.857    312301 -312302 -311305          imp:n=1 u=3854  $ Bottom casing 
 385404  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=3854  $ Water around fuel element
 385405  106  -1.56     312302 -312303 -311304          imp:n=1 u=3854  $ Lower graphite slug 
-385406  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=3854  $ Fuel cladding
+385406  105  -7.857    312302 -312305  311304 -311305  imp:n=1 u=3854  $ Fuel cladding
 385407  108   0.042234 312303 -312304 -311301          imp:n=1 u=3854  $ Zirc pin 
-385408 38541 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3854  $ Fuel meat section 1
-385409 38542 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3854  $ Fuel meat section 2
-385410 38543 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3854  $ Fuel meat section 3
-385411 38544 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3854  $ Fuel meat section 4
-385412 38545 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3854  $ Fuel meat section 5
+385408 3854 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=3854  $ Fuel meat section 1
+385409 3854 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=3854  $ Fuel meat section 2
+385410 3854 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=3854  $ Fuel meat section 3
+385411 3854 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=3854  $ Fuel meat section 4
+385412 3854 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=3854  $ Fuel meat section 5
 385413  106  -1.56     312304 -312305 -311304          imp:n=1 u=3854  $ Upper graphite spacer
-385414  104  -2.70     312305 -312306 -311305          imp:n=1 u=3854  $ Al top cap 
-385415  104  -2.70     312306 -312307 -311303          imp:n=1 u=3854  $ Tri-flute 
+385414  105  -7.857    312305 -312306 -311305          imp:n=1 u=3854  $ SS top cap 
+385415  105  -7.857    312306 -312307 -311303          imp:n=1 u=3854  $ Tri-flute 
 385416  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=3854  $ Water around tri-flute 
-385417  104  -2.70     312307 -312308 -311302          imp:n=1 u=3854  $ Fuel tip
+385417  105  -7.857    312307 -312308 -311302          imp:n=1 u=3854  $ Fuel tip
 385418  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=3854  $ Water around fuel tip
 385419  102  -1.00     312308 -312309 -311306          imp:n=1 u=3854  $ Water above fuel element
 c
 c
 c
-c --- F29 - 4049 - Al (TOS210D130) universe ---
+c --- F29 - 4049 - SS clad (TOS210D210) universe ---
 c
-404901  104  -2.70     312300 -312301 -311302          imp:n=1 u=4049  $ Lower grid plate pin
+404901  105  -7.857    312300 -312301 -311302          imp:n=1 u=4049  $ Lower grid plate pin
 404902  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4049  $ Water around grid plate pin 
-404903  104  -2.70     312301 -312302 -311305          imp:n=1 u=4049  $ Bottom casing 
+404903  105  -7.857    312301 -312302 -311305          imp:n=1 u=4049  $ Bottom casing 
 404904  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4049  $ Water around fuel element
 404905  106  -1.56     312302 -312303 -311304          imp:n=1 u=4049  $ Lower graphite slug 
-404906  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4049  $ Fuel cladding
+404906  105  -7.857    312302 -312305  311304 -311305  imp:n=1 u=4049  $ Fuel cladding
 404907  108   0.042234 312303 -312304 -311301          imp:n=1 u=4049  $ Zirc pin 
-404908 40491 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4049  $ Fuel meat section 1
-404909 40492 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4049  $ Fuel meat section 2
-404910 40493 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4049  $ Fuel meat section 3
-404911 40494 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4049  $ Fuel meat section 4
-404912 40495 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4049  $ Fuel meat section 5
+404908 4049 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4049  $ Fuel meat section 1
+404909 4049 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4049  $ Fuel meat section 2
+404910 4049 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4049  $ Fuel meat section 3
+404911 4049 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4049  $ Fuel meat section 4
+404912 4049 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4049  $ Fuel meat section 5
 404913  106  -1.56     312304 -312305 -311304          imp:n=1 u=4049  $ Upper graphite spacer
-404914  104  -2.70     312305 -312306 -311305          imp:n=1 u=4049  $ Al top cap 
-404915  104  -2.70     312306 -312307 -311303          imp:n=1 u=4049  $ Tri-flute 
+404914  105  -7.857    312305 -312306 -311305          imp:n=1 u=4049  $ SS top cap 
+404915  105  -7.857    312306 -312307 -311303          imp:n=1 u=4049  $ Tri-flute 
 404916  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4049  $ Water around tri-flute 
-404917  104  -2.70     312307 -312308 -311302          imp:n=1 u=4049  $ Fuel tip
+404917  105  -7.857    312307 -312308 -311302          imp:n=1 u=4049  $ Fuel tip
 404918  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4049  $ Water around fuel tip
 404919  102  -1.00     312308 -312309 -311306          imp:n=1 u=4049  $ Water above fuel element
 c
 c
 c
-c --- F30 - 4127 - Al (TOS210D130) universe ---
+c --- F30 - 4127 - SS clad (TOS210D210) universe ---
 c
-412701  104  -2.70     312300 -312301 -311302          imp:n=1 u=4127  $ Lower grid plate pin
+412701  105  -7.857    312300 -312301 -311302          imp:n=1 u=4127  $ Lower grid plate pin
 412702  102  -1.00     312300 -312301  311302 -311306  imp:n=1 u=4127  $ Water around grid plate pin 
-412703  104  -2.70     312301 -312302 -311305          imp:n=1 u=4127  $ Bottom casing 
+412703  105  -7.857    312301 -312302 -311305          imp:n=1 u=4127  $ Bottom casing 
 412704  102  -1.00     312301 -312306  311305 -311306  imp:n=1 u=4127  $ Water around fuel element
 412705  106  -1.56     312302 -312303 -311304          imp:n=1 u=4127  $ Lower graphite slug 
-412706  104  -2.70     312302 -312305  311304 -311305  imp:n=1 u=4127  $ Fuel cladding
+412706  105  -7.857    312302 -312305  311304 -311305  imp:n=1 u=4127  $ Fuel cladding
 412707  108   0.042234 312303 -312304 -311301          imp:n=1 u=4127  $ Zirc pin 
-412708 41271 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4127  $ Fuel meat section 1
-412709 41272 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4127  $ Fuel meat section 2
-412710 41273 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4127  $ Fuel meat section 3
-412711 41274 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4127  $ Fuel meat section 4
-412712 41275 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4127  $ Fuel meat section 5
+412708 4127 -5.66    312303 -302303  311301 -311304  vol=77.096 imp:n=1 u=4127  $ Fuel meat section 1
+412709 4127 -5.66    302303 -302306  311301 -311304  vol=77.096 imp:n=1 u=4127  $ Fuel meat section 2
+412710 4127 -5.66    302306 -302309  311301 -311304  vol=77.096 imp:n=1 u=4127  $ Fuel meat section 3
+412711 4127 -5.66    302309 -302312  311301 -311304  vol=77.096 imp:n=1 u=4127  $ Fuel meat section 4
+412712 4127 -5.66    302312 -312304  311301 -311304  vol=77.096 imp:n=1 u=4127  $ Fuel meat section 5
 412713  106  -1.56     312304 -312305 -311304          imp:n=1 u=4127  $ Upper graphite spacer
-412714  104  -2.70     312305 -312306 -311305          imp:n=1 u=4127  $ Al top cap 
-412715  104  -2.70     312306 -312307 -311303          imp:n=1 u=4127  $ Tri-flute 
+412714  105  -7.857    312305 -312306 -311305          imp:n=1 u=4127  $ SS top cap 
+412715  105  -7.857    312306 -312307 -311303          imp:n=1 u=4127  $ Tri-flute 
 412716  102  -1.00     312306 -312307  311303 -311306  imp:n=1 u=4127  $ Water around tri-flute 
-412717  104  -2.70     312307 -312308 -311302          imp:n=1 u=4127  $ Fuel tip
+412717  105  -7.857    312307 -312308 -311302          imp:n=1 u=4127  $ Fuel tip
 412718  102  -1.00     312307 -312308  311302 -311306  imp:n=1 u=4127  $ Water around fuel tip
 412719  102  -1.00     312308 -312309 -311306          imp:n=1 u=4127  $ Water above fuel element
 c
@@ -3722,79 +3722,79 @@ c
 c
 c
 c
-c c
-c c
-c c ------------------------------
-c c ------ Installed sources -----
-c c ------------------------------
-c c
-c c
-c c
-c c
-c c
-c c
-c c
-c c ---- AmBe source (F23) ----
-c c
-c 62301   103  -2.7        -172303  172302 -171301           imp:n=1   $ cylindrical section beneath cavity
-c 62302   103  -2.7        -172304  172303 -171301  173301   imp:n=1   $ cylindrical section containing bottommost cavity cone
-c 62303   103  -2.7        -172305  172304 -171301  171302   imp:n=1   $ aluminum encasing cylindrical part of cavity
-c 62304   101  -0.0012922  -172306  172305 -173302           imp:n=1   $ half cone atop source cavity
-c 62305   103  -2.7        -172306  172305 -171301  173302   imp:n=1   $ aluminum around half cone part of cavity
-c 62306   101  -0.0012922  -172308  172306 -171303           imp:n=1   $ cylinder component of source cavity cap
-c 62307   103  -2.7        -172308  172306 -171301  171303   imp:n=1   $ aluminum around cylindrical component of source cavity cap
-c 62308   101  -2.7        -172309  172308 -173303           imp:n=1   $ cone on top of cavity cap
-c 62309   103  -2.7        -172309  172308 -171301  173303   imp:n=1   $ aluminum encasing cone on top of cavity cap
-c 62310   101  -0.0012922  -172305  172304 -171302           imp:n=1   $ inner cavity cylinder
-c 62311   101  -0.0012922  -172304  172303 -173301           imp:n=1   $ inner cavity bottom cone
-c 62312   103  -2.7        -172311  172309 -171301           imp:n=1   $ source holder above cavity
-c 62313   103  -2.7        -172312  172311 -906239           imp:n=1   $ cap on source holder that rests on grid plate
-c 62314   103  -2.7        -172313  172312 -171305           imp:n=1   $ cylindrical base on knob
-c 62315   103  -2.7        -172314  172313 -173304           imp:n=1   $ lower half of corset on knob
-c 62316   103  -2.7        -172315  172314 -173305           imp:n=1   $ upper half of corset on knob
-c 62317   103  -2.7        -172316  172315 -171305           imp:n=1   $ upper cylindrical part of knob
-c 62318   103  -2.7        -172317  172316 -173306           imp:n=1   $ upper cone on knob
-c 62319   102  -1.0        -172314  172313 -171305  173304   imp:n=1   $ water in nook of bottom half of corset on knob 
-c 62320   102  -1.0        -172315  172314 -171305  173305   imp:n=1   $ water in nook of top half of corset on knob
-c 62321   102  -1.0        -172317  172316 -171305  173306   imp:n=1   $ water around cone on end of knob
-c 62322   102  -1.0         172302 -112305  171301 -906239   imp:n=1   $ water around source
-c 62323   102  -1.0         10 -172302 -906239           imp:n=1   $ water below source
-c 62324   102  -1.0         172312 -11  171305 -906239   imp:n=1   $ Water around top
-c 62325   102  -1.0         172317 -11 -171305           imp:n=1   $ Water above top
-c c
-c c
-c c
-c c ---- IR-192 source (F25) ----
-c c
-c 62501   103  -2.7        -172303  172302 -171310          imp:n=1  $ cylindrical section beneath cavity
-c 62502   103  -2.7        -172304  172303 -171310  173310  imp:n=1  $ cylindrical section containing bottommost cavity cone
-c 62503   103  -2.7        -172305  172304 -171310  171311  imp:n=1  $ aluminum encasing cylindrical part of cavity
-c 62504   101  -0.0012922  -172306  172305 -173311          imp:n=1  $ half cone atop source cavity
-c 62505   103  -2.7        -172306  172305 -171310  173311  imp:n=1  $ aluminum around half cone part of cavity
-c 62506   101  -0.0012922  -172308  172306 -171312          imp:n=1  $ cylinder component of source cavity cap
-c 62507   103  -2.7        -172308  172306 -171310  171312  imp:n=1  $ aluminum around cylindrical component of source cavity cap
-c 62508   101  -2.7        -172309  172308 -173312          imp:n=1  $ cone on top of cavity cap
-c 62509   103  -2.7        -172309  172308 -171310  173312  imp:n=1  $ aluminum encasing cone on top of cavity cap
-c 62510   101  -0.0012922  -172305  172304 -171311          imp:n=1  $ inner cavity cylinder
-c 62511   101  -0.0012922  -172304  172303 -173310          imp:n=1  $ inner cavity bottom cone
-c 62512   103  -2.7        -172311  172309 -171310          imp:n=1  $ source holder above cavity
-c 62513   103  -2.7        -172312  172311 -906259          imp:n=1  $ cap on source holder that rests on grid plate
-c 62514   103  -2.7        -172313  172312 -171314          imp:n=1  $ cylindrical base on knob
-c 62515   103  -2.7        -172314  172313 -173313          imp:n=1  $ lower half of corset on knob
-c 62516   103  -2.7        -172315  172314 -173314          imp:n=1  $ upper half of corset on knob
-c 62517   103  -2.7        -172316  172315 -171314          imp:n=1  $ upper cylindrical part of knob
-c 62518   103  -2.7        -172317  172316 -173315          imp:n=1  $ upper cone on knob
-c 62519   102  -1.0        -172314  172313 -171314  173313  imp:n=1  $ water in nook of bottom half of corset on knob 
-c 62520   102  -1.0        -172315  172314 -171314  173314  imp:n=1  $ water in nook of top half of corset on knob
-c 62521   102  -1.0        -172317  172316 -171314  173315  imp:n=1  $ water around cone on end of knob
-c 62522   102  -1.0         172302 -112305  171310 -906259  imp:n=1  $ water around source
-c 62523   102  -1.0         10 -172302 -906259          imp:n=1  $ water below source
-c 62524   102  -1.0         172312 -11  171314 -906259  imp:n=1  $ Water around top
-c 62525   102  -1.0         172317 -11 -171314          imp:n=1  $ Water above top
-c c
-c c
-c c
-c c
+c
+c
+c ------------------------------
+c ------ Installed sources -----
+c ------------------------------
+c
+c
+c
+c
+c
+c
+c
+c ---- AmBe source (F23) ----
+c
+62301   103  -2.7        -172303  172302 -171301           imp:n=1   $ cylindrical section beneath cavity
+62302   103  -2.7        -172304  172303 -171301  173301   imp:n=1   $ cylindrical section containing bottommost cavity cone
+62303   103  -2.7        -172305  172304 -171301  171302   imp:n=1   $ aluminum encasing cylindrical part of cavity
+62304   101  -0.0012922  -172306  172305 -173302           imp:n=1   $ half cone atop source cavity
+62305   103  -2.7        -172306  172305 -171301  173302   imp:n=1   $ aluminum around half cone part of cavity
+62306   101  -0.0012922  -172308  172306 -171303           imp:n=1   $ cylinder component of source cavity cap
+62307   103  -2.7        -172308  172306 -171301  171303   imp:n=1   $ aluminum around cylindrical component of source cavity cap
+62308   101  -2.7        -172309  172308 -173303           imp:n=1   $ cone on top of cavity cap
+62309   103  -2.7        -172309  172308 -171301  173303   imp:n=1   $ aluminum encasing cone on top of cavity cap
+62310   101  -0.0012922  -172305  172304 -171302           imp:n=1   $ inner cavity cylinder
+62311   101  -0.0012922  -172304  172303 -173301           imp:n=1   $ inner cavity bottom cone
+62312   103  -2.7        -172311  172309 -171301           imp:n=1   $ source holder above cavity
+62313   103  -2.7        -172312  172311 -906239           imp:n=1   $ cap on source holder that rests on grid plate
+62314   103  -2.7        -172313  172312 -171305           imp:n=1   $ cylindrical base on knob
+62315   103  -2.7        -172314  172313 -173304           imp:n=1   $ lower half of corset on knob
+62316   103  -2.7        -172315  172314 -173305           imp:n=1   $ upper half of corset on knob
+62317   103  -2.7        -172316  172315 -171305           imp:n=1   $ upper cylindrical part of knob
+62318   103  -2.7        -172317  172316 -173306           imp:n=1   $ upper cone on knob
+62319   102  -1.0        -172314  172313 -171305  173304   imp:n=1   $ water in nook of bottom half of corset on knob 
+62320   102  -1.0        -172315  172314 -171305  173305   imp:n=1   $ water in nook of top half of corset on knob
+62321   102  -1.0        -172317  172316 -171305  173306   imp:n=1   $ water around cone on end of knob
+62322   102  -1.0         172302 -112305  171301 -906239   imp:n=1   $ water around source
+62323   102  -1.0         10 -172302 -906239           imp:n=1   $ water below source
+62324   102  -1.0         172312 -11  171305 -906239   imp:n=1   $ Water around top
+62325   102  -1.0         172317 -11 -171305           imp:n=1   $ Water above top
+c
+c
+c
+c ---- IR-192 source (F25) ----
+c
+62501   103  -2.7        -172303  172302 -171310          imp:n=1  $ cylindrical section beneath cavity
+62502   103  -2.7        -172304  172303 -171310  173310  imp:n=1  $ cylindrical section containing bottommost cavity cone
+62503   103  -2.7        -172305  172304 -171310  171311  imp:n=1  $ aluminum encasing cylindrical part of cavity
+62504   101  -0.0012922  -172306  172305 -173311          imp:n=1  $ half cone atop source cavity
+62505   103  -2.7        -172306  172305 -171310  173311  imp:n=1  $ aluminum around half cone part of cavity
+62506   101  -0.0012922  -172308  172306 -171312          imp:n=1  $ cylinder component of source cavity cap
+62507   103  -2.7        -172308  172306 -171310  171312  imp:n=1  $ aluminum around cylindrical component of source cavity cap
+62508   101  -2.7        -172309  172308 -173312          imp:n=1  $ cone on top of cavity cap
+62509   103  -2.7        -172309  172308 -171310  173312  imp:n=1  $ aluminum encasing cone on top of cavity cap
+62510   101  -0.0012922  -172305  172304 -171311          imp:n=1  $ inner cavity cylinder
+62511   101  -0.0012922  -172304  172303 -173310          imp:n=1  $ inner cavity bottom cone
+62512   103  -2.7        -172311  172309 -171310          imp:n=1  $ source holder above cavity
+62513   103  -2.7        -172312  172311 -906259          imp:n=1  $ cap on source holder that rests on grid plate
+62514   103  -2.7        -172313  172312 -171314          imp:n=1  $ cylindrical base on knob
+62515   103  -2.7        -172314  172313 -173313          imp:n=1  $ lower half of corset on knob
+62516   103  -2.7        -172315  172314 -173314          imp:n=1  $ upper half of corset on knob
+62517   103  -2.7        -172316  172315 -171314          imp:n=1  $ upper cylindrical part of knob
+62518   103  -2.7        -172317  172316 -173315          imp:n=1  $ upper cone on knob
+62519   102  -1.0        -172314  172313 -171314  173313  imp:n=1  $ water in nook of bottom half of corset on knob 
+62520   102  -1.0        -172315  172314 -171314  173314  imp:n=1  $ water in nook of top half of corset on knob
+62521   102  -1.0        -172317  172316 -171314  173315  imp:n=1  $ water around cone on end of knob
+62522   102  -1.0         172302 -112305  171310 -906259  imp:n=1  $ water around source
+62523   102  -1.0         10 -172302 -906259          imp:n=1  $ water below source
+62524   102  -1.0         172312 -11  171314 -906259  imp:n=1  $ Water around top
+62525   102  -1.0         172317 -11 -171314          imp:n=1  $ Water above top
+c
+c
+c
+c
 c
 c
 c
@@ -3821,7 +3821,7 @@ c
 30505   103  -2.7      -812301  812302 -811302                  imp:n=1  $ top control rod inactive region
 30506   103  -2.7      -812302  812303 -811304                  imp:n=1  $ upper control rod inactive region
 c
-30507   107  -1.72066  -811303 -812303  812304                  imp:n=1  $ control rod poison section
+30507   107  -1.6859   -811303 -812303  812304                  imp:n=1  $ control rod poison section
 30508   103  -2.7       812305 -812303  811303 -811304          imp:n=1  $ control rod cladding
 c
 30509   103  -2.7      -812304  812305 -811303                  imp:n=1  $ lower control rod inactive section
@@ -3853,7 +3853,7 @@ c
 30905   103  -2.7      -822301  822302 -821302                  imp:n=1  $ top control rod inactive region
 30906   103  -2.7      -822302  822303 -821304                  imp:n=1  $ upper control rod inactive region
 c
-30907   107  -1.72066  -821303 -822303  822304                  imp:n=1  $ control rod poison section
+30907   107  -1.6859   -821303 -822303  822304                  imp:n=1  $ control rod poison section
 30908   103  -2.7       822305 -822303  821303 -821304          imp:n=1  $ control rod cladding
 c
 30909   103  -2.7      -822304  822305 -821303                  imp:n=1  $ lower control rod inactive section
@@ -3884,7 +3884,7 @@ c
 50105   103  -2.7      -832301  832302 -831302                  imp:n=1  $ top control rod inactive region
 50106   103  -2.7      -832302  832303 -831304                  imp:n=1  $ upper control rod inactive region
 c
-50107   107  -1.72066  -831303 -832303  832304                  imp:n=1  $ control rod poison section
+50107   107  -1.6859   -831303 -832303  832304                  imp:n=1  $ control rod poison section
 50108   103  -2.7       832305 -832303  831303 -831304          imp:n=1  $ control rod cladding
 c
 50109   103  -2.7      -832304  832305 -831303                  imp:n=1  $ lower control rod inactive section
@@ -4545,67 +4545,67 @@ c
 c
 c
 c
-c c
-c c
-c c
-c c ------------------------------
-c c ------ Installed sources -----
-c c ------------------------------
-c c
-c c
-c c
-c c ---- p/z surfaces ----
-c c
-c 172302     pz  0.285         $ bottom of source holder
-c 172303     pz  40.245        $ bottom of lower cavity cone
-c 172304     pz  40.745        $ bottom of main cavity cylinder
-c 172305     pz  48.445        $ top of main cavity cylinder
-c 172306     pz  48.695        $ top of half-cone directly above cavity cylinder
-c 172308     pz  49.395        $ top of cylinder on cavity cap
-c 172309     pz  49.595        $ top of upper cavity cone
-c 172311     pz  66.675        $ top of top grid plate
-c 172312     pz  66.975        $ top of upper source body cap
-c 172313     pz  73.575        $ top of lower cylindrical component of source knob
-c 172314     pz  74.075        $ midsection of corset componenet on source knob
-c 172315     pz  74.575        $ top of corset bit/bottom of upper cylindrical component on source knob
-c 172316     pz  75.075        $ top of upper cylindrical component on source knob
-c 172317     pz  75.825        $ top of source knob 
-c c 
-c c
-c c
-c c ---- AmBe c/z and k/z surfaces ----
-c c
-c 171301       c/z  -19.777202  -2.070608  1.9                 $ cylinder body of source holder
-c 171302       c/z  -19.777202  -2.070608  1.25                $ main cylinder part of source cavity
-c 171303       c/z  -19.777202  -2.070608  0.3                 $ top cap cylinder part of source cavity
-c 171305       c/z  -19.777202  -2.070608  0.75                $ cylinder component on knob
-c c
-c 173301       k/z  -19.777202  -2.070608  40.245  4.0804      $ cone on bottom of cavity
-c 173302       k/z  -19.777202  -2.070608  48.945  1.44        $ imaginary cone on top of cavity
-c 173303       k/z  -19.777202  -2.070608  49.595  2.25        $ cone on tip of cavity cap
-c 173304       k/z  -19.777202  -2.070608  76.575  0.0625      $ bottom cone half of corset
-c 173305       k/z  -19.777202  -2.070608  71.575  0.0625      $ top cone half of corset
-c 173306       k/z  -19.777202  -2.070608  75.825  1           $ cone on end of knob
-c c
-c c
-c c
-c c
-c c ---- IR-192 c/z and k/z surfaces ----
-c c
-c 171310       c/z  -18.915634  6.1455300  1.9                 $ cylinder body of source holder
-c 171311       c/z  -18.915634  6.1455300  1.25                $ main cylinder part of source cavity
-c 171312       c/z  -18.915634  6.1455300  0.3                 $ top cap cylinder part of source cavity
-c c 171313       c/z  -18.915634  6.1455300  2                   $ lip of source that rests on grid plate
-c 171314       c/z  -18.915634  6.1455300  0.75                $ cylinder component on knob
-c c
-c 173310       k/z  -18.915634  6.1455300  40.245  4.0804      $ cone on bottom of cavity
-c 173311       k/z  -18.915634  6.1455300  48.945  1.44        $ imaginary cone on top of cavity
-c 173312       k/z  -18.915634  6.1455300  49.595  2.25        $ cone on tip of cavity cap
-c 173313       k/z  -18.915634  6.1455300  76.575  0.0625      $ bottom cone half of corset
-c 173314       k/z  -18.915634  6.1455300  71.575  0.0625      $ top cone half of corset
-c 173315       k/z  -18.915634  6.1455300  75.825  1           $ cone on end of knob
-c c
-c c
+c
+c
+c
+c ------------------------------
+c ------ Installed sources -----
+c ------------------------------
+c
+c
+c
+c ---- p/z surfaces ----
+c
+172302     pz  0.285         $ bottom of source holder
+172303     pz  40.245        $ bottom of lower cavity cone
+172304     pz  40.745        $ bottom of main cavity cylinder
+172305     pz  48.445        $ top of main cavity cylinder
+172306     pz  48.695        $ top of half-cone directly above cavity cylinder
+172308     pz  49.395        $ top of cylinder on cavity cap
+172309     pz  49.595        $ top of upper cavity cone
+172311     pz  66.675        $ top of top grid plate
+172312     pz  66.975        $ top of upper source body cap
+172313     pz  73.575        $ top of lower cylindrical component of source knob
+172314     pz  74.075        $ midsection of corset componenet on source knob
+172315     pz  74.575        $ top of corset bit/bottom of upper cylindrical component on source knob
+172316     pz  75.075        $ top of upper cylindrical component on source knob
+172317     pz  75.825        $ top of source knob 
+c 
+c
+c
+c ---- AmBe c/z and k/z surfaces ----
+c
+171301       c/z  -19.777202  -2.070608  1.9                 $ cylinder body of source holder
+171302       c/z  -19.777202  -2.070608  1.25                $ main cylinder part of source cavity
+171303       c/z  -19.777202  -2.070608  0.3                 $ top cap cylinder part of source cavity
+171305       c/z  -19.777202  -2.070608  0.75                $ cylinder component on knob
+c
+173301       k/z  -19.777202  -2.070608  40.245  4.0804      $ cone on bottom of cavity
+173302       k/z  -19.777202  -2.070608  48.945  1.44        $ imaginary cone on top of cavity
+173303       k/z  -19.777202  -2.070608  49.595  2.25        $ cone on tip of cavity cap
+173304       k/z  -19.777202  -2.070608  76.575  0.0625      $ bottom cone half of corset
+173305       k/z  -19.777202  -2.070608  71.575  0.0625      $ top cone half of corset
+173306       k/z  -19.777202  -2.070608  75.825  1           $ cone on end of knob
+c
+c
+c
+c
+c ---- IR-192 c/z and k/z surfaces ----
+c
+171310       c/z  -18.915634  6.1455300  1.9                 $ cylinder body of source holder
+171311       c/z  -18.915634  6.1455300  1.25                $ main cylinder part of source cavity
+171312       c/z  -18.915634  6.1455300  0.3                 $ top cap cylinder part of source cavity
+c 171313       c/z  -18.915634  6.1455300  2                   $ lip of source that rests on grid plate
+171314       c/z  -18.915634  6.1455300  0.75                $ cylinder component on knob
+c
+173310       k/z  -18.915634  6.1455300  40.245  4.0804      $ cone on bottom of cavity
+173311       k/z  -18.915634  6.1455300  48.945  1.44        $ imaginary cone on top of cavity
+173312       k/z  -18.915634  6.1455300  49.595  2.25        $ cone on tip of cavity cap
+173313       k/z  -18.915634  6.1455300  76.575  0.0625      $ bottom cone half of corset
+173314       k/z  -18.915634  6.1455300  71.575  0.0625      $ top cone half of corset
+173315       k/z  -18.915634  6.1455300  75.825  1           $ cone on end of knob
+c
+c
 c
 c
 c
@@ -4782,7 +4782,7 @@ c
 c ROD HEIGHTS
 c Control rods have a travel of 38 cm
 c The "bottom of control rod" has z-position 13.7425 at 0% and 51.7425 at 100%
-c Rod moves 0.38 for every 1%
+c Rod moves 0.38 cm for every 1%
 c
 c Safe Rod (0% Withdrawn)
 c
@@ -4791,7 +4791,7 @@ c c/z surfaces
 c
 811301   c/z   6.91134   -3.99034   0.508   $ Upper connecting rod cylinder
 811302   c/z   6.91134   -3.99034   1.2573   $ Lower conic section cylinder
-811303   c/z   6.91134   -3.99034   1.4224   $ Poison section cylinder 
+811303   c/z   6.91134   -3.99034   1.3000   $ Poison section cylinder 
 811304   c/z   6.91134   -3.99034   1.5875   $ Outer diameter
 c
 c
@@ -4825,7 +4825,7 @@ c c/z surfaces
 c
 821301   c/z   -6.91134   -3.99034   0.508   $ Upper connecting rod cylinder
 821302   c/z   -6.91134   -3.99034   1.2573   $ Lower conic section cylinder
-821303   c/z   -6.91134   -3.99034   1.4224   $ Poison section cylinder 
+821303   c/z   -6.91134   -3.99034   1.3000   $ Poison section cylinder 
 821304   c/z   -6.91134   -3.99034   1.5875   $ Outer diameter
 c
 c
@@ -4859,7 +4859,7 @@ c c/z surfaces
 c
 831301   c/z   0   15.9156   0.508   $ Upper connecting rod cylinder
 831302   c/z   0   15.9156   1.2573   $ Lower conic section cylinder
-831303   c/z   0   15.9156   1.4224   $ Poison section cylinder 
+831303   c/z   0   15.9156   1.3000   $ Poison section cylinder 
 831304   c/z   0   15.9156   1.5875   $ Outer diameter
 c
 c
@@ -4881,106 +4881,6 @@ c
 833303   k/z   0   15.9156   13.74250   5.0625   $ lower inner beveling
 c
 c End of Reg Rod
-c
-c
-c
-c KEEP FOR REFERENCE
-c Safe Rod (90% Withdrawn)
-c
-c
-c c/z surfaces
-c
-c 811301   c/z   6.91134   -3.99034   0.508   $ Upper connecting rod cylinder
-c 811302   c/z   6.91134   -3.99034   1.2573   $ Lower conic section cylinder
-c 811303   c/z   6.91134   -3.99034   1.4224   $ Poison section cylinder 
-c 811304   c/z   6.91134   -3.99034   1.5875   $ Outer diameter
-c
-c
-c pz surfaces
-c
-c 812301   pz    97.0153   $ top of control rod
-c 812302   pz    96.2533   $ top of main section
-c 812303   pz    95.6183   $ top of poison portion
-c 812304   pz    49.5427   $ bottom of poison portion
-c 812305   pz    48.9077   $ bottom of main section
-c 812306   pz    48.5013   $ bottom of outer lower cone
-c 812307   pz    47.9425   $ bottom of control rod
-c
-c
-c k/z surfaces
-c
-c 813301   k/z  6.91134   -3.99034   99.9167615385   0.1877777777   $ upper beveling
-c 813302   k/z  6.91134   -3.99034   46.95385   0.66015625   $ lower outer beveling
-c 813303   k/z  6.91134   -3.99034   47.9425   5.0625   $ lower inner beveling
-c
-c
-c
-c
-c
-c
-c
-c Shim Rod (90% Withdrawn)
-c
-c
-c c/z surfaces
-c
-c 821301   c/z   -6.91134   -3.99034   0.508   $ Upper connecting rod cylinder
-c 821302   c/z   -6.91134   -3.99034   1.2573   $ Lower conic section cylinder
-c 821303   c/z   -6.91134   -3.99034   1.4224   $ Poison section cylinder 
-c 821304   c/z   -6.91134   -3.99034   1.5875   $ Outer diameter
-c
-c
-c pz surfaces
-c
-c 822301   pz    97.0153   $ top of control rod
-c 822302   pz    96.2533   $ top of main section
-c 822303   pz    95.6183   $ top of poison portion
-c 822304   pz    49.5427   $ bottom of poison portion
-c 822305   pz    48.9077   $ bottom of main section
-c 822306   pz    48.5013   $ bottom of outer lower cone
-c 822307   pz    47.9425   $ bottom of control rod
-c
-c
-c k/z surfaces
-c
-c 823301   k/z  -6.91134   -3.99034   99.9167615385   0.1877777777   $ upper beveling
-c 823302   k/z  -6.91134   -3.99034   46.95385   0.66015625   $ lower outer beveling
-c 823303   k/z  -6.91134   -3.99034   47.9425   5.0625   $ lower inner beveling
-c
-c
-c
-c
-c
-c
-c
-c Reg Rod (90% Withdrawn)
-c
-c
-c c/z surfaces
-c
-c 831301   c/z   0   15.9156   0.508   $ Upper connecting rod cylinder
-c 831302   c/z   0   15.9156   1.2573   $ Lower conic section cylinder
-c 831303   c/z   0   15.9156   1.4224   $ Poison section cylinder 
-c 831304   c/z   0   15.9156   1.5875   $ Outer diameter
-c
-c
-c pz surfaces
-c
-c 832301   pz    97.0153   $ top of control rod
-c 832302   pz    96.2533   $ top of main section
-c 832303   pz    95.6183   $ top of poison portion
-c 832304   pz    49.5427   $ bottom of poison portion
-c 832305   pz    48.9077   $ bottom of main section
-c 832306   pz    48.5013   $ bottom of outer lower cone
-c 832307   pz    47.9425   $ bottom of control rod
-c
-c
-c k/z surfaces
-c
-c 833301   k/z  0   15.9156   99.9167615385   0.1877777777   $ upper beveling
-c 833302   k/z  0   15.9156   46.95385   0.66015625   $ lower outer beveling
-c 833303   k/z  0   15.9156   47.9425   5.0625   $ lower inner beveling
-c
 c
 c
 c
@@ -5025,7 +4925,7 @@ c 302313  pz  48.37684  $ Fuel meat 13"
 c 302314  pz  50.91684  $ Fuel meat 14"
 c
 c
-c Al element (TOS210D130) (done)
+c SS-clad FE element (TOS210D210) (done)
 c 
 311301  cz  0.285750  $ Zirc pin outer radius (0.225" DIA)
 311302  cz  0.793750  $ Top and bottom fitting outer radii (0.625" DIA)
@@ -5040,7 +4940,7 @@ c
 312303  pz  15.35684  $ Bottom of active section
 312304  pz  53.45684  $ Top of active section 
 312305  pz  62.42304  $ Top of upper graphite spacer
-312306  pz  63.69304  $ Top of Al top cap 
+312306  pz  63.69304  $ Top of SS top cap 
 312307  pz  66.55054  $ Top of tri-flute  
 312308  pz  70.36054  $ Top of fuel 
 312309  pz  76.40000  $ top plane of fuel assembly supercells
@@ -5261,7 +5161,7 @@ c
 c
 c ------- 1100F Aluminum -------
 c
-c   1100F Aluminum used in the cladding of graphite elements or old alumunum fuel elements
+c   1100F Aluminum used in the cladding of graphite elements or old aluminum fuel elements
 c   Assumed to be 99.6% aluminum, 0.95% iron, 0.95% silicon, 0.125% copper, 0.05% manganese
 c
 c
@@ -5270,19 +5170,19 @@ m104   13027.80c 0.996   26054.80c 0.0056  26056.80c 0.0871
        29063.80c 0.0086  29065.80c 0.0039  25055.80c 0.0005  
 c
 c
-c c ------- Type 304 Stainless steel -------
-c c
-c c   Type 304 Stainless steel used as fuel element cladding
-c c   Assumed to be    
-c c   Thanks to Rob Schickler of OSU for providing this m card
-c c
-c c
-c m105   6000.80c 0.00031519 24050.80c 7.8200E-4 24052.80c 1.4501E-2 
-c        24053.80c 1.6130E-3 24054.80c 3.9400E-4 26054.80c 3.5540E-3
-c        26056.80c 5.5110E-2 26057.80c 1.2570E-3 26058.80c 1.6600E-4
-c        28058.80c 5.5580E-3 28060.80c 2.0700E-3 28061.80c 8.8500E-5
-c        28062.80c 2.7800E-4 28064.80c 6.8500E-5 
-c c
+c ------- Type 304 Stainless steel -------
+c
+c   Type 304 Stainless steel used as fuel element cladding
+c   Density 7.857 g/cc per OSU Neutronics of RRR Report 2010   
+c   Thanks to Rob Schickler of OSU for providing this m card
+c
+c
+m105   6000.80c 0.00031519 24050.80c 7.8200E-4 24052.80c 1.4501E-2 
+       24053.80c 1.6130E-3 24054.80c 3.9400E-4 26054.80c 3.5540E-3
+       26056.80c 5.5110E-2 26057.80c 1.2570E-3 26058.80c 1.6600E-4
+       28058.80c 5.5580E-3 28060.80c 2.0700E-3 28061.80c 8.8500E-5
+       28062.80c 2.7800E-4 28064.80c 6.8500E-5 
+c
 c
 c
 c ------- Graphite -------
@@ -5300,12 +5200,15 @@ c
 c
 c ------- 25% mass b4c and Grapite 5% depleted -------
 c
-c
-c
-c
+c 	From OSU Neutronics Analysis 2010
+c 	Density 1.6859
 c
 m107   5010.80c  0.0035454  5011.80c  0.01427   
-       6000.80c  0.0693901                     $ 25% mass b4c and Grapite 5% depleted   
+       6000.80c  0.0693901                     $ 25% mass b4c and Grapite 5% depleted 
+c
+c 	Original card - Density 1.72066
+c m107   5010.80c  0.0035454  5011.80c  0.01427   
+c        6000.80c  0.0693901                     $ 25% mass b4c and Grapite 5% depleted   
 c
 c
 c
@@ -5348,3050 +5251,409 @@ c
 c
 c
 c
-m36741  92235.80c 1.8610E-04  92238.80c 7.4665E-04  40090.80c 1.4085E-02  
-        40091.80c 3.0728E-03  40092.80c 4.6970E-03  40094.80c 4.7585E-03  
-        40096.80c 7.6896E-04   1001.80c 2.7375E-02
+m7202    92235.80c -36.395024    92238.80c -154.119236    94249.80c -0.089411    40000.80c -796.812603     1001.80c -1254.979850
+mt7202 h/zr.10t zr/h.10t
 c
-mt36741 h/zr.10t zr/h.10t
 c
+m7945    92235.80c -36.565275    92238.80c -152.106266    94249.80c -0.080249    40000.80c -789.070872     1001.80c -1242.786623
+mt7945 h/zr.10t zr/h.10t
 c
-m36742  92235.80c 1.8610E-04  92238.80c 7.4665E-04  40090.80c 1.4085E-02
-        40091.80c 3.0728E-03  40092.80c 4.6970E-03  40094.80c 4.7585E-03
-        40096.80c 7.6896E-04   1001.80c 2.7375E-02
 c
-mt36742 h/zr.10t zr/h.10t
+m7946    92235.80c -36.478748    92238.80c -151.112849    94249.80c -0.084914    40000.80c -784.575704     1001.80c -1235.706734
+mt7946 h/zr.10t zr/h.10t
 c
 c
-m36743  92235.80c 1.8610E-04  92238.80c 7.4665E-04  40090.80c 1.4085E-02
-        40091.80c 3.0728E-03  40092.80c 4.6970E-03  40094.80c 4.7585E-03
-        40096.80c 7.6896E-04   1001.80c 2.7375E-02
+m8102    92235.80c -38.224573    92238.80c -151.556725    94249.80c -0.044081    40000.80c -793.558978     1001.80c -1249.855390
+mt8102 h/zr.10t zr/h.10t
 c
-mt36743 h/zr.10t zr/h.10t
 c
+m8103    92235.80c -38.224573    92238.80c -151.556725    94249.80c -0.044081    40000.80c -793.558978     1001.80c -1249.855390
+mt8103 h/zr.10t zr/h.10t
 c
-m36744  92235.80c 1.8610E-04  92238.80c 7.4665E-04  40090.80c 1.4085E-02
-        40091.80c 3.0728E-03  40092.80c 4.6970E-03  40094.80c 4.7585E-03
-        40096.80c 7.6896E-04   1001.80c 2.7375E-02
 c
-mt36744 h/zr.10t zr/h.10t
+m8104    92235.80c -38.154012    92238.80c -151.561932    94249.80c -0.048046    40000.80c -793.302347     1001.80c -1249.451196
+mt8104 h/zr.10t zr/h.10t
 c
 c
-m36745  92235.80c 1.8610E-04  92238.80c 7.4665E-04  40090.80c 1.4085E-02
-        40091.80c 3.0728E-03  40092.80c 4.6970E-03  40094.80c 4.7585E-03
-        40096.80c 7.6896E-04   1001.80c 2.7375E-02
+m8105    92235.80c -38.229808    92238.80c -151.556335    94249.80c -0.043790    40000.80c -793.578017     1001.80c -1249.885377
+mt8105 h/zr.10t zr/h.10t
 c
-mt36745 h/zr.10t zr/h.10t
 c
+m9678    92235.80c -36.303133    92238.80c -150.632246    94249.80c -0.062947    40000.80c -781.740575     1001.80c -1231.241405
+mt9678 h/zr.10t zr/h.10t
 c
 c
+m9679    92235.80c -36.332238    92238.80c -150.752312    94249.80c -0.062997    40000.80c -782.364389     1001.80c -1232.223912
+mt9679 h/zr.10t zr/h.10t
 c
 c
-m81041  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02  
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03  
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
+m10705    92235.80c -37.206096    92238.80c -153.045581    94249.80c -0.020426    40000.80c -795.426498     1001.80c -1252.796735
+mt10705 h/zr.10t zr/h.10t
 c
-mt81041 h/zr.10t zr/h.10t
 c
+m3671    92235.80c -32.169337    92238.80c -154.707305    94249.80c -0.627136    40000.80c -783.853605     1001.80c -1234.569427
+mt3671 h/zr.10t zr/h.10t
 c
-m81042  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
 c
-mt81042 h/zr.10t zr/h.10t
+m3673    92235.80c -33.946324    92238.80c -154.608631    94249.80c -0.460418    40000.80c -790.172776     1001.80c -1244.522122
+mt3673 h/zr.10t zr/h.10t
 c
 c
-m81043  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
+m3674    92235.80c -33.736470    92238.80c -154.619323    94249.80c -0.484488    40000.80c -789.440807     1001.80c -1243.369271
+mt3674 h/zr.10t zr/h.10t
 c
-mt81043 h/zr.10t zr/h.10t
 c
+m3676    92235.80c -33.851744    92238.80c -154.614136    94249.80c -0.469518    40000.80c -789.838442     1001.80c -1243.995546
+mt3676 h/zr.10t zr/h.10t
 c
-m81044  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
 c
-mt81044 h/zr.10t zr/h.10t
+m3677    92235.80c -32.075352    92238.80c -154.712752    94249.80c -0.634863    40000.80c -783.515773     1001.80c -1234.037343
+mt3677 h/zr.10t zr/h.10t
 c
 c
-m81045  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
+m3679    92235.80c -32.041523    92238.80c -154.714510    94249.80c -0.637965    40000.80c -783.394669     1001.80c -1233.846603
+mt3679 h/zr.10t zr/h.10t
 c
-mt81045 h/zr.10t zr/h.10t
 c
+m3682    92235.80c -32.908916    92238.80c -154.667369    94249.80c -0.558943    40000.80c -786.493358     1001.80c -1238.727038
+mt3682 h/zr.10t zr/h.10t
 c
 c
+m3683    92235.80c -34.000992    92238.80c -154.603872    94249.80c -0.459682    40000.80c -790.378343     1001.80c -1244.845890
+mt3683 h/zr.10t zr/h.10t
 c
 c
-m87331  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m3685    92235.80c -32.861538    92238.80c -154.670733    94249.80c -0.561771    40000.80c -786.321184     1001.80c -1238.455865
+mt3685 h/zr.10t zr/h.10t
 c
-mt87331 h/zr.10t zr/h.10t
 c
+m3721    92235.80c -30.430327    92238.80c -150.678129    94249.80c -0.696301    40000.80c -760.029023     1001.80c -1197.045712
+mt3721 h/zr.10t zr/h.10t
 c
-m87332  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
 c
-mt87332 h/zr.10t zr/h.10t
+m3743    92235.80c -31.634671    92238.80c -150.619263    94249.80c -0.582348    40000.80c -764.341281     1001.80c -1203.837517
+mt3743 h/zr.10t zr/h.10t
 c
 c
-m87333  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m3748    92235.80c -35.156331    92238.80c -150.410186    94249.80c -0.240617    40000.80c -776.760835     1001.80c -1223.398315
+mt3748 h/zr.10t zr/h.10t
 c
-mt87333 h/zr.10t zr/h.10t
 c
+m3774    92235.80c -31.583642    92238.80c -154.734318    94249.80c -0.685243    40000.80c -781.760962     1001.80c -1231.273515
+mt3774 h/zr.10t zr/h.10t
 c
-m87334  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
 c
-mt87334 h/zr.10t zr/h.10t
+m3810    92235.80c -31.652935    92238.80c -154.733432    94249.80c -0.675074    40000.80c -782.004424     1001.80c -1231.656968
+mt3810 h/zr.10t zr/h.10t
 c
 c
-m87335  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m3835    92235.80c -35.834258    92238.80c -158.617683    94249.80c -0.375955    40000.80c -814.471847     1001.80c -1282.793159
+mt3835 h/zr.10t zr/h.10t
 c
-mt87335 h/zr.10t zr/h.10t
 c
+m3840    92235.80c -35.201785    92238.80c -154.532838    94249.80c -0.338123    40000.80c -794.593091     1001.80c -1251.484118
+mt3840 h/zr.10t zr/h.10t
 c
 c
+m3851    92235.80c -35.141414    92238.80c -154.537025    94249.80c -0.342243    40000.80c -794.375436     1001.80c -1251.141312
+mt3851 h/zr.10t zr/h.10t
 c
 c
-m41061  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m3852    92235.80c -36.160800    92238.80c -154.471789    94249.80c -0.241645    40000.80c -797.943686     1001.80c -1256.761306
+mt3852 h/zr.10t zr/h.10t
 c
-mt41061 h/zr.10t zr/h.10t
 c
+m3853    92235.80c -34.518302    92238.80c -154.574921    94249.80c -0.404448    40000.80c -792.189009     1001.80c -1247.697689
+mt3853 h/zr.10t zr/h.10t
 c
-m41062  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
 c
-mt41062 h/zr.10t zr/h.10t
+m3854    92235.80c -31.279554    92238.80c -154.751945    94249.80c -0.708933    40000.80c -780.662456     1001.80c -1229.543368
+mt3854 h/zr.10t zr/h.10t
 c
 c
-m41063  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m3855    92235.80c -31.854259    92238.80c -154.720763    94249.80c -0.660609    40000.80c -782.732621     1001.80c -1232.803877
+mt3855 h/zr.10t zr/h.10t
 c
-mt41063 h/zr.10t zr/h.10t
 c
+m3856    92235.80c -35.552544    92238.80c -154.511373    94249.80c -0.300381    40000.80c -795.811910     1001.80c -1253.403759
+mt3856 h/zr.10t zr/h.10t
 c
-m41064  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
 c
-mt41064 h/zr.10t zr/h.10t
+m3858    92235.80c -30.981471    92238.80c -154.766761    94249.80c -0.735190    40000.80c -779.588029     1001.80c -1227.851146
+mt3858 h/zr.10t zr/h.10t
 c
 c
-m41065  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m3862    92235.80c -30.737324    92238.80c -154.778308    94249.80c -0.757012    40000.80c -778.706883     1001.80c -1226.463340
+mt3862 h/zr.10t zr/h.10t
 c
-mt41065 h/zr.10t zr/h.10t
 c
+m3864    92235.80c -32.880597    92238.80c -158.782782    94249.80c -0.660796    40000.80c -804.005117     1001.80c -1266.308060
+mt3864 h/zr.10t zr/h.10t
 c
 c
+m3865    92235.80c -35.856442    92238.80c -154.491383    94249.80c -0.272989    40000.80c -796.884270     1001.80c -1255.092725
+mt3865 h/zr.10t zr/h.10t
 c
 c
-m41171  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02  
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03  
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
+m3866    92235.80c -36.814545    92238.80c -158.556351    94249.80c -0.276757    40000.80c -817.898813     1001.80c -1288.190630
+mt3866 h/zr.10t zr/h.10t
 c
-mt41171 h/zr.10t zr/h.10t
 c
+m3868    92235.80c -34.567644    92238.80c -154.571746    94249.80c -0.400331    40000.80c -792.364793     1001.80c -1247.974548
+mt3868 h/zr.10t zr/h.10t
 c
-m41172  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
 c
-mt41172 h/zr.10t zr/h.10t
+m3870    92235.80c -30.856296    92238.80c -154.769351    94249.80c -0.750613    40000.80c -779.140049     1001.80c -1227.145577
+mt3870 h/zr.10t zr/h.10t
 c
 c
-m41173  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
+m3872    92235.80c -31.375998    92238.80c -158.859333    94249.80c -0.792077    40000.80c -798.584023     1001.80c -1257.769836
+mt3872 h/zr.10t zr/h.10t
 c
-mt41173 h/zr.10t zr/h.10t
 c
+m3874    92235.80c -37.539032    92238.80c -154.379256    94249.80c -0.099298    40000.80c -802.723433     1001.80c -1264.289407
+mt3874 h/zr.10t zr/h.10t
 c
-m41174  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
 c
-mt41174 h/zr.10t zr/h.10t
+m4046    92235.80c -33.105331    92238.80c -158.773517    94249.80c -0.635996    40000.80c -804.802203     1001.80c -1267.563470
+mt4046 h/zr.10t zr/h.10t
 c
 c
-m41175  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
+m4049    92235.80c -32.792316    92238.80c -158.789783    94249.80c -0.664816    40000.80c -803.682137     1001.80c -1265.799366
+mt4049 h/zr.10t zr/h.10t
 c
-mt41175 h/zr.10t zr/h.10t
 c
+m4050    92235.80c -31.146797    92238.80c -158.866068    94249.80c -0.816509    40000.80c -797.756151     1001.80c -1256.465938
+mt4050 h/zr.10t zr/h.10t
 c
 c
+m4053    92235.80c -36.007346    92238.80c -158.607175    94249.80c -0.358204    40000.80c -815.077299     1001.80c -1283.746746
+mt4053 h/zr.10t zr/h.10t
 c
 c
-m36711  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m4054    92235.80c -32.872532    92238.80c -154.670130    94249.80c -0.560744    40000.80c -786.360324     1001.80c -1238.517511
+mt4054 h/zr.10t zr/h.10t
 c
-mt36711 h/zr.10t zr/h.10t
 c
+m4055    92235.80c -35.980563    92238.80c -158.608835    94249.80c -0.360844    40000.80c -814.983311     1001.80c -1283.598715
+mt4055 h/zr.10t zr/h.10t
 c
-m36712  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
 c
-mt36712 h/zr.10t zr/h.10t
+m4057    92235.80c -35.411837    92238.80c -154.519677    94249.80c -0.317330    40000.80c -795.329267     1001.80c -1252.643596
+mt4057 h/zr.10t zr/h.10t
 c
 c
-m36713  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m4060    92235.80c -30.842106    92238.80c -154.770014    94249.80c -0.751878    40000.80c -779.088790     1001.80c -1227.064844
+mt4060 h/zr.10t zr/h.10t
 c
-mt36713 h/zr.10t zr/h.10t
 c
+m4061    92235.80c -35.466571    92238.80c -158.639268    94249.80c -0.414699    40000.80c -813.186943     1001.80c -1280.769435
+mt4061 h/zr.10t zr/h.10t
 c
-m36714  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
 c
-mt36714 h/zr.10t zr/h.10t
+m4062    92235.80c -34.857231    92238.80c -154.554316    94249.80c -0.371338    40000.80c -793.381336     1001.80c -1249.575605
+mt4062 h/zr.10t zr/h.10t
 c
 c
-m36715  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m4063    92235.80c -29.940015    92238.80c -154.810467    94249.80c -0.831360    40000.80c -775.819004     1001.80c -1221.914931
+mt4063 h/zr.10t zr/h.10t
 c
-mt36715 h/zr.10t zr/h.10t
 c
+m4064    92235.80c -34.178164    92238.80c -150.471929    94249.80c -0.340096    40000.80c -773.345621     1001.80c -1218.019353
+mt4064 h/zr.10t zr/h.10t
 c
 c
+m4065    92235.80c -32.642035    92238.80c -150.564326    94249.80c -0.485984    40000.80c -767.920025     1001.80c -1209.474040
+mt4065 h/zr.10t zr/h.10t
 c
 c
-m87321  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02  
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03  
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
+m4066    92235.80c -31.067914    92238.80c -154.759372    94249.80c -0.731709    40000.80c -779.903963     1001.80c -1228.348742
+mt4066 h/zr.10t zr/h.10t
 c
-mt87321 h/zr.10t zr/h.10t
 c
+m4068    92235.80c -32.811963    92238.80c -158.786293    94249.80c -0.667095    40000.80c -803.759207     1001.80c -1265.920751
+mt4068 h/zr.10t zr/h.10t
 c
-m87322  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
 c
-mt87322 h/zr.10t zr/h.10t
+m4069    92235.80c -34.856774    92238.80c -154.554162    94249.80c -0.372074    40000.80c -793.381857     1001.80c -1249.576424
+mt4069 h/zr.10t zr/h.10t
 c
 c
-m87323  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
+m4070    92235.80c -33.160542    92238.80c -158.771998    94249.80c -0.628374    40000.80c -804.994796     1001.80c -1267.866803
+mt4070 h/zr.10t zr/h.10t
 c
-mt87323 h/zr.10t zr/h.10t
 c
+m4071    92235.80c -30.869327    92238.80c -158.882205    94249.80c -0.836768    40000.80c -796.748346     1001.80c -1254.878645
+mt4071 h/zr.10t zr/h.10t
 c
-m87324  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
 c
-mt87324 h/zr.10t zr/h.10t
+m4074    92235.80c -35.143635    92238.80c -154.536458    94249.80c -0.343862    40000.80c -794.389119     1001.80c -1251.162863
+mt4074 h/zr.10t zr/h.10t
 c
 c
-m87325  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
+m4077    92235.80c -32.110492    92238.80c -154.710375    94249.80c -0.632567    40000.80c -783.643138     1001.80c -1234.237942
+mt4077 h/zr.10t zr/h.10t
 c
-mt87325 h/zr.10t zr/h.10t
 c
+m4081    92235.80c -32.207277    92238.80c -154.702670    94249.80c -0.628256    40000.80c -783.997512     1001.80c -1234.796081
+mt4081 h/zr.10t zr/h.10t
 c
 c
+m4082    92235.80c -32.484163    92238.80c -154.688158    94249.80c -0.602693    40000.80c -784.987491     1001.80c -1236.355298
+mt4082 h/zr.10t zr/h.10t
 c
 c
-m81051  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m4083    92235.80c -32.037647    92238.80c -158.827952    94249.80c -0.732882    40000.80c -800.971378     1001.80c -1261.529920
+mt4083 h/zr.10t zr/h.10t
 c
-mt81051 h/zr.10t zr/h.10t
 c
+m4085    92235.80c -34.695493    92238.80c -150.439860    94249.80c -0.286822    40000.80c -775.151525     1001.80c -1220.863652
+mt4085 h/zr.10t zr/h.10t
 c
-m81052  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
 c
-mt81052 h/zr.10t zr/h.10t
+m4086    92235.80c -32.028441    92238.80c -154.715706    94249.80c -0.638303    40000.80c -783.346394     1001.80c -1233.770571
+mt4086 h/zr.10t zr/h.10t
 c
 c
-m81053  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m4087    92235.80c -33.815533    92238.80c -154.614598    94249.80c -0.477433    40000.80c -789.722083     1001.80c -1243.812281
+mt4087 h/zr.10t zr/h.10t
 c
-mt81053 h/zr.10t zr/h.10t
 c
+m4088    92235.80c -31.377672    92238.80c -150.632856    94249.80c -0.606158    40000.80c -763.423266     1001.80c -1202.391643
+mt4088 h/zr.10t zr/h.10t
 c
-m81054  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
 c
-mt81054 h/zr.10t zr/h.10t
+m4090    92235.80c -33.147143    92238.80c -158.768986    94249.80c -0.636317    40000.80c -804.959401     1001.80c -1267.811056
+mt4090 h/zr.10t zr/h.10t
 c
 c
-m81055  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m4091    92235.80c -35.549088    92238.80c -158.635084    94249.80c -0.403878    40000.80c -813.469177     1001.80c -1281.213954
+mt4091 h/zr.10t zr/h.10t
 c
-mt81055 h/zr.10t zr/h.10t
 c
+m4094    92235.80c -35.111748    92238.80c -154.538872    94249.80c -0.345172    40000.80c -794.271388     1001.80c -1250.977436
+mt4094 h/zr.10t zr/h.10t
 c
 c
+m4095    92235.80c -33.397046    92238.80c -154.640871    94249.80c -0.511219    40000.80c -788.223687     1001.80c -1241.452308
+mt4095 h/zr.10t zr/h.10t
 c
 c
-m40621  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m4103    92235.80c -32.312488    92238.80c -154.700311    94249.80c -0.612957    40000.80c -784.363526     1001.80c -1235.372554
+mt4103 h/zr.10t zr/h.10t
 c
-mt40621 h/zr.10t zr/h.10t
 c
+m4104    92235.80c -32.036539    92238.80c -154.714768    94249.80c -0.638439    40000.80c -783.376894     1001.80c -1233.818609
+mt4104 h/zr.10t zr/h.10t
 c
-m40622  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
 c
-mt40622 h/zr.10t zr/h.10t
+m4106    92235.80c -32.515482    92238.80c -150.571117    94249.80c -0.499011    40000.80c -767.473824     1001.80c -1208.771272
+mt4106 h/zr.10t zr/h.10t
 c
 c
-m40623  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m4107    92235.80c -33.539348    92238.80c -154.630359    94249.80c -0.503731    40000.80c -788.743325     1001.80c -1242.270736
+mt4107 h/zr.10t zr/h.10t
 c
-mt40623 h/zr.10t zr/h.10t
 c
+m4110    92235.80c -34.423049    92238.80c -158.701576    94249.80c -0.511726    40000.80c -809.490629     1001.80c -1274.947740
+mt4110 h/zr.10t zr/h.10t
 c
-m40624  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
 c
-mt40624 h/zr.10t zr/h.10t
+m4111    92235.80c -33.874940    92238.80c -154.612845    94249.80c -0.467136    40000.80c -789.920061     1001.80c -1244.124095
+mt4111 h/zr.10t zr/h.10t
 c
 c
-m40625  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m4113    92235.80c -33.718839    92238.80c -158.738549    94249.80c -0.583213    40000.80c -807.000118     1001.80c -1271.025185
+mt4113 h/zr.10t zr/h.10t
 c
-mt40625 h/zr.10t zr/h.10t
 c
+m4114    92235.80c -35.126419    92238.80c -154.537695    94249.80c -0.344850    40000.80c -794.326450     1001.80c -1251.064159
+mt4114 h/zr.10t zr/h.10t
 c
 c
+m4117    92235.80c -35.228758    92238.80c -154.531812    94249.80c -0.332544    40000.80c -794.678238     1001.80c -1251.618224
+mt4117 h/zr.10t zr/h.10t
 c
 c
-m96781  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02  
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03  
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
+m4118    92235.80c -35.973281    92238.80c -158.609565    94249.80c -0.360411    40000.80c -814.954108     1001.80c -1283.552721
+mt4118 h/zr.10t zr/h.10t
 c
-mt96781 h/zr.10t zr/h.10t
 c
+m4119    92235.80c -32.546817    92238.80c -154.684835    94249.80c -0.596878    40000.80c -785.211218     1001.80c -1236.707669
+mt4119 h/zr.10t zr/h.10t
 c
-m96782  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
 c
-mt96782 h/zr.10t zr/h.10t
+m4120    92235.80c -35.696086    92238.80c -158.626145    94249.80c -0.389502    40000.80c -813.986229     1001.80c -1282.028311
+mt4120 h/zr.10t zr/h.10t
 c
 c
-m96783  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
+m4121    92235.80c -35.924345    92238.80c -158.612313    94249.80c -0.366379    40000.80c -814.785970     1001.80c -1283.287903
+mt4121 h/zr.10t zr/h.10t
 c
-mt96783 h/zr.10t zr/h.10t
 c
+m4122    92235.80c -32.411550    92238.80c -150.576978    94249.80c -0.508870    40000.80c -767.105059     1001.80c -1208.190467
+mt4122 h/zr.10t zr/h.10t
 c
-m96784  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
 c
-mt96784 h/zr.10t zr/h.10t
+m4123    92235.80c -30.408410    92238.80c -158.897943    94249.80c -0.880903    40000.80c -795.071795     1001.80c -1252.238077
+mt4123 h/zr.10t zr/h.10t
 c
 c
-m96785  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
+m4125    92235.80c -30.657961    92238.80c -154.781566    94249.80c -0.764600    40000.80c -778.420454     1001.80c -1226.012215
+mt4125 h/zr.10t zr/h.10t
 c
-mt96785 h/zr.10t zr/h.10t
 c
+m4126    92235.80c -33.148467    92238.80c -154.652222    94249.80c -0.540682    40000.80c -787.355130     1001.80c -1240.084330
+mt4126 h/zr.10t zr/h.10t
 c
 c
+m4127    92235.80c -34.094829    92238.80c -154.599929    94249.80c -0.446149    40000.80c -790.697567     1001.80c -1245.348667
+mt4127 h/zr.10t zr/h.10t
 c
 c
-m41031  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m4129    92235.80c -36.344351    92238.80c -154.459928    94249.80c -0.221892    40000.80c -798.578859     1001.80c -1257.761703
+mt4129 h/zr.10t zr/h.10t
 c
-mt41031 h/zr.10t zr/h.10t
 c
+m4130    92235.80c -35.975319    92238.80c -158.608984    94249.80c -0.362087    40000.80c -814.967207     1001.80c -1283.573351
+mt4130 h/zr.10t zr/h.10t
 c
-m41032  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
 c
-mt41032 h/zr.10t zr/h.10t
+m4131    92235.80c -36.025309    92238.80c -154.480791    94249.80c -0.254114    40000.80c -797.467028     1001.80c -1256.010570
+mt4131 h/zr.10t zr/h.10t
 c
 c
-m41033  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m4132    92235.80c -34.740079    92238.80c -150.436883    94249.80c -0.283082    40000.80c -775.309839     1001.80c -1221.112996
+mt4132 h/zr.10t zr/h.10t
 c
-mt41033 h/zr.10t zr/h.10t
 c
+m4133    92235.80c -36.742981    92238.80c -158.560745    94249.80c -0.285129    40000.80c -817.653008     1001.80c -1287.803488
+mt4133 h/zr.10t zr/h.10t
 c
-m41034  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
 c
-mt41034 h/zr.10t zr/h.10t
+m4134    92235.80c -34.553719    92238.80c -154.572785    94249.80c -0.401001    40000.80c -792.313723     1001.80c -1247.894114
+mt4134 h/zr.10t zr/h.10t
 c
 c
-m41035  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
+m8732    92235.80c -37.627082    92238.80c -151.480687    94249.80c -0.015813    40000.80c -790.625139     1001.80c -1245.234594
+mt8732 h/zr.10t zr/h.10t
 c
-mt41035 h/zr.10t zr/h.10t
 c
+m8733    92235.80c -37.761810    92238.80c -152.049711    94249.80c -0.016558    40000.80c -793.570267     1001.80c -1249.873170
+mt8733 h/zr.10t zr/h.10t
 c
 c
+m8734    92235.80c -37.615467    92238.80c -151.440185    94249.80c -0.015970    40000.80c -790.407922     1001.80c -1244.892477
+mt8734 h/zr.10t zr/h.10t
 c
 c
-m96791  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02  
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03  
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
+m8735    92235.80c -38.336434    92238.80c -154.447264    94249.80c -0.017742    40000.80c -806.000311     1001.80c -1269.450490
+mt8735 h/zr.10t zr/h.10t
 c
-mt96791 h/zr.10t zr/h.10t
 c
+m8736    92235.80c -38.206628    92238.80c -153.919220    94249.80c -0.017551    40000.80c -803.249387     1001.80c -1265.117784
+mt8736 h/zr.10t zr/h.10t
 c
-m96792  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt96792 h/zr.10t zr/h.10t
-c
-c
-m96793  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt96793 h/zr.10t zr/h.10t
-c
-c
-m96794  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt96794 h/zr.10t zr/h.10t
-c
-c
-m96795  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt96795 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m87361  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02  
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03  
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt87361 h/zr.10t zr/h.10t
-c
-c
-m87362  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt87362 h/zr.10t zr/h.10t
-c
-c
-m87363  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt87363 h/zr.10t zr/h.10t
-c
-c
-m87364  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt87364 h/zr.10t zr/h.10t
-c
-c
-m87365  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt87365 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m87341  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt87341 h/zr.10t zr/h.10t
-c
-c
-m87342  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt87342 h/zr.10t zr/h.10t
-c
-c
-m87343  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt87343 h/zr.10t zr/h.10t
-c
-c
-m87344  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt87344 h/zr.10t zr/h.10t
-c
-c
-m87345  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt87345 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m41211  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41211 h/zr.10t zr/h.10t
-c
-c
-m41212  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41212 h/zr.10t zr/h.10t
-c
-c
-m41213  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41213 h/zr.10t zr/h.10t
-c
-c
-m41214  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41214 h/zr.10t zr/h.10t
-c
-c
-m41215  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41215 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m107051  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt107051 h/zr.10t zr/h.10t
-c
-c
-m107052  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt107052 h/zr.10t zr/h.10t
-c
-c
-m107053  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt107053 h/zr.10t zr/h.10t
-c
-c
-m107054  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt107054 h/zr.10t zr/h.10t
-c
-c
-m107055  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt107055 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m36851  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt36851 h/zr.10t zr/h.10t
-c
-c
-m36852  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt36852 h/zr.10t zr/h.10t
-c
-c
-m36853  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt36853 h/zr.10t zr/h.10t
-c
-c
-m36854  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt36854 h/zr.10t zr/h.10t
-c
-c
-m36855  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt36855 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m40951  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40951 h/zr.10t zr/h.10t
-c
-c
-m40952  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40952 h/zr.10t zr/h.10t
-c
-c
-m40953  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40953 h/zr.10t zr/h.10t
-c
-c
-m40954  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40954 h/zr.10t zr/h.10t
-c
-c
-m40955  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40955 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m40861  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02  
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03  
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt40861 h/zr.10t zr/h.10t
-c
-c
-m40862  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt40862 h/zr.10t zr/h.10t
-c
-c
-m40863  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt40863 h/zr.10t zr/h.10t
-c
-c
-m40864  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt40864 h/zr.10t zr/h.10t
-c
-c
-m40865  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt40865 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m72021  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02  
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03  
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt72021 h/zr.10t zr/h.10t
-c
-c
-m72022  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt72022 h/zr.10t zr/h.10t
-c
-c
-m72023  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt72023 h/zr.10t zr/h.10t
-c
-c
-m72024  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt72024 h/zr.10t zr/h.10t
-c
-c
-m72025  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt72025 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m41141  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41141 h/zr.10t zr/h.10t
-c
-c
-m41142  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41142 h/zr.10t zr/h.10t
-c
-c
-m41143  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41143 h/zr.10t zr/h.10t
-c
-c
-m41144  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41144 h/zr.10t zr/h.10t
-c
-c
-m41145  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41145 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m40771  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40771 h/zr.10t zr/h.10t
-c
-c
-m40772  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40772 h/zr.10t zr/h.10t
-c
-c
-m40773  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40773 h/zr.10t zr/h.10t
-c
-c
-m40774  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40774 h/zr.10t zr/h.10t
-c
-c
-m40775  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40775 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m40701  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02  
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03  
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt40701 h/zr.10t zr/h.10t
-c
-c
-m40702  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt40702 h/zr.10t zr/h.10t
-c
-c
-m40703  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt40703 h/zr.10t zr/h.10t
-c
-c
-m40704  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt40704 h/zr.10t zr/h.10t
-c
-c
-m40705  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt40705 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m41041  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02  
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03  
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt41041 h/zr.10t zr/h.10t
-c
-c
-m41042  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt41042 h/zr.10t zr/h.10t
-c
-c
-m41043  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt41043 h/zr.10t zr/h.10t
-c
-c
-m41044  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt41044 h/zr.10t zr/h.10t
-c
-c
-m41045  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt41045 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m36791  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02  
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03  
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt36791 h/zr.10t zr/h.10t
-c
-c
-m36792  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt36792 h/zr.10t zr/h.10t
-c
-c
-m36793  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt36793 h/zr.10t zr/h.10t
-c
-c
-m36794  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt36794 h/zr.10t zr/h.10t
-c
-c
-m36795  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt36795 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m81021  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02  
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03  
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt81021 h/zr.10t zr/h.10t
-c
-c
-m81022  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt81022 h/zr.10t zr/h.10t
-c
-c
-m81023  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt81023 h/zr.10t zr/h.10t
-c
-c
-m81024  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt81024 h/zr.10t zr/h.10t
-c
-c
-m81025  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt81025 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m40541  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40541 h/zr.10t zr/h.10t
-c
-c
-m40542  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40542 h/zr.10t zr/h.10t
-c
-c
-m40543  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40543 h/zr.10t zr/h.10t
-c
-c
-m40544  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40544 h/zr.10t zr/h.10t
-c
-c
-m40545  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40545 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m41221  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41221 h/zr.10t zr/h.10t
-c
-c
-m41222  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41222 h/zr.10t zr/h.10t
-c
-c
-m41223  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41223 h/zr.10t zr/h.10t
-c
-c
-m41224  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41224 h/zr.10t zr/h.10t
-c
-c
-m41225  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41225 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m41181  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41181 h/zr.10t zr/h.10t
-c
-c
-m41182  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41182 h/zr.10t zr/h.10t
-c
-c
-m41183  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41183 h/zr.10t zr/h.10t
-c
-c
-m41184  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41184 h/zr.10t zr/h.10t
-c
-c
-m41185  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41185 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m38721  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02  
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03  
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt38721 h/zr.10t zr/h.10t
-c
-c
-m38722  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt38722 h/zr.10t zr/h.10t
-c
-c
-m38723  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt38723 h/zr.10t zr/h.10t
-c
-c
-m38724  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt38724 h/zr.10t zr/h.10t
-c
-c
-m38725  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt38725 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m40831  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40831 h/zr.10t zr/h.10t
-c
-c
-m40832  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40832 h/zr.10t zr/h.10t
-c
-c
-m40833  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40833 h/zr.10t zr/h.10t
-c
-c
-m40834  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40834 h/zr.10t zr/h.10t
-c
-c
-m40835  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40835 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m79461  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02  
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03  
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt79461 h/zr.10t zr/h.10t
-c
-c
-m79462  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt79462 h/zr.10t zr/h.10t
-c
-c
-m79463  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt79463 h/zr.10t zr/h.10t
-c
-c
-m79464  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt79464 h/zr.10t zr/h.10t
-c
-c
-m79465  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt79465 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m38531  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38531 h/zr.10t zr/h.10t
-c
-c
-m38532  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38532 h/zr.10t zr/h.10t
-c
-c
-m38533  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38533 h/zr.10t zr/h.10t
-c
-c
-m38534  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38534 h/zr.10t zr/h.10t
-c
-c
-m38535  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38535 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m38561  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02  
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03  
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt38561 h/zr.10t zr/h.10t
-c
-c
-m38562  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt38562 h/zr.10t zr/h.10t
-c
-c
-m38563  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt38563 h/zr.10t zr/h.10t
-c
-c
-m38564  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt38564 h/zr.10t zr/h.10t
-c
-c
-m38565  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt38565 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m41341  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41341 h/zr.10t zr/h.10t
-c
-c
-m41342  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41342 h/zr.10t zr/h.10t
-c
-c
-m41343  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41343 h/zr.10t zr/h.10t
-c
-c
-m41344  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41344 h/zr.10t zr/h.10t
-c
-c
-m41345  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41345 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m41331  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41331 h/zr.10t zr/h.10t
-c
-c
-m41332  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41332 h/zr.10t zr/h.10t
-c
-c
-m41333  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41333 h/zr.10t zr/h.10t
-c
-c
-m41334  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41334 h/zr.10t zr/h.10t
-c
-c
-m41335  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41335 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m40851  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40851 h/zr.10t zr/h.10t
-c
-c
-m40852  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40852 h/zr.10t zr/h.10t
-c
-c
-m40853  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40853 h/zr.10t zr/h.10t
-c
-c
-m40854  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40854 h/zr.10t zr/h.10t
-c
-c
-m40855  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40855 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m41101  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41101 h/zr.10t zr/h.10t
-c
-c
-m41102  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41102 h/zr.10t zr/h.10t
-c
-c
-m41103  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41103 h/zr.10t zr/h.10t
-c
-c
-m41104  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41104 h/zr.10t zr/h.10t
-c
-c
-m41105  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41105 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m36771  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt36771 h/zr.10t zr/h.10t
-c
-c
-m36772  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt36772 h/zr.10t zr/h.10t
-c
-c
-m36773  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt36773 h/zr.10t zr/h.10t
-c
-c
-m36774  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt36774 h/zr.10t zr/h.10t
-c
-c
-m36775  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt36775 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m41311  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02  
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03  
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt41311 h/zr.10t zr/h.10t
-c
-c
-m41312  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt41312 h/zr.10t zr/h.10t
-c
-c
-m41313  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt41313 h/zr.10t zr/h.10t
-c
-c
-m41314  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt41314 h/zr.10t zr/h.10t
-c
-c
-m41315  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt41315 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m40651  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02  
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03  
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt40651 h/zr.10t zr/h.10t
-c
-c
-m40652  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt40652 h/zr.10t zr/h.10t
-c
-c
-m40653  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt40653 h/zr.10t zr/h.10t
-c
-c
-m40654  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt40654 h/zr.10t zr/h.10t
-c
-c
-m40655  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt40655 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m38511  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02  
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03  
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt38511 h/zr.10t zr/h.10t
-c
-c
-m38512  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt38512 h/zr.10t zr/h.10t
-c
-c
-m38513  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt38513 h/zr.10t zr/h.10t
-c
-c
-m38514  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt38514 h/zr.10t zr/h.10t
-c
-c
-m38515  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt38515 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m40551  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40551 h/zr.10t zr/h.10t
-c
-c
-m40552  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40552 h/zr.10t zr/h.10t
-c
-c
-m40553  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40553 h/zr.10t zr/h.10t
-c
-c
-m40554  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40554 h/zr.10t zr/h.10t
-c
-c
-m40555  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40555 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m38621  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38621 h/zr.10t zr/h.10t
-c
-c
-m38622  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38622 h/zr.10t zr/h.10t
-c
-c
-m38623  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38623 h/zr.10t zr/h.10t
-c
-c
-m38624  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38624 h/zr.10t zr/h.10t
-c
-c
-m38625  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38625 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m40641  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40641 h/zr.10t zr/h.10t
-c
-c
-m40642  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40642 h/zr.10t zr/h.10t
-c
-c
-m40643  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40643 h/zr.10t zr/h.10t
-c
-c
-m40644  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40644 h/zr.10t zr/h.10t
-c
-c
-m40645  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40645 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m38581  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38581 h/zr.10t zr/h.10t
-c
-c
-m38582  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38582 h/zr.10t zr/h.10t
-c
-c
-m38583  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38583 h/zr.10t zr/h.10t
-c
-c
-m38584  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38584 h/zr.10t zr/h.10t
-c
-c
-m38585  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38585 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m40531  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40531 h/zr.10t zr/h.10t
-c
-c
-m40532  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40532 h/zr.10t zr/h.10t
-c
-c
-m40533  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40533 h/zr.10t zr/h.10t
-c
-c
-m40534  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40534 h/zr.10t zr/h.10t
-c
-c
-m40535  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40535 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m87351  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02  
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03  
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt87351 h/zr.10t zr/h.10t
-c
-c
-m87352  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt87352 h/zr.10t zr/h.10t
-c
-c
-m87353  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt87353 h/zr.10t zr/h.10t
-c
-c
-m87354  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt87354 h/zr.10t zr/h.10t
-c
-c
-m87355  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9254E-02
-        40091.80c 4.2003E-03  40092.80c 6.4203E-03  40094.80c 6.5045E-03
-        40096.80c 1.0511E-03   1001.80c 3.7419E-02
-c
-mt87355 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m37481  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt37481 h/zr.10t zr/h.10t
-c
-c
-m37482  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt37482 h/zr.10t zr/h.10t
-c
-c
-m37483  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt37483 h/zr.10t zr/h.10t
-c
-c
-m37484  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt37484 h/zr.10t zr/h.10t
-c
-c
-m37485  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt37485 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m79451  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02  
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03  
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt79451 h/zr.10t zr/h.10t
-c
-c
-m79452  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt79452 h/zr.10t zr/h.10t
-c
-c
-m79453  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt79453 h/zr.10t zr/h.10t
-c
-c
-m79454  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt79454 h/zr.10t zr/h.10t
-c
-c
-m79455  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt79455 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m38661  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38661 h/zr.10t zr/h.10t
-c
-c
-m38662  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38662 h/zr.10t zr/h.10t
-c
-c
-m38663  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38663 h/zr.10t zr/h.10t
-c
-c
-m38664  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38664 h/zr.10t zr/h.10t
-c
-c
-m38665  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38665 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m38521  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38521 h/zr.10t zr/h.10t
-c
-c
-m38522  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38522 h/zr.10t zr/h.10t
-c
-c
-m38523  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38523 h/zr.10t zr/h.10t
-c
-c
-m38524  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38524 h/zr.10t zr/h.10t
-c
-c
-m38525  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38525 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m40711  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40711 h/zr.10t zr/h.10t
-c
-c
-m40712  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40712 h/zr.10t zr/h.10t
-c
-c
-m40713  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40713 h/zr.10t zr/h.10t
-c
-c
-m40714  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40714 h/zr.10t zr/h.10t
-c
-c
-m40715  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40715 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m40941  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40941 h/zr.10t zr/h.10t
-c
-c
-m40942  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40942 h/zr.10t zr/h.10t
-c
-c
-m40943  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40943 h/zr.10t zr/h.10t
-c
-c
-m40944  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40944 h/zr.10t zr/h.10t
-c
-c
-m40945  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt40945 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m41291  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41291 h/zr.10t zr/h.10t
-c
-c
-m41292  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41292 h/zr.10t zr/h.10t
-c
-c
-m41293  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41293 h/zr.10t zr/h.10t
-c
-c
-m41294  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41294 h/zr.10t zr/h.10t
-c
-c
-m41295  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt41295 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m38741  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02  
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03  
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38741 h/zr.10t zr/h.10t
-c
-c
-m38742  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38742 h/zr.10t zr/h.10t
-c
-c
-m38743  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38743 h/zr.10t zr/h.10t
-c
-c
-m38744  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38744 h/zr.10t zr/h.10t
-c
-c
-m38745  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9355E-02
-        40091.80c 4.2224E-03  40092.80c 6.4541E-03  40094.80c 6.5387E-03
-        40096.80c 1.0566E-03   1001.80c 3.7616E-02
-c
-mt38745 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-m81031  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02  
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03  
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt81031 h/zr.10t zr/h.10t
-c
-c
-m81032  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt81032 h/zr.10t zr/h.10t
-c
-c
-m81033  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt81033 h/zr.10t zr/h.10t
-c
-c
-m81034  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt81034 h/zr.10t zr/h.10t
-c
-c
-m81035  92235.80c 2.5257E-04  92238.80c 1.0133E-03  40090.80c 1.9456E-02
-        40091.80c 4.2445E-03  40092.80c 6.4879E-03  40094.80c 6.5729E-03
-        40096.80c 1.0622E-03   1001.80c 3.7813E-02
-c
-mt81035 h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-c
-c --- F ring ---
-c
-c --- F1 - 4057 ---
-c 
-m40571  92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40571 h/zr.10t zr/h.10t
-c
-c
-m40572  92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40572 h/zr.10t zr/h.10t
-c
-c
-m40573  92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40573 h/zr.10t zr/h.10t
-c
-c
-m40574  92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40574 h/zr.10t zr/h.10t
-c
-c
-m40575  92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40575 h/zr.10t zr/h.10t
-c
-c
-c
-c --- F2 - 4125 ---
-c 
-m41251  92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41251 h/zr.10t zr/h.10t
-c
-c
-m41252   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41252  h/zr.10t zr/h.10t
-c
-c
-m41253   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41253  h/zr.10t zr/h.10t
-c
-c
-m41254   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41254  h/zr.10t zr/h.10t
-c
-c
-m41255   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41255  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F3 - 4074 ---
-c 
-m40741   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-         40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-         40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40741  h/zr.10t zr/h.10t
-c
-c
-m40742   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40742  h/zr.10t zr/h.10t
-c
-c
-m40743   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40743  h/zr.10t zr/h.10t
-c
-c
-m40744   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40744  h/zr.10t zr/h.10t
-c
-c
-m40745   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40745  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F4 - 4069 ---
-c 
-m40691   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40691  h/zr.10t zr/h.10t
-c
-c
-m40692   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40692  h/zr.10t zr/h.10t
-c
-c
-m40693   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40693  h/zr.10t zr/h.10t
-c
-c
-m40694   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40694  h/zr.10t zr/h.10t
-c
-c
-m40695   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40695  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F5 - 4088 ---
-c 
-m40881   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40881  h/zr.10t zr/h.10t
-c
-c
-m40882   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40882  h/zr.10t zr/h.10t
-c
-c
-m40883   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40883  h/zr.10t zr/h.10t
-c
-c
-m40884   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40884  h/zr.10t zr/h.10t
-c
-c
-m40885   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40885  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F7 - 3868 ---
-c 
-m38681   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38681  h/zr.10t zr/h.10t
-c
-c
-m38682   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38682  h/zr.10t zr/h.10t
-c
-c
-m38683   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38683  h/zr.10t zr/h.10t
-c
-c
-m38684   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38684  h/zr.10t zr/h.10t
-c
-c
-m38685   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38685  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F8 - 4120 ---
-c 
-m41201   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41201  h/zr.10t zr/h.10t
-c
-c
-m41202   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41202  h/zr.10t zr/h.10t
-c
-c
-m41203   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41203  h/zr.10t zr/h.10t
-c
-c
-m41204   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41204  h/zr.10t zr/h.10t
-c
-c
-m41205   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41205  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F14 - 3810 ---
-c 
-m38101   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38101  h/zr.10t zr/h.10t
-c
-c
-m38102   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38102  h/zr.10t zr/h.10t
-c
-c
-m38103   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38103  h/zr.10t zr/h.10t
-c
-c
-m38104   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38104  h/zr.10t zr/h.10t
-c
-c
-m38105   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38105  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F15 - 4130 ---
-c 
-m41301   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41301  h/zr.10t zr/h.10t
-c
-c
-m41302   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41302  h/zr.10t zr/h.10t
-c
-c
-m41303   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41303  h/zr.10t zr/h.10t
-c
-c
-m41304   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41304  h/zr.10t zr/h.10t
-c
-c
-m41305   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41305  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F16 - 4091 ---
-c 
-m40911   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40911  h/zr.10t zr/h.10t
-c
-c
-m40912   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40912  h/zr.10t zr/h.10t
-c
-c
-m40913   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40913  h/zr.10t zr/h.10t
-c
-c
-m40914   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40914  h/zr.10t zr/h.10t
-c
-c
-m40915   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40915  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F17 - 3673 ---
-c 
-m36731   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36731  h/zr.10t zr/h.10t
-c
-c
-m36732   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36732  h/zr.10t zr/h.10t
-c
-c
-m36733   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36733  h/zr.10t zr/h.10t
-c
-c
-m36734   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36734  h/zr.10t zr/h.10t
-c
-c
-m36735   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36735  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F18 - 3682 ---
-c 
-m36821   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36821  h/zr.10t zr/h.10t
-c
-c
-m36822   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36822  h/zr.10t zr/h.10t
-c
-c
-m36823   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36823  h/zr.10t zr/h.10t
-c
-c
-m36824   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36824  h/zr.10t zr/h.10t
-c
-c
-m36825   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36825  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F19 - 4132 ---
-c 
-m41321   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41321  h/zr.10t zr/h.10t
-c
-c
-m41322   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41322  h/zr.10t zr/h.10t
-c
-c
-m41323   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41323  h/zr.10t zr/h.10t
-c
-c
-m41324   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41324  h/zr.10t zr/h.10t
-c
-c
-m41325   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41325  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F20 - 4046 ---
-c 
-m40461   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40461  h/zr.10t zr/h.10t
-c
-c
-m40462   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40462  h/zr.10t zr/h.10t
-c
-c
-m40463   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40463  h/zr.10t zr/h.10t
-c
-c
-m40464   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40464  h/zr.10t zr/h.10t
-c
-c
-m40465   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40465  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F21 - 3865 ---
-c 
-m38651   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38651  h/zr.10t zr/h.10t
-c
-c
-m38652   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38652  h/zr.10t zr/h.10t
-c
-c
-m38653   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38653  h/zr.10t zr/h.10t
-c
-c
-m38654   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38654  h/zr.10t zr/h.10t
-c
-c
-m38655   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38655  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F22 - 3743 ---
-c 
-m37431   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt37431  h/zr.10t zr/h.10t
-c
-c
-m37432   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt37432  h/zr.10t zr/h.10t
-c
-c
-m37433   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt37433  h/zr.10t zr/h.10t
-c
-c
-m37434   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt37434  h/zr.10t zr/h.10t
-c
-c
-m37435   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt37435  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F24 - 3835 ---
-c 
-m38351   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38351  h/zr.10t zr/h.10t
-c
-c
-m38352   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38352  h/zr.10t zr/h.10t
-c
-c
-m38353   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38353  h/zr.10t zr/h.10t
-c
-c
-m38354   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38354  h/zr.10t zr/h.10t
-c
-c
-m38355   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38355  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F26 - 3676 ---
-c 
-m36761   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36761  h/zr.10t zr/h.10t
-c
-c
-m36762   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36762  h/zr.10t zr/h.10t
-c
-c
-m36763   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36763  h/zr.10t zr/h.10t
-c
-c
-m36764   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36764  h/zr.10t zr/h.10t
-c
-c
-m36765   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt36765  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F27 - 3840 ---
-c 
-m38401   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38401  h/zr.10t zr/h.10t
-c
-c
-m38402   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38402  h/zr.10t zr/h.10t
-c
-c
-m38403   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38403  h/zr.10t zr/h.10t
-c
-c
-m38404   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38404  h/zr.10t zr/h.10t
-c
-c
-m38405   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38405  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F28 - 3854 ---
-c 
-m38541   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38541  h/zr.10t zr/h.10t
-c
-c
-m38542   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38542  h/zr.10t zr/h.10t
-c
-c
-m38543   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38543  h/zr.10t zr/h.10t
-c
-c
-m38544   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38544  h/zr.10t zr/h.10t
-c
-c
-m38545   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt38545  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F29 - 4049 ---
-c 
-m40491   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40491  h/zr.10t zr/h.10t
-c
-c
-m40492   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40492  h/zr.10t zr/h.10t
-c
-c
-m40493   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40493  h/zr.10t zr/h.10t
-c
-c
-m40494   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40494  h/zr.10t zr/h.10t
-c
-c
-m40495   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt40495  h/zr.10t zr/h.10t
-c
-c
-c
-c --- F30 - 4127 ---
-c 
-m41271   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41271  h/zr.10t zr/h.10t
-c
-c
-m41272   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41272  h/zr.10t zr/h.10t
-c
-c
-m41273   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41273  h/zr.10t zr/h.10t
-c
-c
-m41274   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41274  h/zr.10t zr/h.10t
-c
-c
-m41275   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-        40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-        40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-mt41275  h/zr.10t zr/h.10t
-c
-c
-c
-c
-c
-c --- Fuel storage - cards commented out bc FE is no longer in core ---
-c
-c FE 277 originally in F16 in 2017, no longer in core as of 2020, fuel data now used as F ring FE burnup
-c 
-c m2771   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03  
-c         40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03  
-c         40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-c mt2771  h/zr.10t zr/h.10t
-c
-c
-c m2772   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-c         40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-c         40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-c mt2772  h/zr.10t zr/h.10t
-c
-c
-c m2773   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-c         40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-c         40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-c mt2773  h/zr.10t zr/h.10t
-c
-c
-c m2774   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-c         40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-c         40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-c mt2774  h/zr.10t zr/h.10t
-c
-c
-c m2775   92235.80c 1.1964E-04  92238.80c 4.7999E-04  40090.80c 8.4421E-03
-c         40091.80c 1.8417E-03  40092.80c 2.8151E-03  40094.80c 2.8520E-03
-c         40096.80c 4.6088E-04   1001.80c 1.6407E-02
-c
-c mt2775  h/zr.10t zr/h.10t
 c
 c
 c
@@ -8658,7 +5920,7 @@ c
 c
 mode n                                                  $ neutrons! 
 c
-kcode    20000 1 5 105 $ kcode card, NIST default is 20000 neutrons, discard 5, run 105 total active cycles
+kcode    1000 1 5 105 $ kcode card, NIST default is 20000 neutrons, discard 5, run 105 total active cycles
 c
 esplt:n  2 0.1 2 0.001 2 0.0001 2 0.000001 0.75 5e-7    $ split energy
 c
