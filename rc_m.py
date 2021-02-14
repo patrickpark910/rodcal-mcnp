@@ -50,16 +50,17 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 
 
-#from mcnp_funcs import *
+from mcnp_funcs import *
 
 # Variables
 cm_per_percent_height = 0.38 # Control rods have 38 cm of travel, so 0.38 cm/%
 rods = ["safe", "shim", "reg"]
-heights = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100] # % heights, 
+heights = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+# heights = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100] # % heights,
 # for use in strings, use str(height).zfill(3) to pad 0s until it is 3 characters long,
 # e.g. 'rc-reg-010.i'
 
-filepath = "C:/MCNP6/facilities/reed/rodcal-mcnp" # do NOT include / at the end
+filepath = os.path.dirname(os.path.abspath(__file__)) # do NOT include / at the end
 inputs_folder_name = "inputs" # Folder for newly-generated MCNP input decks
 outputs_folder_name = "outputs" # Folder for all MCNP output decks
 keff_csv_name = "keff.csv" # File for keff and uncertainty values.
@@ -82,7 +83,7 @@ import this into another py file, e.g. 'from mcnp_funcs import *'.
 def main(argv):
     os.chdir(f'{filepath}')
     
-    ''' # [START] TO PLOT YOUR OWN KEFF: Remove first # to just plot rodcal data using a CSV of keff values.
+    # ''' # [START] TO PLOT YOUR OWN KEFF: Remove first # to just plot rodcal data using a CSV of keff values.
     
     base_input_name = find_base_file(filepath)
     check_kcode(filepath,base_input_name)
@@ -332,7 +333,6 @@ def plot_rodcal_data(keff_csv_name,rho_csv_name,figure_name):
         
         # The standard least squaures fit curve
         ax_int.plot(x_fit,y_fit_int,color=color[rod],label=f'{rod.capitalize()}')
-        
 
         dif_eq = -1*np.polyder(int_eq) # coefs of differential worth curve equation
         y_dif_fit = np.polyval(dif_eq,x_fit)
