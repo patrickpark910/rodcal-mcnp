@@ -4784,7 +4784,7 @@ c Control rods have a travel of 38 cm
 c The "bottom of control rod" has z-position 13.7425 at 0% and 51.7425 at 100%
 c Rod moves 0.38 cm for every 1%
 c
-c Safe Rod (0% Withdrawn)
+c Safe Rod (100% withdrawn)
 c
 c
 c c/z surfaces
@@ -4797,20 +4797,20 @@ c
 c
 c pz surfaces
 c
-812301   pz   62.8153   $ top of control rod
-812302   pz   62.0533   $ top of main section
-812303   pz   61.4183   $ top of poison portion
-812304   pz   15.4327   $ bottom of poison portion
-812305   pz   14.7077   $ bottom of main section
-812306   pz   14.3013   $ bottom of outer lower cone
-812307   pz   13.7425   $ bottom of control rod
+812301   pz   100.8153   $ top of control rod
+812302   pz   100.0533   $ top of main section
+812303   pz   99.4183   $ top of poison portion
+812304   pz   53.4327   $ bottom of poison portion
+812305   pz   52.7077   $ bottom of main section
+812306   pz   52.3013   $ bottom of outer lower cone
+812307   pz   51.7425   $ bottom of control rod
 c
 c
 c k/z surfaces
 c
-813301   k/z   6.91134   -3.99034   65.71676   0.1877777777   $ upper beveling
-813302   k/z   6.91134   -3.99034   12.75385   0.66015625   $ lower outer beveling
-813303   k/z   6.91134   -3.99034   13.74250   5.0625   $ lower inner beveling
+813301   k/z   6.91134   -3.99034   103.71676   0.1877777777   $ upper beveling
+813302   k/z   6.91134   -3.99034   50.75385   0.66015625   $ lower outer beveling
+813303   k/z   6.91134   -3.99034   51.7425   5.0625   $ lower inner beveling
 c
 c End of Safe Rod
 c
@@ -4818,7 +4818,7 @@ c
 c
 c
 c
-c Shim Rod (0% Withdrawn)
+c Shim Rod (100% withdrawn)
 c
 c
 c c/z surfaces
@@ -4831,20 +4831,20 @@ c
 c
 c pz surfaces
 c
-822301   pz   62.8153   $ top of control rod
-822302   pz   62.0533   $ top of main section
-822303   pz   61.4183   $ top of poison portion
-822304   pz   15.4327   $ bottom of poison portion
-822305   pz   14.7077   $ bottom of main section
-822306   pz   14.3013   $ bottom of outer lower cone
-822307   pz   13.7425   $ bottom of control rod
+822301   pz   100.8153   $ top of control rod
+822302   pz   100.0533   $ top of main section
+822303   pz   99.4183   $ top of poison portion
+822304   pz   53.4327   $ bottom of poison portion
+822305   pz   52.7077   $ bottom of main section
+822306   pz   52.3013   $ bottom of outer lower cone
+822307   pz   51.7425   $ bottom of control rod
 c
 c
 c k/z surfaces
 c
-823301   k/z   -6.91134   -3.99034   65.71676   0.1877777777   $ upper beveling
-823302   k/z   -6.91134   -3.99034   12.75385   0.66015625   $ lower outer beveling
-823303   k/z   -6.91134   -3.99034   13.74250   5.0625   $ lower inner beveling
+823301   k/z   -6.91134   -3.99034   103.71676   0.1877777777   $ upper beveling
+823302   k/z   -6.91134   -3.99034   50.75385   0.66015625   $ lower outer beveling
+823303   k/z   -6.91134   -3.99034   51.7425   5.0625   $ lower inner beveling
 c
 c End of Shim Rod
 c
@@ -4852,7 +4852,7 @@ c
 c
 c
 c
-c Reg Rod (0% Withdrawn)
+c Reg Rod (40% withdrawn)
 c
 c
 c c/z surfaces
@@ -4865,20 +4865,20 @@ c
 c
 c pz surfaces
 c
-832301   pz   62.8153   $ top of control rod
-832302   pz   62.0533   $ top of main section
-832303   pz   61.4183   $ top of poison portion
-832304   pz   15.4327   $ bottom of poison portion
-832305   pz   14.7077   $ bottom of main section
-832306   pz   14.3013   $ bottom of outer lower cone
-832307   pz   13.7425   $ bottom of control rod
+832301   pz   78.0153   $ top of control rod
+832302   pz   77.2533   $ top of main section
+832303   pz   76.6183   $ top of poison portion
+832304   pz   30.6327   $ bottom of poison portion
+832305   pz   29.9077   $ bottom of main section
+832306   pz   29.5013   $ bottom of outer lower cone
+832307   pz   28.9425   $ bottom of control rod
 c
 c
 c k/z surfaces
 c
-833301   k/z   0   15.9156   65.71676   0.1877777777   $ upper beveling
-833302   k/z   0   15.9156   12.75385   0.66015625   $ lower outer beveling
-833303   k/z   0   15.9156   13.74250   5.0625   $ lower inner beveling
+833301   k/z   0   15.9156   80.91676   0.1877777777   $ upper beveling
+833302   k/z   0   15.9156   27.95385   0.66015625   $ lower outer beveling
+833303   k/z   0   15.9156   28.9425   5.0625   $ lower inner beveling
 c
 c End of Reg Rod
 c

@@ -55,8 +55,8 @@ from mcnp_funcs import *
 # Variables
 cm_per_percent_height = 0.38 # Control rods have 38 cm of travel, so 0.38 cm/%
 rods = ["safe", "shim", "reg"]
-heights = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-# heights = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100] # % heights,
+heights = [0, 20, 40, 50, 60, 80, 100]
+# heights = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100] # % heights,
 # for use in strings, use str(height).zfill(3) to pad 0s until it is 3 characters long,
 # e.g. 'rc-reg-010.i'
 
@@ -86,20 +86,33 @@ def main(argv):
     # ''' # [START] TO PLOT YOUR OWN KEFF: Remove first # to just plot rodcal data using a CSV of keff values.
     
     base_input_name = find_base_file(filepath)
-    check_kcode(filepath,base_input_name)
+    check_kcode(filepath, base_input_name)
 
     num_inputs_created = 0
     num_inputs_skipped = 0
 
-    for rod in rods:
-        for height in heights:
-            input_created = change_rod_height(filepath, rod, height, base_input_name, inputs_folder_name)
-            # find_height returns False if the input already exists.
-            # Otherwise, it finds and changes the heights and returns True.
-            if input_created: num_inputs_created +=1
-            if not input_created: num_inputs_skipped +=1
-    
-    print(f"Created {num_inputs_created} new input decks.\n--Skipped {num_inputs_skipped} input decks because they already exist..")
+    for height in heights:
+        for rod in rods:
+            if rod == 'reg':
+                rod_heights_dict = {"safe": 0, "shim": 0, "reg": height}
+                input_created = change_rod_height(filepath, 'rodcal', rod_heights_dict, base_input_name, inputs_folder_name)
+                # change_rod_height(filepath, module_name, rod_heights_dict, base_input_name, inputs_folder_name)
+                # Returns False if file already exists.
+                # Otherwise, it finds and changes the heights and returns True.
+                if input_created: num_inputs_created +=1
+                if not input_created: num_inputs_skipped +=1
+            if rod == 'shim':
+                rod_heights_dict = {"safe": 100, "shim": height, "reg": 100}
+                input_created = change_rod_height(filepath, 'rodcal', rod_heights_dict, base_input_name, inputs_folder_name)
+                if input_created: num_inputs_created +=1
+                if not input_created: num_inputs_skipped +=1
+            elif rod == 'safe':
+                rod_heights_dict = {"safe": height, "shim": 100, "reg": 100}
+                input_created = change_rod_height(filepath, 'rodcal', rod_heights_dict, base_input_name, inputs_folder_name)
+                if input_created: num_inputs_created +=1
+                if not input_created: num_inputs_skipped +=1
+
+    print(f"Created {num_inputs_created} new input decks.\n--Skipped {num_inputs_skipped} input decks because they already exist.")
 
     # Check if you want to run MCNP right now. 
     # check_run_mcnp() returns True or False. If False, quit program.
@@ -120,11 +133,20 @@ def main(argv):
 
     # Add keff values to dataframe
     # NB: Use keff_df.iloc[row, column] to select by range integers, .loc[row, column] to select by row/column labels
-    for rod in rods:
-        for height in heights:
-            keff, keff_unc = extract_keff(f"{filepath}/{outputs_folder_name}/o_rc-{rod}-{str(height).zfill(3)}.o")
-            keff_df.loc[height,rod] = keff 
-            keff_df.loc[height,f'{rod} unc'] = keff_unc    
+    for height in heights:
+        for rod in rods:
+            if rod == 'safe':
+                keff, keff_unc = extract_keff(f"{filepath}/{outputs_folder_name}/o_rodcal-a{str(height).zfill(3)}-h100-r100.o")
+                keff_df.loc[height,rod] = keff
+                keff_df.loc[height,f'{rod} unc'] = keff_unc
+            elif rod == 'shim':
+                keff, keff_unc = extract_keff(f"{filepath}/{outputs_folder_name}/o_rodcal-a100-h{str(height).zfill(3)}-r100.o")
+                keff_df.loc[height,rod] = keff
+                keff_df.loc[height,f'{rod} unc'] = keff_unc
+            elif rod == 'reg':
+                keff, keff_unc = extract_keff(f"{filepath}/{outputs_folder_name}/o_rodcal-a000-h000-r{str(height).zfill(3)}.o")
+                keff_df.loc[height,rod] = keff
+                keff_df.loc[height,f'{rod} unc'] = keff_unc
     
     print(f"\nDataframe of keff values and their uncertainties:\n{keff_df}\n")
     keff_df.to_csv(keff_csv_name)
@@ -233,7 +255,7 @@ def calc_params(rho_csv_name,params_csv_name):
         max_worth_rate_per = 0.01*max(np.polyval(dif_eq,heights)) / float(beta_eff) 
         params_df.loc[rod,parameters[1]] = max_worth_rate_per
         
-        max_worth_rate_inch = float(max_worth_rate_per)/float(cm_per_percent_height)*2.54
+        max_worth_rate_inch = float(max_worth_rate_per) / float(CM_PER_PERCENT_HEIGHT) * 2.54
         params_df.loc[rod,parameters[2]] = max_worth_rate_inch
         
         # Normal rod motion speed is about: 

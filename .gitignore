@@ -1,4 +1,5 @@
-
+.git/
+.idea/
 *.pyc
 outputs/
 cladding_al/
