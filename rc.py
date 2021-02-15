@@ -367,7 +367,7 @@ def plot_rodcal_data(keff_csv_name,rho_csv_name,figure_name):
     
     # Keff plot settings
     ax_keff.set_xlim([0,100])
-    ax_keff.set_ylim([0.96,0.99])
+    ax_keff.set_ylim([1.00475,1.03])
 
     ax_keff.xaxis.set_major_locator(MultipleLocator(10))
     ax_keff.yaxis.set_major_locator(MultipleLocator(0.005))
