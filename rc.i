@@ -4791,7 +4791,7 @@ c c/z surfaces
 c
 811301   c/z   6.91134   -3.99034   0.508   $ Upper connecting rod cylinder
 811302   c/z   6.91134   -3.99034   1.2573   $ Lower conic section cylinder
-811303   c/z   6.91134   -3.99034   1.4224   $ Poison section cylinder 
+811303   c/z   6.91134   -3.99034   1.5300   $ Poison section cylinder
 811304   c/z   6.91134   -3.99034   1.5875   $ Outer diameter
 c
 c
@@ -4825,7 +4825,7 @@ c c/z surfaces
 c
 821301   c/z   -6.91134   -3.99034   0.508   $ Upper connecting rod cylinder
 821302   c/z   -6.91134   -3.99034   1.2573   $ Lower conic section cylinder
-821303   c/z   -6.91134   -3.99034   1.4224   $ Poison section cylinder 
+821303   c/z   -6.91134   -3.99034   1.5300   $ Poison section cylinder
 821304   c/z   -6.91134   -3.99034   1.5875   $ Outer diameter
 c
 c
@@ -4859,7 +4859,7 @@ c c/z surfaces
 c
 831301   c/z   0   15.9156   0.508   $ Upper connecting rod cylinder
 831302   c/z   0   15.9156   1.2573   $ Lower conic section cylinder
-831303   c/z   0   15.9156   1.4224   $ Poison section cylinder 
+831303   c/z   0   15.9156   1.5300   $ Poison section cylinder
 831304   c/z   0   15.9156   1.5875   $ Outer diameter
 c
 c

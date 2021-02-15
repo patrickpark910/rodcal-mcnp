@@ -4791,7 +4791,7 @@ c c/z surfaces
 c
 811301   c/z   6.91134   -3.99034   0.508   $ Upper connecting rod cylinder
 811302   c/z   6.91134   -3.99034   1.2573   $ Lower conic section cylinder
-811303   c/z   6.91134   -3.99034   1.3000   $ Poison section cylinder 
+811303   c/z   6.91134   -3.99034   1.5300   $ Poison section cylinder
 811304   c/z   6.91134   -3.99034   1.5875   $ Outer diameter
 c
 c
@@ -4825,7 +4825,7 @@ c c/z surfaces
 c
 821301   c/z   -6.91134   -3.99034   0.508   $ Upper connecting rod cylinder
 821302   c/z   -6.91134   -3.99034   1.2573   $ Lower conic section cylinder
-821303   c/z   -6.91134   -3.99034   1.3000   $ Poison section cylinder 
+821303   c/z   -6.91134   -3.99034   1.5300   $ Poison section cylinder
 821304   c/z   -6.91134   -3.99034   1.5875   $ Outer diameter
 c
 c
@@ -4859,7 +4859,7 @@ c c/z surfaces
 c
 831301   c/z   0   15.9156   0.508   $ Upper connecting rod cylinder
 831302   c/z   0   15.9156   1.2573   $ Lower conic section cylinder
-831303   c/z   0   15.9156   1.3000   $ Poison section cylinder 
+831303   c/z   0   15.9156   1.5300   $ Poison section cylinder
 831304   c/z   0   15.9156   1.5875   $ Outer diameter
 c
 c
@@ -4925,25 +4925,48 @@ c 302313  pz  48.37684  $ Fuel meat 13"
 c 302314  pz  50.91684  $ Fuel meat 14"
 c
 c
-c SS-clad FE element (TOS210D210) (done)
+c SS-clad Fuel Element 
+c specs from Reed Neutronics Report 2010
 c 
 311301  cz  0.285750  $ Zirc pin outer radius (0.225" DIA)
 311302  cz  0.793750  $ Top and bottom fitting outer radii (0.625" DIA)
 311303  cz  1.587500  $ Tri-flute effective outer radius (1.250" DIA)
-311304  cz  1.797050  $ Fuel active section outer radius (1.415" DIA)
+311304  cz  1.822450  $ Fuel active section outer radius (36.449 mm OD)
 311305  cz  1.873250  $ Cladding outer radius (1.475" DIA)
-311306  cz  1.92  $
+311306  cz  1.920000  $ Water around FE (fits gap between cladding OD and core position diameter)
 c
 312300  pz  0         $ Bottom of lower grid plate (with rounding correction)
 312301  pz  5.120640  $ Top of lower grid plate pin
 312302  pz  6.390640  $ Top of bottom fitting casing
-312303  pz  15.35684  $ Bottom of active section
-312304  pz  53.45684  $ Top of active section 
+312303  pz  15.35684  $ Bottom of active section 
+312304  pz  53.45684  $ Top of active section (active length = 381 mm)
 312305  pz  62.42304  $ Top of upper graphite spacer
 312306  pz  63.69304  $ Top of SS top cap 
 312307  pz  66.55054  $ Top of tri-flute  
 312308  pz  70.36054  $ Top of fuel 
 312309  pz  76.40000  $ top plane of fuel assembly supercells
+c
+c
+c
+c Al-clad FE element (done) (originals from 2016 to 02/14/2021)
+c
+c 311301  cz  0.285750  $ Zirc pin outer radius (0.225" DIA)
+c 311302  cz  0.793750  $ Top and bottom fitting outer radii (0.625" DIA)
+c 311303  cz  1.587500  $ Tri-flute effective outer radius (1.250" DIA)
+c 311304  cz  1.797050  $ Fuel active section outer radius (1.415" DIA)
+c 311305  cz  1.873250  $ Cladding outer radius (1.475" DIA)
+c 311306  cz  1.92  $
+c c
+c 312300  pz  0         $ Bottom of lower grid plate (with rounding correction)
+c 312301  pz  5.120640  $ Top of lower grid plate pin
+c 312302  pz  6.390640  $ Top of bottom fitting casing
+c 312303  pz  15.35684  $ Bottom of active section
+c 312304  pz  53.45684  $ Top of active section 
+c 312305  pz  62.42304  $ Top of upper graphite spacer
+c 312306  pz  63.69304  $ Top of SS top cap 
+c 312307  pz  66.55054  $ Top of tri-flute  
+c 312308  pz  70.36054  $ Top of fuel 
+c 312309  pz  76.40000  $ top plane of fuel assembly supercells
 c
 c
 c

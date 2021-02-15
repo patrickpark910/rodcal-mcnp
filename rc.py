@@ -367,7 +367,7 @@ def plot_rodcal_data(keff_csv_name,rho_csv_name,figure_name):
     
     # Keff plot settings
     ax_keff.set_xlim([0,100])
-    ax_keff.set_ylim([0.945,0.98])
+    ax_keff.set_ylim([0.96,0.99])
 
     ax_keff.xaxis.set_major_locator(MultipleLocator(10))
     ax_keff.yaxis.set_major_locator(MultipleLocator(0.005))
@@ -391,7 +391,7 @@ def plot_rodcal_data(keff_csv_name,rho_csv_name,figure_name):
 
     # Overwrite set_ylim above for dollar units
     if rho_or_dollars == "dollars":
-        ax_int.set_ylim([-0.25,4.5]) # Use for dollars units
+        ax_int.set_ylim([-0.25,3.5]) # Use for dollars units
         ax_int.yaxis.set_major_formatter(FormatStrFormatter('%.2f')) # Use for 2 decimal places after 0. for dollars units
 
     ax_int.xaxis.set_major_locator(MultipleLocator(10))
@@ -415,7 +415,7 @@ def plot_rodcal_data(keff_csv_name,rho_csv_name,figure_name):
     ax_dif.set_ylim([0,0.06])
 
     if rho_or_dollars == "dollars": 
-        ax_dif.set_ylim([0,0.07]) # use for dollars/% units
+        ax_dif.set_ylim([0,0.05]) # use for dollars/% units
 
     ax_dif.xaxis.set_major_locator(MultipleLocator(10))
     ax_dif.yaxis.set_major_locator(MultipleLocator(0.01))

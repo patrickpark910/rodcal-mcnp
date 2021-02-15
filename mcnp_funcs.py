@@ -51,7 +51,8 @@ FE_ID = {'B1': '7202', 'B2': '9678', 'B3': '9679', 'B4': '7946', 'B5': '7945', '
 
 RODS = ["safe", "shim", "reg"] # must be in lower case
 
-
+def initialize_rane():
+    print("\n\n      _/_/_/         _/_/_/       _/      _/     _/_/_/_/_/\n    _/     _/     _/      _/     _/_/    _/     _/\n   _/_/_/_/      _/_/_/_/_/     _/  _/  _/     _/_/_/_/_/\n  _/   _/       _/      _/     _/    _/_/     _/\n _/     _/     _/      _/     _/      _/     _/_/_/_/_/\n\n")
 
 def find_base_file(filepath):
     # filepath: string with current folder directory name, e.g. "C:/MCNP6/facilities/reed/rodcal-mcnp"
