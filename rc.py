@@ -153,7 +153,7 @@ def main(argv):
 
     # ''' # [END] TO PLOT YOUR OWN KEFF: Remove first # to just plot rodcal data using a CSV of keff values.
     
-    convert_keff_to_rho(keff_csv_name,rho_csv_name)
+    convert_keff_to_rho_rodcal(keff_csv_name,rho_csv_name)
     
     calc_params(rho_csv_name,params_csv_name)
 
@@ -177,7 +177,7 @@ rho_csv_name: str, desired name of CSV of rho values, including extension, "rho.
 
 Does not return anything. Only makes the actual file changes.
 '''
-def convert_keff_to_rho(keff_csv_name,rho_csv_name):
+def convert_keff_to_rho_rodcal(keff_csv_name,rho_csv_name):
     # Assumes the keff.csv has columns labeled "rod" and "rod unc" for keff and keff uncertainty values for a given rod
     keff_df = pd.read_csv(keff_csv_name,index_col=0)
     rods = [c for c in keff_df.columns.values.tolist() if "unc" not in c]

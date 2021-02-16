@@ -1,4 +1,4 @@
-1 RRR TRIGA Core - Patrick Park (2021-02-13)
+1 RRR TRIGA Core - Patrick Park (2021-02-15)
 c    __   ___  ___  __      __   ___  __   ___       __   __           __   ___       __  ___  __   __  
 c   |__) |__  |__  |  \    |__) |__  /__` |__   /\  |__) /  ` |__|    |__) |__   /\  /  `  |  /  \ |__) 
 c   |  \ |___ |___ |__/    |  \ |___ .__/ |___ /--\ |  \ \__, |  |    |  \ |___ /--\ \__,  |  \__/ |  \
@@ -126,11 +126,11 @@ c
 c    2021-02-13
 c    Rewrote fuel mats with 2020 burnup data
 c    Consolidated invidual fuel meat section mat cards into one mat card for each FE
-c 	 Removed vol(ume)=77.096 argument from each fuel meat cell
+c 	 Removed vol(ume)=77(o)096 argument from each fuel meat cell
 c
-c
-c
-c
+c    2021-02-14
+c    Changed control rod OD from 1(o)300 to 1(o)5300
+c    Changed FE meat OD 
 c
 c
 c
